@@ -1,43 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
-export const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState(true);
+function getInitialTheme(): 'dark' | 'light' {
+  try {
+    const saved = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    if (saved === 'dark' || saved === 'light') return saved;
+    // Fall back to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  } catch {
+    return 'dark';
+  }
+}
 
+function applyTheme(theme: 'dark' | 'light') {
+  const root = window.document.documentElement;
+  if (theme === 'dark') {
+    root.classList.add('dark');
+    root.classList.remove('light');
+  } else {
+    root.classList.remove('dark');
+    root.classList.add('light');
+  }
+  try {
+    localStorage.setItem('theme', theme);
+  } catch { /* ignore */ }
+}
+
+export const ThemeToggle: React.FC = () => {
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => getInitialTheme());
+
+  // On mount, ensure DOM matches resolved theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    const root = window.document.documentElement;
-    if (savedTheme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-      setIsDark(true);
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-      setIsDark(false);
-    }
+    applyTheme(theme);
   }, []);
 
   const toggleTheme = () => {
-    const root = window.document.documentElement;
-    if (isDark) {
-      root.classList.remove('dark');
-      root.classList.add('light');
-      localStorage.setItem('theme', 'light');
-      setIsDark(false);
-    } else {
-      root.classList.remove('light');
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDark(true);
-    }
+    const next = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    setTheme(next);
   };
+
+  const isDark = theme === 'dark';
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-850 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
-      aria-label="Toggle theme mode"
+      className="p-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all duration-200"
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {isDark ? <Sun size={15} /> : <Moon size={15} />}
     </button>

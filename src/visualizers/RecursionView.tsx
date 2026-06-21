@@ -56,7 +56,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                   </div>
 
                   {/* Peg Base Label */}
-                  <div className="absolute -bottom-8 font-mono text-xs font-bold bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-750 px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-300 transition-colors">
+                  <div className="absolute -bottom-8 font-mono text-xs font-bold bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-300 transition-colors">
                     Peg {pegKey}
                   </div>
                 </div>
@@ -76,7 +76,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                 const isReturning = frame.isReturning;
                 
                 let borderClass = 'border-zinc-200 dark:border-zinc-800';
-                let bgClass = 'bg-zinc-100 dark:bg-zinc-950/40 text-zinc-650 dark:text-zinc-400';
+                let bgClass = 'bg-zinc-100 dark:bg-zinc-950/40 text-zinc-600 dark:text-zinc-400';
                 let actionText = '';
 
                 if (isActive && isReturning) {
@@ -85,7 +85,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                   actionText = `→ Returns ${frame.returnValue}`;
                 } else if (isActive) {
                   borderClass = 'border-violet-500';
-                  bgClass = 'bg-violet-100 dark:bg-violet-955/30 text-violet-750 dark:text-violet-300 ring-2 ring-violet-500/30';
+                  bgClass = 'bg-violet-100 dark:bg-violet-955/30 text-violet-700 dark:text-violet-300 ring-2 ring-violet-500/30';
                   actionText = 'Active Execution';
                 } else if (isReturning) {
                   borderClass = 'border-emerald-500/50 dark:border-emerald-600/50';
@@ -128,7 +128,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
 
       {/* Hanoi Legend */}
       {pegs && (
-        <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-550 dark:text-zinc-400">
+        <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-500 dark:text-zinc-400">
           <div className="flex items-center gap-2">
             <span>Peg A: Source</span>
           </div>

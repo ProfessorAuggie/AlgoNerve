@@ -458,9 +458,9 @@ export const ConceptView: React.FC = () => {
   if (!concept) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-        <HelpCircle size={32} className="text-zinc-400 dark:text-zinc-650 animate-pulse mb-3" />
+        <HelpCircle size={32} className="text-zinc-400 dark:text-zinc-600 animate-pulse mb-3" />
         <h2 className="font-bold text-lg text-zinc-800 dark:text-zinc-200 mb-2">{selectedAlgo.name}</h2>
-        <p className="text-xs text-zinc-550 dark:text-zinc-400 text-center max-w-sm">
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center max-w-sm">
           Interactive visualizer animation and concept cards for this algorithm are in active development.
           Explore the pseudocode and complexity metrics on the right panel.
         </p>
@@ -472,8 +472,8 @@ export const ConceptView: React.FC = () => {
     <div className="w-full h-full flex flex-col p-6 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm overflow-y-auto max-h-[calc(100vh-280px)] transition-colors duration-300 scrollbar-thin">
       
       {/* Header Info */}
-      <div className="flex flex-col gap-1.5 border-b border-zinc-200 dark:border-zinc-850 pb-4 mb-5">
-        <span className="text-[10px] font-mono font-bold text-violet-650 dark:text-violet-400 uppercase tracking-widest">
+      <div className="flex flex-col gap-1.5 border-b border-zinc-200 dark:border-zinc-800 pb-4 mb-5">
+        <span className="text-[10px] font-mono font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest">
           {concept.categoryName}
         </span>
         <h2 className="text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
@@ -483,7 +483,7 @@ export const ConceptView: React.FC = () => {
 
       {/* Core Explanation */}
       <div className="flex items-start gap-3 p-4 rounded-xl bg-violet-50/40 dark:bg-violet-950/10 border border-violet-100/60 dark:border-violet-900/20 mb-6">
-        <BookOpen size={16} className="text-violet-650 dark:text-violet-400 shrink-0 mt-0.5" />
+        <BookOpen size={16} className="text-violet-600 dark:text-violet-400 shrink-0 mt-0.5" />
         <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-sans">
           <strong>How it works:</strong> {concept.explanation}
         </div>
@@ -493,7 +493,7 @@ export const ConceptView: React.FC = () => {
         {/* Key Properties */}
         <div className="flex flex-col gap-3">
           <h3 className="text-xs font-bold font-mono text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
-            <Layers size={13} className="text-indigo-650 dark:text-indigo-400" />
+            <Layers size={13} className="text-indigo-600 dark:text-indigo-400" />
             Key Properties
           </h3>
           <ul className="flex flex-col gap-2 pl-1.5">
@@ -527,24 +527,24 @@ export const ConceptView: React.FC = () => {
       {concept.operations && concept.operations.length > 0 && (
         <div className="flex flex-col gap-3 mt-2">
           <h3 className="text-xs font-bold font-mono text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
-            <Settings size={13} className="text-violet-650 dark:text-violet-400" />
+            <Settings size={13} className="text-violet-600 dark:text-violet-400" />
             Core Operations & Complexities
           </h3>
-          <div className="overflow-x-auto border border-zinc-200 dark:border-zinc-850 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/20">
+          <div className="overflow-x-auto border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-50/50 dark:bg-zinc-950/20">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-850 text-[9px] font-mono font-bold text-zinc-500 bg-zinc-100/50 dark:bg-zinc-950/40">
+                <tr className="border-b border-zinc-200 dark:border-zinc-800 text-[9px] font-mono font-bold text-zinc-500 bg-zinc-100/50 dark:bg-zinc-950/40">
                   <th className="px-4 py-2">Operation</th>
                   <th className="px-4 py-2 text-center">Complexity</th>
                   <th className="px-4 py-2">Description</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-850 text-xs">
+              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-xs">
                 {concept.operations.map((op, idx) => (
-                  <tr key={idx} className="text-zinc-700 dark:text-zinc-350 hover:bg-zinc-100/20 dark:hover:bg-zinc-950/10">
-                    <td className="px-4 py-2.5 font-bold font-mono text-zinc-805 dark:text-zinc-250">{op.name}</td>
+                  <tr key={idx} className="text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100/20 dark:hover:bg-zinc-950/10">
+                    <td className="px-4 py-2.5 font-bold font-mono text-zinc-800 dark:text-zinc-200">{op.name}</td>
                     <td className="px-4 py-2.5 text-center font-mono font-bold text-violet-600 dark:text-violet-400">{op.complexity}</td>
-                    <td className="px-4 py-2.5 text-zinc-550 dark:text-zinc-400 leading-normal">{op.desc}</td>
+                    <td className="px-4 py-2.5 text-zinc-500 dark:text-zinc-400 leading-normal">{op.desc}</td>
                   </tr>
                 ))}
               </tbody>

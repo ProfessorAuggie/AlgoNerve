@@ -37,7 +37,7 @@ export const SortingView: React.FC<SortingViewProps> = ({ step }) => {
             glowClass = 'shadow-[0_0_12px_rgba(217,70,239,0.4)]';
           } else if (left !== undefined && right !== undefined && idx >= left && idx <= right) {
             // Highlighting current active subsegment in divide-and-conquer
-            barColorClass = 'bg-indigo-650/40 dark:bg-indigo-600/40 border-indigo-500/60';
+            barColorClass = 'bg-indigo-600/40 dark:bg-indigo-600/40 border-indigo-500/60';
             if (idx === mid) {
               barColorClass = 'bg-cyan-600/70 border-cyan-500/80';
             }
@@ -60,7 +60,7 @@ export const SortingView: React.FC<SortingViewProps> = ({ step }) => {
               />
 
               {/* Index Label */}
-              <span className="text-[10px] font-mono text-zinc-550 dark:text-zinc-500 mt-2">
+              <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-500 mt-2">
                 {idx}
               </span>
 
@@ -76,7 +76,7 @@ export const SortingView: React.FC<SortingViewProps> = ({ step }) => {
       </div>
 
       {/* Legend Indicators */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-indigo-500/80 border border-indigo-400" />
           <span>Unsorted</span>

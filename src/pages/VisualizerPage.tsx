@@ -127,8 +127,8 @@ export const VisualizerPage: React.FC = () => {
     if (selectedAlgo.mode === 'concept') {
       return (
         <div className="p-4 bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-xl backdrop-blur-sm shadow-md transition-colors duration-300">
-          <h4 className="font-semibold text-zinc-850 dark:text-zinc-200 text-xs uppercase tracking-wider mb-2 font-mono">Concept Mode</h4>
-          <p className="text-[11px] text-zinc-550 dark:text-zinc-400 leading-relaxed font-sans">
+          <h4 className="font-semibold text-zinc-800 dark:text-zinc-200 text-xs uppercase tracking-wider mb-2 font-mono">Concept Mode</h4>
+          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">
             Input customization is disabled because this algorithm is running in concept exploration mode. Refer to the properties, applications, and pseudocode to review its behavior.
           </p>
         </div>
@@ -161,7 +161,7 @@ export const VisualizerPage: React.FC = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate('/')}
-            className="p-2 rounded-lg border border-zinc-200 dark:border-zinc-850 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            className="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             aria-label="Back to dashboard"
           >
             <ChevronLeft size={16} />
@@ -170,11 +170,11 @@ export const VisualizerPage: React.FC = () => {
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <h2 className="font-bold text-base text-zinc-900 dark:text-white">{selectedAlgo.name}</h2>
-              <span className="text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-750 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
                 {selectedAlgo.category}
               </span>
             </div>
-            <span className="text-[10px] text-zinc-550 dark:text-zinc-500 font-mono">Real-Time Traversal Visualizer</span>
+            <span className="text-[10px] text-zinc-500 dark:text-zinc-500 font-mono">Real-Time Traversal Visualizer</span>
           </div>
         </div>
 
@@ -182,20 +182,20 @@ export const VisualizerPage: React.FC = () => {
         <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
           {selectedAlgo.mode !== 'concept' && (
             <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">Space</kbd> Play/Pause</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">←</kbd> Prev</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">→</kbd> Next</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">R</kbd> Reset</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">Space</kbd> Play/Pause</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">←</kbd> Prev</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">→</kbd> Next</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">R</kbd> Reset</span>
             </div>
           )}
           <Link
             to="/documentation"
-            className="text-xs text-zinc-550 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors"
+            className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors"
             title="Open Documentation"
           >
             Documentation
           </Link>
-          <HelpCircle size={15} className="text-zinc-550 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors" />
+          <HelpCircle size={15} className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors" />
           <ThemeToggle />
         </div>
       </header>
@@ -210,7 +210,7 @@ export const VisualizerPage: React.FC = () => {
 
           {/* Bottom control hub */}
           {selectedAlgo.mode !== 'concept' ? (
-            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-205 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
+            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <Player />
                 <SpeedControl />
@@ -225,11 +225,11 @@ export const VisualizerPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-205 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col items-center justify-center py-6 px-4 transition-colors duration-300 text-center">
-              <span className="text-xs font-mono font-bold text-violet-650 dark:text-violet-400 uppercase tracking-widest mb-1">
+            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col items-center justify-center py-6 px-4 transition-colors duration-300 text-center">
+              <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-1">
                 Conceptual Mode Active
               </span>
-              <p className="text-[11px] text-zinc-550 dark:text-zinc-400 max-w-md font-sans">
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 max-w-md font-sans">
                 This algorithm runs in conceptual overview mode. Read the properties, applications, and pseudocode. Step simulation is disabled.
               </p>
             </div>
@@ -244,12 +244,12 @@ export const VisualizerPage: React.FC = () => {
         </section>
       </main>
 
-      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-4 text-center text-[10px] font-mono text-zinc-550 dark:text-zinc-705 bg-zinc-50 dark:bg-zinc-955/80 backdrop-blur-sm mt-auto z-10 transition-colors duration-300">
-        © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
+      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-4 text-center text-[10px] font-mono text-zinc-500 dark:text-zinc-700 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-sm mt-auto z-10 transition-colors duration-300">
+        © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
         <span className="mx-2">|</span>
-        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
+        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
         <span className="mx-2">|</span>
-        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
+        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
       </footer>
     </div>
   );

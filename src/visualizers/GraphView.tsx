@@ -215,7 +215,7 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
                     <text
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      className="text-[9px] font-mono fill-zinc-650 dark:fill-zinc-300 font-bold"
+                      className="text-[9px] font-mono fill-zinc-600 dark:fill-zinc-300 font-bold"
                     >
                       d={distText}
                     </text>
@@ -249,7 +249,7 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
       )}
 
       {/* Legend */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-[#8b5cf6] border border-violet-400" />
           <span>Active Node</span>

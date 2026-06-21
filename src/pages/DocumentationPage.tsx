@@ -29,7 +29,7 @@ export const DocumentationPage: React.FC = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate('/')}
-            className="p-2 rounded-lg border border-zinc-200 dark:border-zinc-850 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-650 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            className="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             aria-label="Back to home"
           >
             <ChevronLeft size={16} />
@@ -37,8 +37,8 @@ export const DocumentationPage: React.FC = () => {
           
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <h2 className="font-bold text-base text-zinc-905 dark:text-white">AlgoNerve</h2>
-              <span className="text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-750 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <h2 className="font-bold text-base text-zinc-900 dark:text-white">AlgoNerve</h2>
+              <span className="text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Documentation
               </span>
             </div>
@@ -62,11 +62,11 @@ export const DocumentationPage: React.FC = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold border transition-all duration-200 whitespace-nowrap md:whitespace-normal ${
                   isActive
-                    ? 'bg-violet-600 border-violet-500 text-white shadow-md shadow-violet-550/20 scale-102'
-                    : 'bg-white/40 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-850 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-800'
+                    ? 'bg-violet-600 border-violet-500 text-white shadow-md shadow-violet-500/20 scale-102'
+                    : 'bg-white/40 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-800'
                 }`}
               >
-                <Icon size={14} className={isActive ? 'text-white' : 'text-zinc-550 dark:text-zinc-500'} />
+                <Icon size={14} className={isActive ? 'text-white' : 'text-zinc-500 dark:text-zinc-500'} />
                 {tab.label}
               </button>
             );
@@ -84,24 +84,24 @@ export const DocumentationPage: React.FC = () => {
                 <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Platform Identity: AlgoNerve Visualization Engine</p>
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
-              <p className="text-sm text-zinc-650 dark:text-zinc-350 leading-relaxed">
+              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 <strong>AlgoNerve</strong> is a premier, high-fidelity algorithm visualization environment built for developers, educators, and software engineer candidates. Instead of treating algorithms like abstract formulas, AlgoNerve animates their internal execution logic, memory mutations, stack operations, and path traversals in real-time.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                <div className="p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-850">
+                <div className="p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-800">
                   <h3 className="font-bold text-xs uppercase text-violet-600 dark:text-violet-400 mb-2 font-mono">🧠 Live State Inspection</h3>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     Watch the variables change, stacks grow, queue indices align, and distance vectors update in real-time.
                   </p>
                 </div>
-                <div className="p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-850">
+                <div className="p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-800">
                   <h3 className="font-bold text-xs uppercase text-emerald-600 dark:text-emerald-400 mb-2 font-mono">⏱️ Playback Control</h3>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     Scrub through execution history with step-by-step resolution. Pause, rewind, speed up (up to 4x), or play step-by-step.
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-zinc-650 dark:text-zinc-350 leading-relaxed">
+              <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 The visualizer is accessibly optimized, utilizing trace logs, dynamic step narratives, and keyboard bindings to guarantee full accessibility controls on multiple desktop and mobile devices.
               </p>
             </div>
@@ -123,7 +123,7 @@ export const DocumentationPage: React.FC = () => {
                   
                   return (
                     <div key={cat} className="flex flex-col gap-3">
-                      <h3 className="text-sm font-bold uppercase tracking-wider text-violet-650 dark:text-violet-400 font-mono border-b border-zinc-200 dark:border-zinc-800 pb-1">
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 font-mono border-b border-zinc-200 dark:border-zinc-800 pb-1">
                         {cat === 'dp' 
                           ? 'Dynamic Programming' 
                           : cat === 'datastructures' 
@@ -136,18 +136,18 @@ export const DocumentationPage: React.FC = () => {
                         {items.map((algo) => (
                           <div
                             key={algo.id}
-                            className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-850 bg-zinc-50/50 dark:bg-zinc-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                            className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                           >
                             <div className="flex flex-col gap-1">
                               <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200">{algo.name}</span>
                               <span className="text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">{algo.description}</span>
                             </div>
-                            <div className="flex items-center gap-3 font-mono text-[10px] shrink-0 text-zinc-550 dark:text-zinc-500">
+                            <div className="flex items-center gap-3 font-mono text-[10px] shrink-0 text-zinc-500 dark:text-zinc-500">
                               <span className="px-2 py-0.5 bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded">
-                                Time: <strong className="text-zinc-850 dark:text-zinc-300">{algo.timeComplexity}</strong>
+                                Time: <strong className="text-zinc-800 dark:text-zinc-300">{algo.timeComplexity}</strong>
                               </span>
                               <span className="px-2 py-0.5 bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded">
-                                Space: <strong className="text-zinc-850 dark:text-zinc-300">{algo.spaceComplexity}</strong>
+                                Space: <strong className="text-zinc-800 dark:text-zinc-300">{algo.spaceComplexity}</strong>
                               </span>
                             </div>
                           </div>
@@ -169,7 +169,7 @@ export const DocumentationPage: React.FC = () => {
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
               
-              <div className="space-y-4 text-sm text-zinc-650 dark:text-zinc-350 leading-relaxed">
+              <div className="space-y-4 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 <p>
                   Every algorithm execution compiles into a state sequence list of **Steps**. The control board allows traversing this timeline interactively:
                 </p>
@@ -204,21 +204,21 @@ export const DocumentationPage: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b border-zinc-150 dark:border-zinc-850/60">
-                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-350">Spacebar</kbd></td>
-                      <td className="py-3 text-zinc-650 dark:text-zinc-400 font-medium">Toggle playback (Play / Pause)</td>
+                    <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-300">Spacebar</kbd></td>
+                      <td className="py-3 text-zinc-600 dark:text-zinc-400 font-medium">Toggle playback (Play / Pause)</td>
                     </tr>
-                    <tr className="border-b border-zinc-150 dark:border-zinc-850/60">
-                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-350">Left Arrow</kbd></td>
-                      <td className="py-3 text-zinc-650 dark:text-zinc-400 font-medium">Step backward exactly one step</td>
+                    <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-300">Left Arrow</kbd></td>
+                      <td className="py-3 text-zinc-600 dark:text-zinc-400 font-medium">Step backward exactly one step</td>
                     </tr>
-                    <tr className="border-b border-zinc-150 dark:border-zinc-850/60">
-                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-350">Right Arrow</kbd></td>
-                      <td className="py-3 text-zinc-650 dark:text-zinc-400 font-medium">Step forward exactly one step</td>
+                    <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-300">Right Arrow</kbd></td>
+                      <td className="py-3 text-zinc-600 dark:text-zinc-400 font-medium">Step forward exactly one step</td>
                     </tr>
-                    <tr className="border-b border-zinc-150 dark:border-zinc-850/60">
-                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-350">R</kbd></td>
-                      <td className="py-3 text-zinc-650 dark:text-zinc-400 font-medium">Reset execution timeline to start</td>
+                    <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                      <td className="py-3 pr-4 font-mono font-bold"><kbd className="bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-800 dark:text-zinc-300">R</kbd></td>
+                      <td className="py-3 text-zinc-600 dark:text-zinc-400 font-medium">Reset execution timeline to start</td>
                     </tr>
                   </tbody>
                 </table>
@@ -235,7 +235,7 @@ export const DocumentationPage: React.FC = () => {
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
 
-              <div className="space-y-4 text-sm text-zinc-650 dark:text-zinc-350 leading-relaxed">
+              <div className="space-y-4 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 <p>
                   AlgoNerve has been designed from the ground up to support accessible usage and screen-reader assistance:
                 </p>
@@ -263,15 +263,15 @@ export const DocumentationPage: React.FC = () => {
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
 
-              <div className="space-y-4 text-sm text-zinc-650 dark:text-zinc-350 leading-relaxed font-mono">
-                <div className="bg-zinc-100 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-850">
-                  <p className="text-xs text-zinc-450 uppercase mb-2 font-bold tracking-wider font-sans">Prerequisites</p>
+              <div className="space-y-4 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-mono">
+                <div className="bg-zinc-100 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                  <p className="text-xs text-zinc-400 uppercase mb-2 font-bold tracking-wider font-sans">Prerequisites</p>
                   <p className="text-xs text-zinc-600 dark:text-zinc-400">Node.js (v18+) and npm/yarn installed.</p>
                 </div>
                 
-                <div className="bg-zinc-100 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-850 flex flex-col gap-3">
+                <div className="bg-zinc-100 dark:bg-zinc-950 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 flex flex-col gap-3">
                   <div>
-                    <p className="text-xs text-zinc-455 uppercase font-bold tracking-wider font-sans">1. Clone Repository & Install</p>
+                    <p className="text-xs text-zinc-400 uppercase font-bold tracking-wider font-sans">1. Clone Repository & Install</p>
                     <pre className="text-xs text-violet-600 dark:text-violet-400 overflow-x-auto whitespace-pre-wrap p-1.5 mt-1 rounded bg-zinc-200/50 dark:bg-zinc-900/60">
                       git clone https://github.com/ProfessorAuggie/AlgoNerve.git{"\n"}
                       cd AlgoNerve{"\n"}
@@ -280,14 +280,14 @@ export const DocumentationPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <p className="text-xs text-zinc-455 uppercase font-bold tracking-wider font-sans">2. Run Dev Server</p>
+                    <p className="text-xs text-zinc-400 uppercase font-bold tracking-wider font-sans">2. Run Dev Server</p>
                     <pre className="text-xs text-violet-600 dark:text-violet-400 overflow-x-auto whitespace-pre-wrap p-1.5 mt-1 rounded bg-zinc-200/50 dark:bg-zinc-900/60">
                       npm run dev
                     </pre>
                   </div>
 
                   <div>
-                    <p className="text-xs text-zinc-455 uppercase font-bold tracking-wider font-sans">3. Build production bundle</p>
+                    <p className="text-xs text-zinc-400 uppercase font-bold tracking-wider font-sans">3. Build production bundle</p>
                     <pre className="text-xs text-violet-600 dark:text-violet-400 overflow-x-auto whitespace-pre-wrap p-1.5 mt-1 rounded bg-zinc-200/50 dark:bg-zinc-900/60">
                       npm run build
                     </pre>
@@ -306,14 +306,14 @@ export const DocumentationPage: React.FC = () => {
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
 
-              <div className="flex flex-col md:flex-row items-center gap-6 p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-850">
+              <div className="flex flex-col md:flex-row items-center gap-6 p-4 rounded-xl bg-zinc-100/40 dark:bg-zinc-950/40 border border-zinc-200 dark:border-zinc-800">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-violet-500 via-indigo-400 to-emerald-400 flex items-center justify-center font-bold text-white text-3xl shadow-md select-none shrink-0">
                   VK
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="font-bold text-lg text-zinc-900 dark:text-white mb-1">Vaibhav Kushwaha</h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono mb-3">Software Engineer | Full-Stack & Systems Developer</p>
-                  <p className="text-xs text-zinc-650 dark:text-zinc-350 leading-relaxed mb-4">
+                  <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
                     Vaibhav is a software engineer passionate about developer tooling, backend microservices, performance tuning, and interactive educational visualizations. He built AlgoNerve to bridge the gap between algorithmic theory and visual state execution tracing.
                   </p>
                   <div className="flex flex-wrap gap-2.5">
@@ -321,7 +321,7 @@ export const DocumentationPage: React.FC = () => {
                       href="https://www.linkedin.com/in/professorauggie/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-violet-650 hover:bg-violet-600 text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 shadow-md shadow-violet-950/30"
+                      className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-600 text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 shadow-md shadow-violet-950/30"
                     >
                       Connect on LinkedIn
                     </a>
@@ -329,7 +329,7 @@ export const DocumentationPage: React.FC = () => {
                       href="https://professor-auggie.vercel.app/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-zinc-250 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-705 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-750 shadow-sm"
+                      className="inline-flex items-center gap-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-700 shadow-sm"
                     >
                       Visit Portfolio
                     </a>
@@ -337,7 +337,7 @@ export const DocumentationPage: React.FC = () => {
                       href="https://github.com/ProfessorAuggie"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-zinc-250 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-705 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-750 shadow-sm"
+                      className="inline-flex items-center gap-2 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-700 shadow-sm"
                     >
                       Explore GitHub
                     </a>
@@ -351,12 +351,12 @@ export const DocumentationPage: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-550 dark:text-zinc-650 z-10 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
-        © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
+      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-500 dark:text-zinc-600 z-10 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
+        © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
         <span className="mx-2">|</span>
-        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
+        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
         <span className="mx-2">|</span>
-        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
+        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
       </footer>
     </div>
   );

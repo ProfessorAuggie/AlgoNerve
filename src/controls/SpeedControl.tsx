@@ -22,7 +22,7 @@ export const SpeedControl: React.FC = () => {
             onClick={() => setSpeed(s.delay)}
             className={`px-3 py-1 text-xs font-mono font-bold rounded-md transition-all duration-200 ${
               isActive
-                ? 'bg-white dark:bg-zinc-800 text-violet-650 dark:text-violet-400 border border-zinc-200 dark:border-zinc-700 shadow-sm'
+                ? 'bg-white dark:bg-zinc-800 text-violet-600 dark:text-violet-400 border border-zinc-200 dark:border-zinc-700 shadow-sm'
                 : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >

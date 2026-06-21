@@ -22,7 +22,7 @@ export const Player: React.FC = () => {
       <button
         onClick={resetPlayback}
         disabled={isAtStart}
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-650 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-350 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-650 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-600 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
         title="Reset Playback (R)"
         aria-label="Reset Playback"
       >
@@ -33,7 +33,7 @@ export const Player: React.FC = () => {
       <button
         onClick={prevStep}
         disabled={isAtStart}
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-650 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-350 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-650 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-600 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
         title="Previous Step (Left Arrow)"
         aria-label="Previous Step"
       >
@@ -47,7 +47,7 @@ export const Player: React.FC = () => {
         className={`p-3.5 rounded-xl border font-semibold flex items-center justify-center transition-all duration-300 shadow-md ${
           isPlaying
             ? 'bg-amber-600 border-amber-500 text-white hover:bg-amber-500 shadow-amber-950/20'
-            : 'bg-violet-650 border-violet-550 text-white hover:bg-violet-600 shadow-violet-950/20'
+            : 'bg-violet-600 border-violet-500 text-white hover:bg-violet-600 shadow-violet-950/20'
         } disabled:opacity-40`}
         title={isPlaying ? 'Pause (Spacebar)' : 'Play (Spacebar)'}
         aria-label={isPlaying ? 'Pause Playback' : 'Start Playback'}
@@ -59,7 +59,7 @@ export const Player: React.FC = () => {
       <button
         onClick={nextStep}
         disabled={isAtEnd}
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-650 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-350 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-650 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 disabled:opacity-40 disabled:hover:text-zinc-600 disabled:hover:border-zinc-200 dark:disabled:hover:border-zinc-800 transition-all duration-205"
         title="Next Step (Right Arrow)"
         aria-label="Next Step"
       >

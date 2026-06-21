@@ -17,7 +17,7 @@ export const NarrationPanel: React.FC = () => {
       <div
         id="algo-narration"
         aria-live="polite"
-        className="text-sm text-zinc-805 dark:text-zinc-200 font-medium leading-relaxed font-sans min-h-[40px]"
+        className="text-sm text-zinc-800 dark:text-zinc-200 font-medium leading-relaxed font-sans min-h-[40px]"
       >
         {description}
       </div>

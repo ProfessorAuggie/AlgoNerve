@@ -43,7 +43,7 @@ export const DPView: React.FC<DPViewProps> = ({ step }) => {
             {table.map((rowArr, rIdx) => (
               <tr key={`row-${rIdx}`}>
                 {/* Row Header */}
-                <td className="p-3 border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-650 dark:text-zinc-400 font-semibold text-center transition-colors">
+                <td className="p-3 border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 font-semibold text-center transition-colors">
                   {rows[rIdx] || rIdx}
                 </td>
                 
@@ -55,11 +55,11 @@ export const DPView: React.FC<DPViewProps> = ({ step }) => {
 
                   let cellClass = 'text-zinc-400 dark:text-zinc-500';
                   let bgClass = 'bg-zinc-100/20 dark:bg-zinc-950/20';
-                  let borderClass = 'border-zinc-200 dark:border-zinc-850';
+                  let borderClass = 'border-zinc-200 dark:border-zinc-800';
 
                   if (active) {
                     cellClass = 'text-white font-bold scale-105';
-                    bgClass = 'bg-violet-650 dark:bg-violet-600/90 glow-indigo ring-2 ring-violet-400 ring-offset-2 ring-offset-zinc-50 dark:ring-offset-zinc-950';
+                    bgClass = 'bg-violet-600 dark:bg-violet-600/90 glow-indigo ring-2 ring-violet-400 ring-offset-2 ring-offset-zinc-50 dark:ring-offset-zinc-950';
                     borderClass = 'border-violet-400';
                   } else if (dep) {
                     cellClass = 'text-amber-800 dark:text-amber-300 font-semibold';
@@ -93,7 +93,7 @@ export const DPView: React.FC<DPViewProps> = ({ step }) => {
       )}
 
       {/* Legend */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-violet-600 ring-2 ring-violet-400" />
           <span>Active Cell</span>

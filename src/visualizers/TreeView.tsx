@@ -132,7 +132,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
               const isComparing = comparing === node.id;
               const isVisited = visited.includes(node.id);
 
-              let circleClass = 'fill-white dark:fill-zinc-955 stroke-zinc-300 dark:stroke-zinc-700';
+              let circleClass = 'fill-white dark:fill-zinc-950 stroke-zinc-300 dark:stroke-zinc-700';
               let strokeWidth = 2;
               let filter = '';
 
@@ -145,7 +145,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                 strokeWidth = 3;
                 filter = 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))';
               } else if (isVisited) {
-                circleClass = 'fill-emerald-500 stroke-emerald-355 dark:stroke-emerald-400';
+                circleClass = 'fill-emerald-500 stroke-emerald-400 dark:stroke-emerald-400';
               }
 
               return (
@@ -196,7 +196,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
             <span className="text-zinc-500 uppercase font-semibold">Output:</span>
             <div className="flex gap-1.5 flex-wrap">
               {result.map((val, idx) => (
-                <span key={idx} className="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-250 dark:border-emerald-500/30 px-2 py-0.5 rounded font-bold">
+                <span key={idx} className="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 px-2 py-0.5 rounded font-bold">
                   {val}
                 </span>
               ))}
@@ -207,7 +207,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
               <span className="text-zinc-500 uppercase font-semibold">Recursion Stack:</span>
               <div className="flex gap-1 overflow-x-auto">
                 {callStack.map((frame, idx) => (
-                  <span key={idx} className="bg-violet-100 dark:bg-violet-950/80 text-violet-750 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80 px-2 py-0.5 rounded text-[10px] whitespace-nowrap">
+                  <span key={idx} className="bg-violet-100 dark:bg-violet-950/80 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80 px-2 py-0.5 rounded text-[10px] whitespace-nowrap">
                     {frame}
                   </span>
                 ))}
@@ -218,7 +218,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
       )}
 
       {/* Legend */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-[#8b5cf6] border border-violet-400" />
           <span>Current Node</span>

@@ -33,7 +33,7 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
               
               const isActive = activeRow === rIdx && activeCol === cIdx;
 
-              let squareBg = isDark ? 'bg-zinc-250 dark:bg-zinc-850' : 'bg-zinc-50 dark:bg-zinc-700/60';
+              let squareBg = isDark ? 'bg-zinc-200 dark:bg-zinc-800' : 'bg-zinc-50 dark:bg-zinc-700/60';
               let borderClass = 'border-transparent';
               let cellContent = null;
 
@@ -73,13 +73,13 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
       </div>
 
       {/* Solutions count indicator */}
-      <div className="w-full flex items-center justify-between gap-4 mt-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-850 rounded-lg text-xs font-mono transition-colors">
+      <div className="w-full flex items-center justify-between gap-4 mt-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-lg text-xs font-mono transition-colors">
         <span className="text-zinc-500 font-semibold uppercase">Chessboard: {n}x{n}</span>
         <span className="text-emerald-650 dark:text-emerald-400 font-bold">Solutions Found: {solutionsCount}</span>
       </div>
 
       {/* Legend */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-950 border border-emerald-500 flex items-center justify-center text-[8px]">👑</div>
           <span>Queen placed</span>
@@ -89,7 +89,7 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
           <span>Checking conflicts</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded bg-zinc-250 dark:bg-zinc-850 border border-zinc-350 dark:border-zinc-700" />
+          <div className="w-3 h-3 rounded bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700" />
           <span>Dark square</span>
         </div>
         <div className="flex items-center gap-2">

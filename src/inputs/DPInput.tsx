@@ -104,7 +104,7 @@ export const DPInput: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-2.5 p-4 bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-xl backdrop-blur-sm shadow-md transition-colors duration-300">
-      <h4 className="font-semibold text-zinc-805 dark:text-zinc-200 text-sm">Parameters Configuration</h4>
+      <h4 className="font-semibold text-zinc-800 dark:text-zinc-200 text-sm">Parameters Configuration</h4>
 
       {/* String Input */}
       {isDPStringAlgo && (
@@ -116,7 +116,7 @@ export const DPInput: React.FC = () => {
                 type="text"
                 value={s1}
                 onChange={(e) => setS1(e.target.value)}
-                className="bg-zinc-100 dark:bg-zinc-955 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
+                className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -125,14 +125,14 @@ export const DPInput: React.FC = () => {
                 type="text"
                 value={s2}
                 onChange={(e) => setS2(e.target.value)}
-                className="bg-zinc-100 dark:bg-zinc-955 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
+                className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
               />
             </div>
           </div>
           {error && <span className="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">{error}</span>}
           <button
             onClick={handleApplyStrings}
-            className="w-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-750 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
+            className="w-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
           >
             Apply Strings
           </button>
@@ -148,20 +148,20 @@ export const DPInput: React.FC = () => {
               type="text"
               value={treeValStr}
               onChange={(e) => setTreeValStr(e.target.value)}
-              className="bg-zinc-100 dark:bg-zinc-955 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
+              className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
             />
           </div>
           {error && <span className="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">{error}</span>}
           <div className="flex items-center gap-2">
             <button
               onClick={handleApplyTree}
-              className="flex-1 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-750 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
+              className="flex-1 bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
             >
               Apply Order
             </button>
             <button
               onClick={handleRandomizeTree}
-              className="bg-violet-650 hover:bg-violet-600 text-white font-medium text-xs py-1.5 px-3 rounded-lg transition-colors shadow-sm"
+              className="bg-violet-600 hover:bg-violet-600 text-white font-medium text-xs py-1.5 px-3 rounded-lg transition-colors shadow-sm"
             >
               Randomize
             </button>
@@ -180,13 +180,13 @@ export const DPInput: React.FC = () => {
               type="number"
               value={nVal}
               onChange={(e) => setNVal(Number(e.target.value))}
-              className="bg-zinc-100 dark:bg-zinc-955 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
+              className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-lg px-2.5 py-1.5 text-xs font-mono focus:outline-none focus:border-violet-500 transition-colors"
             />
           </div>
           {error && <span className="text-[10px] text-rose-600 dark:text-rose-400 font-semibold">{error}</span>}
           <button
             onClick={handleApplyRecursionN}
-            className="w-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-750 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
+            className="w-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-white font-medium text-xs py-1.5 rounded-lg transition-colors"
           >
             Apply Value
           </button>

@@ -525,7 +525,7 @@ export const CodePanel: React.FC = () => {
         <h4 className="text-xs uppercase font-mono font-semibold text-zinc-600 dark:text-zinc-400 tracking-wider">
           Pseudocode Execution
         </h4>
-        <span className="text-[10px] font-mono text-zinc-550 dark:text-zinc-600 bg-zinc-200/50 dark:bg-zinc-950 px-2 py-0.5 rounded transition-colors">
+        <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-600 bg-zinc-200/50 dark:bg-zinc-950 px-2 py-0.5 rounded transition-colors">
           Sync Active
         </span>
       </div>
@@ -547,7 +547,7 @@ export const CodePanel: React.FC = () => {
                 key={idx}
                 className={`flex w-full items-center py-0.5 px-2 rounded transition-colors duration-200 ${
                   isHighlighted
-                    ? 'bg-violet-100 dark:bg-violet-950/80 text-violet-750 dark:text-violet-300 font-semibold border-l-2 border-violet-500 shadow-sm'
+                    ? 'bg-violet-100 dark:bg-violet-950/80 text-violet-700 dark:text-violet-300 font-semibold border-l-2 border-violet-500 shadow-sm'
                     : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/40 dark:hover:bg-zinc-800/20'
                 }`}
               >

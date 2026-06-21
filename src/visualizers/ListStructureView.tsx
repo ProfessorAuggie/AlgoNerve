@@ -27,7 +27,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     const reversedElements = [...elements].reverse();
     return (
       <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6">
-        <div className="text-xs font-mono text-zinc-550 dark:text-zinc-400 mb-4 uppercase tracking-wider">
+        <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-4 uppercase tracking-wider">
           Stack (LIFO - Last In First Out)
         </div>
         
@@ -92,13 +92,13 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     // Render queue horizontally
     return (
       <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6 px-4">
-        <div className="text-xs font-mono text-zinc-550 dark:text-zinc-400 mb-6 uppercase tracking-wider">
+        <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-6 uppercase tracking-wider">
           Queue (FIFO - First In First Out)
         </div>
 
-        <div className="w-full max-w-2xl flex items-center gap-2 border-y-2 border-zinc-200 dark:border-zinc-850 bg-zinc-100/10 dark:bg-zinc-950/10 py-6 px-4 rounded-xl min-h-[140px] relative overflow-x-auto">
+        <div className="w-full max-w-2xl flex items-center gap-2 border-y-2 border-zinc-200 dark:border-zinc-800 bg-zinc-100/10 dark:bg-zinc-950/10 py-6 px-4 rounded-xl min-h-[140px] relative overflow-x-auto">
           {elements.length === 0 ? (
-            <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-zinc-400 dark:text-zinc-650 animate-pulse">
+            <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-zinc-400 dark:text-zinc-600 animate-pulse">
               Empty Queue
             </div>
           ) : (
@@ -160,23 +160,23 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     // Render Singly Linked List
     return (
       <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6 px-4 overflow-x-auto">
-        <div className="text-xs font-mono text-zinc-550 dark:text-zinc-400 mb-6 uppercase tracking-wider shrink-0">
+        <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-6 uppercase tracking-wider shrink-0">
           Singly Linked List
         </div>
 
         <div className="flex items-center gap-1 min-h-[140px] px-4 w-full justify-start md:justify-center overflow-x-auto py-4">
           {/* Head Indicator */}
           <div className="flex flex-col items-center justify-center mr-3 shrink-0">
-            <span className="text-xs font-mono font-extrabold text-violet-650 dark:text-violet-400 mb-1">Head</span>
-            <div className="w-8 h-8 rounded-full bg-violet-100 dark:bg-violet-950 border border-violet-300 dark:border-violet-850 flex items-center justify-center text-violet-750 dark:text-violet-300 font-extrabold text-sm">
+            <span className="text-xs font-mono font-extrabold text-violet-600 dark:text-violet-400 mb-1">Head</span>
+            <div className="w-8 h-8 rounded-full bg-violet-100 dark:bg-violet-950 border border-violet-300 dark:border-violet-850 flex items-center justify-center text-violet-700 dark:text-violet-300 font-extrabold text-sm">
               H
             </div>
             {/* arrow right */}
-            <span className="text-zinc-450 mt-1">↓</span>
+            <span className="text-zinc-400 mt-1">↓</span>
           </div>
 
           {nodes.length === 0 ? (
-            <div className="text-xs font-mono text-zinc-400 dark:text-zinc-650 animate-pulse">
+            <div className="text-xs font-mono text-zinc-400 dark:text-zinc-600 animate-pulse">
               Null (List is empty)
             </div>
           ) : (
@@ -199,7 +199,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
                   glow = 'shadow-[0_0_12px_rgba(245,158,11,0.4)]';
                 }
               } else if (isAction) {
-                cardBg = 'bg-violet-600/10 border-violet-500 text-violet-650 dark:text-violet-400';
+                cardBg = 'bg-violet-600/10 border-violet-500 text-violet-600 dark:text-violet-400';
                 glow = 'shadow-[0_0_10px_rgba(124,58,237,0.2)] border-dashed border-2 animate-pulse';
               }
 
@@ -211,7 +211,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
                       className={`flex rounded-xl border overflow-hidden transition-all duration-300 ${cardBg} ${glow} shadow-sm`}
                     >
                       {/* Value Compartment */}
-                      <div className="px-4 py-3 flex flex-col items-center justify-center min-w-[50px] border-r border-zinc-200 dark:border-zinc-850">
+                      <div className="px-4 py-3 flex flex-col items-center justify-center min-w-[50px] border-r border-zinc-200 dark:border-zinc-800">
                         <span className={`font-bold text-sm ${isActive ? 'text-white' : 'text-zinc-800 dark:text-zinc-200'}`}>
                           {node.value}
                         </span>
@@ -233,7 +233,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
 
                     {/* Active Node Highlighter Flag */}
                     {isActive && (
-                      <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-zinc-850 text-white dark:bg-white dark:text-zinc-900 border border-zinc-700 px-1 py-0.5 rounded shadow mt-1.5 animate-pulse shrink-0">
+                      <span className="text-[8px] font-mono font-bold uppercase tracking-wider bg-zinc-800 text-white dark:bg-white dark:text-zinc-900 border border-zinc-700 px-1 py-0.5 rounded shadow mt-1.5 animate-pulse shrink-0">
                         {actionType || 'Active'}
                       </span>
                     )}
@@ -242,12 +242,12 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
                   {/* SVG / Connector Arrow to next node */}
                   {idx < nodes.length - 1 ? (
                     <div className="w-10 flex items-center justify-center shrink-0">
-                      <svg className="w-full h-6 text-zinc-400 dark:text-zinc-750" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 40 24">
+                      <svg className="w-full h-6 text-zinc-400 dark:text-zinc-700" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 40 24">
                         <path d="M0 12h32M24 6l8 6-8 6" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   ) : (
-                    <div className="w-10 flex items-center justify-center text-xs font-mono font-extrabold text-zinc-400 dark:text-zinc-650 shrink-0 select-none">
+                    <div className="w-10 flex items-center justify-center text-xs font-mono font-extrabold text-zinc-400 dark:text-zinc-600 shrink-0 select-none">
                       → Null
                     </div>
                   )}
@@ -267,7 +267,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
       {type === 'linked-list' && renderLinkedList()}
 
       {/* Action panel legend summary */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded bg-violet-600 border border-violet-500" />
           <span>Insert/Push/Enqueue</span>
