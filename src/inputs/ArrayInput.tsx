@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAlgorithmStore } from '../store/algorithmStore';
 
 export const ArrayInput: React.FC = () => {
   const { inputArray, setInputArray, selectedAlgo, recursionN, setRecursionN } = useAlgorithmStore();
   const [inputValue, setInputValue] = useState(inputArray.join(', '));
+  const [targetInput, setTargetInput] = useState(recursionN.toString());
+
+  useEffect(() => {
+    setTargetInput(recursionN.toString());
+  }, [recursionN]);
+
+  const handleTargetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setTargetInput(val);
+    if (val !== '') {
+      const parsed = Number(val);
+      if (!isNaN(parsed)) {
+        setRecursionN(parsed);
+      }
+    }
+  };
   const [error, setError] = useState('');
 
   const handleUpdate = () => {
@@ -75,8 +91,8 @@ export const ArrayInput: React.FC = () => {
           <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Search Target Value</label>
           <input
             type="number"
-            value={recursionN}
-            onChange={(e) => setRecursionN(Math.max(1, Math.min(100, Number(e.target.value) || 1)))}
+            value={targetInput}
+            onChange={handleTargetChange}
             className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 text-xs font-mono text-zinc-800 dark:text-white focus:outline-none focus:border-violet-500 transition-colors w-24"
           />
         </div>
