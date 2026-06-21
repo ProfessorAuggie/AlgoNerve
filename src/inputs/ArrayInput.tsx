@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAlgorithmStore } from '../store/algorithmStore';
 
 export const ArrayInput: React.FC = () => {
-  const { inputArray, setInputArray } = useAlgorithmStore();
+  const { inputArray, setInputArray, selectedAlgo, recursionN, setRecursionN } = useAlgorithmStore();
   const [inputValue, setInputValue] = useState(inputArray.join(', '));
   const [error, setError] = useState('');
 
@@ -69,6 +69,18 @@ export const ArrayInput: React.FC = () => {
           Randomize
         </button>
       </div>
+
+      {selectedAlgo?.category === 'searching' && (
+        <div className="flex flex-col gap-1.5 border-t border-zinc-200 dark:border-zinc-800/60 pt-3">
+          <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Search Target Value</label>
+          <input
+            type="number"
+            value={recursionN}
+            onChange={(e) => setRecursionN(Math.max(1, Math.min(100, Number(e.target.value) || 1)))}
+            className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 text-xs font-mono text-zinc-805 dark:text-white focus:outline-none focus:border-violet-500 transition-colors w-24"
+          />
+        </div>
+      )}
     </div>
   );
 };

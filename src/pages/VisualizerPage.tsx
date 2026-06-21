@@ -7,6 +7,8 @@ import { TreeView } from '../visualizers/TreeView';
 import { DPView } from '../visualizers/DPView';
 import { RecursionView } from '../visualizers/RecursionView';
 import { ChessboardView } from '../visualizers/ChessboardView';
+import { ListStructureView } from '../visualizers/ListStructureView';
+import { ConceptView } from '../visualizers/ConceptView';
 
 
 import { Player } from '../controls/Player';
@@ -95,10 +97,16 @@ export const VisualizerPage: React.FC = () => {
 
   // Map active visualization categories to their views
   const renderVisualizer = () => {
+    if (selectedAlgo.mode === 'concept') {
+      return <ConceptView />;
+    }
     if (!currentStep) return null;
     switch (selectedAlgo.category) {
+      case 'searching':
       case 'sorting':
         return <SortingView step={currentStep} />;
+      case 'datastructures':
+        return <ListStructureView step={currentStep} />;
       case 'graph':
         return <GraphView step={currentStep} />;
       case 'tree':
@@ -116,8 +124,20 @@ export const VisualizerPage: React.FC = () => {
 
   // Map active category inputs
   const renderInputs = () => {
+    if (selectedAlgo.mode === 'concept') {
+      return (
+        <div className="p-4 bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-xl backdrop-blur-sm shadow-md transition-colors duration-300">
+          <h4 className="font-semibold text-zinc-850 dark:text-zinc-200 text-xs uppercase tracking-wider mb-2 font-mono">Concept Mode</h4>
+          <p className="text-[11px] text-zinc-550 dark:text-zinc-400 leading-relaxed font-sans">
+            Input customization is disabled because this algorithm is running in concept exploration mode. Refer to the properties, applications, and pseudocode to review its behavior.
+          </p>
+        </div>
+      );
+    }
     switch (selectedAlgo.category) {
+      case 'searching':
       case 'sorting':
+      case 'datastructures':
         return <ArrayInput />;
       case 'graph':
         return <GraphInput />;
@@ -160,12 +180,14 @@ export const VisualizerPage: React.FC = () => {
 
         {/* Short info/help guides */}
         <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
-          <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
-            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">Space</kbd> Play/Pause</span>
-            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">←</kbd> Prev</span>
-            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">→</kbd> Next</span>
-            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">R</kbd> Reset</span>
-          </div>
+          {selectedAlgo.mode !== 'concept' && (
+            <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">Space</kbd> Play/Pause</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">←</kbd> Prev</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">→</kbd> Next</span>
+              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-655 dark:text-zinc-400">R</kbd> Reset</span>
+            </div>
+          )}
           <Link
             to="/documentation"
             className="text-xs text-zinc-550 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors"
@@ -187,20 +209,31 @@ export const VisualizerPage: React.FC = () => {
           </div>
 
           {/* Bottom control hub */}
-          <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-205 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <Player />
-              <SpeedControl />
-            </div>
-            
-            <div className="w-full">
-              <Timeline />
-            </div>
+          {selectedAlgo.mode !== 'concept' ? (
+            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-205 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <Player />
+                <SpeedControl />
+              </div>
+              
+              <div className="w-full">
+                <Timeline />
+              </div>
 
-            <div className="w-full">
-              <NarrationPanel />
+              <div className="w-full">
+                <NarrationPanel />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-205 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col items-center justify-center py-6 px-4 transition-colors duration-300 text-center">
+              <span className="text-xs font-mono font-bold text-violet-650 dark:text-violet-400 uppercase tracking-widest mb-1">
+                Conceptual Mode Active
+              </span>
+              <p className="text-[11px] text-zinc-550 dark:text-zinc-400 max-w-md font-sans">
+                This algorithm runs in conceptual overview mode. Read the properties, applications, and pseudocode. Step simulation is disabled.
+              </p>
+            </div>
+          )}
         </section>
 
         {/* Right Details Config Panel (1 col) */}

@@ -2,7 +2,9 @@ import { create } from 'zustand';
 import type { Step, AlgorithmMeta } from '../algorithms/types';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 
-import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps } from '../algorithms/sorting';
+import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps } from '../algorithms/sorting';
+import { generateLinearSearchSteps, generateBinarySearchSteps } from '../algorithms/searching';
+import { generateStackSteps, generateQueueSteps, generateLinkedListSteps } from '../algorithms/datastructures';
 import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps, generateAStarSteps, generatePrimSteps, generateKruskalSteps } from '../algorithms/graph';
 import { generateBSTInsertSteps, generateTraversalSteps, generateAVLSteps } from '../algorithms/tree';
 import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps } from '../algorithms/dp';
@@ -212,9 +214,20 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
     let generated: Step[] = [];
 
     switch (algo.id) {
+      // Searching
+      case 'linear-search':
+        generated = generateLinearSearchSteps(state.inputArray, state.recursionN);
+        break;
+      case 'binary-search':
+        generated = generateBinarySearchSteps(state.inputArray, state.recursionN);
+        break;
+
       // Sorting
       case 'bubble-sort':
         generated = generateBubbleSortSteps(state.inputArray);
+        break;
+      case 'selection-sort':
+        generated = generateSelectionSortSteps(state.inputArray);
         break;
       case 'insertion-sort':
         generated = generateInsertionSortSteps(state.inputArray);
@@ -227,6 +240,17 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         break;
       case 'heap-sort':
         generated = generateHeapSortSteps(state.inputArray);
+        break;
+
+      // Data Structures
+      case 'stack-ops':
+        generated = generateStackSteps(state.inputArray);
+        break;
+      case 'queue-ops':
+        generated = generateQueueSteps(state.inputArray);
+        break;
+      case 'singly-linked-list':
+        generated = generateLinkedListSteps(state.inputArray);
         break;
         
       // Graph
@@ -298,6 +322,17 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         break;
 
       default:
+        if (algo.mode === 'concept') {
+          generated = [
+            {
+              id: 0,
+              action: 'concept',
+              description: `Concept Overview of ${algo.name}. Refer to properties and applications.`,
+              codeLine: 1,
+              payload: {},
+            }
+          ];
+        }
         break;
     }
 

@@ -259,3 +259,43 @@ export function generateHeapSortSteps(arr: number[]): Step[] {
   steps.push(createSortingStep(stepId++, 'done', 'Heap Sort complete!', 8, array, [], [], [...sorted]));
   return steps;
 }
+
+// ─── Selection Sort ──────────────────────────────────────────────────────────
+export function generateSelectionSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  const array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  for (let i = 0; i < n - 1; i++) {
+    let minIdx = i;
+    steps.push(createSortingStep(stepId++, 'outer-loop', `Outer loop iteration ${i + 1}: Find the minimum element in subarray from index ${i} to ${n - 1}. Set minimum index to ${i}.`, 2, array, [i], [], Array.from({ length: i }, (_, idx) => idx)));
+
+    for (let j = i + 1; j < n; j++) {
+      steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j}] (${array[j]}) with current minimum array[${minIdx}] (${array[minIdx]}).`, 4, array, [j, minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
+
+      if (array[j] < array[minIdx]) {
+        minIdx = j;
+        steps.push(createSortingStep(stepId++, 'new-min', `Found a new minimum element (${array[j]}) at index ${j}. Update minimum index.`, 5, array, [minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
+      }
+    }
+
+    if (minIdx !== i) {
+      const temp = array[i];
+      array[i] = array[minIdx];
+      array[minIdx] = temp;
+      steps.push(createSortingStep(stepId++, 'swap', `Swap array[${i}] (${temp}) with the minimum element array[${minIdx}] (${array[i]}).`, 7, array, [], [i, minIdx], Array.from({ length: i }, (_, idx) => idx)));
+    } else {
+      steps.push(createSortingStep(stepId++, 'no-swap', `The minimum element is already at index ${i}. No swap needed.`, 8, array, [], [], Array.from({ length: i }, (_, idx) => idx)));
+    }
+
+    // Element at index i is sorted
+    const sortedSoFar = Array.from({ length: i + 1 }, (_, idx) => idx);
+    steps.push(createSortingStep(stepId++, 'sorted', `Element at index ${i} (${array[i]}) is now in its final position.`, 9, array, [], [], sortedSoFar));
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Selection Sort complete! The array is fully sorted.', 11, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}

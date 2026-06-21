@@ -112,19 +112,25 @@ export const DocumentationPage: React.FC = () => {
             <div className="flex flex-col gap-6">
               <div>
                 <h1 className="text-2xl font-extrabold tracking-tight mb-2 text-zinc-900 dark:text-white">Supported Algorithms Registry</h1>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 20+ Algorithms & Layout Engines</p>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 40+ Algorithms & Layout Engines</p>
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
               
               <div className="flex flex-col gap-6">
-                {(['sorting', 'graph', 'tree', 'dp', 'recursion', 'backtracking'] as const).map((cat) => {
+                {(['searching', 'sorting', 'datastructures', 'graph', 'tree', 'dp', 'recursion', 'backtracking'] as const).map((cat) => {
                   const items = ALGORITHM_REGISTRY.filter((x) => x.category === cat);
                   if (items.length === 0) return null;
                   
                   return (
                     <div key={cat} className="flex flex-col gap-3">
-                      <h3 className="text-sm font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 font-mono border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                        {cat === 'dp' ? 'Dynamic Programming' : cat}
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-violet-650 dark:text-violet-400 font-mono border-b border-zinc-200 dark:border-zinc-800 pb-1">
+                        {cat === 'dp' 
+                          ? 'Dynamic Programming' 
+                          : cat === 'datastructures' 
+                          ? 'Data Structures' 
+                          : cat === 'searching' 
+                          ? 'Searching' 
+                          : cat}
                       </h3>
                       <div className="grid grid-cols-1 gap-2.5">
                         {items.map((algo) => (
