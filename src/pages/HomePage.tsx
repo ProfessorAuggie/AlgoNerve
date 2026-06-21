@@ -134,56 +134,86 @@ export const HomePage: React.FC = () => {
         {/* Algorithm Selection Grid or Empty State */}
         {filteredAlgos.length === 0 ? (
           <div className="flex flex-col items-center justify-center p-12 border border-dashed border-zinc-250 dark:border-zinc-850 rounded-3xl bg-white/20 dark:bg-zinc-900/10 backdrop-blur-sm max-w-md w-full mb-16">
-            <HelpCircle className="text-zinc-450 dark:text-zinc-600 mb-3 animate-bounce" size={32} />
+            <HelpCircle className="text-zinc-455 dark:text-zinc-600 mb-3 animate-bounce" size={32} />
             <h3 className="font-bold text-zinc-800 dark:text-zinc-200 text-sm mb-1">No algorithms found</h3>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center">
               No results match "{searchQuery}". Try selecting another category or typing another keyword.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
-            {filteredAlgos.map((algo) => (
-              <div
-                key={algo.id}
-                onClick={() => handleSelect(algo.id)}
-                className="glass-panel glass-panel-hover p-6 rounded-2xl cursor-pointer flex flex-col justify-between items-start text-left relative group overflow-hidden"
-              >
-                {/* Card glow effect */}
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-violet-600/5 blur-3xl pointer-events-none group-hover:bg-violet-600/10 transition-colors" />
+          <div className="w-full max-w-5xl flex flex-col items-center">
+            {categories
+              .filter((c) => c.key !== 'all')
+              .map((cat) => {
+                // If filtering by a single category, skip other categories
+                if (activeCategory !== 'all' && activeCategory !== cat.key) return null;
 
-                <div className="w-full flex justify-between items-start mb-4">
-                  <span className="text-[10px] font-mono bg-zinc-100 dark:bg-zinc-950 text-zinc-550 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-855 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                    {algo.category}
-                  </span>
-                  
-                  {/* Complexity badge */}
-                  <div className="flex flex-col items-end font-mono text-[10px] text-zinc-500">
-                    <span>Time: <strong className="text-zinc-700 dark:text-zinc-300">{algo.timeComplexity}</strong></span>
-                    <span>Space: <strong className="text-zinc-700 dark:text-zinc-300">{algo.spaceComplexity}</strong></span>
+                const catAlgos = filteredAlgos.filter((algo) => algo.category === cat.key);
+                if (catAlgos.length === 0) return null;
+
+                const CatIcon = cat.icon;
+
+                return (
+                  <div key={cat.key} className="w-full mb-12 text-left">
+                    {/* Category Header */}
+                    <div className="w-full flex items-center gap-3 border-b border-zinc-200 dark:border-zinc-850 pb-2 mb-6">
+                      <CatIcon size={16} className="text-violet-650 dark:text-violet-400" />
+                      <h2 className="text-xs font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-wider font-mono">
+                        {cat.label}
+                      </h2>
+                      <span className="text-[9px] font-mono font-bold bg-zinc-150 dark:bg-zinc-900 border border-zinc-250 dark:border-zinc-805 text-zinc-550 dark:text-zinc-450 px-2 py-0.5 rounded-full ml-auto">
+                        {catAlgos.length} {catAlgos.length === 1 ? 'item' : 'items'}
+                      </span>
+                    </div>
+
+                    {/* Category Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                      {catAlgos.map((algo) => (
+                        <div
+                          key={algo.id}
+                          onClick={() => handleSelect(algo.id)}
+                          className="glass-panel glass-panel-hover p-6 rounded-2xl cursor-pointer flex flex-col justify-between items-start text-left relative group overflow-hidden h-full min-h-[190px] transition-all"
+                        >
+                          {/* Card glow effect */}
+                          <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-violet-600/5 blur-3xl pointer-events-none group-hover:bg-violet-600/10 transition-colors" />
+
+                          <div className="w-full flex justify-between items-start mb-4">
+                            <span className="text-[10px] font-mono bg-zinc-100 dark:bg-zinc-950 text-zinc-550 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-855 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                              {algo.category}
+                            </span>
+                            
+                            {/* Complexity badge */}
+                            <div className="flex flex-col items-end font-mono text-[10px] text-zinc-500">
+                              <span>Time: <strong className="text-zinc-700 dark:text-zinc-300">{algo.timeComplexity}</strong></span>
+                              <span>Space: <strong className="text-zinc-700 dark:text-zinc-300">{algo.spaceComplexity}</strong></span>
+                            </div>
+                          </div>
+
+                          <h3 className="font-bold text-lg text-zinc-850 dark:text-white mb-2 group-hover:text-violet-650 dark:group-hover:text-violet-400 transition-colors">
+                            {algo.name}
+                          </h3>
+                          
+                          <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                            {algo.description}
+                          </p>
+
+                          {/* Tags */}
+                          <div className="flex flex-wrap gap-1.5 mt-auto">
+                            {algo.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-[9px] font-mono bg-zinc-100 dark:bg-zinc-950/60 border border-zinc-200 dark:border-zinc-850/60 text-zinc-500 px-2 py-0.5 rounded font-semibold"
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <h3 className="font-bold text-lg text-zinc-850 dark:text-white mb-2 group-hover:text-violet-650 dark:group-hover:text-violet-400 transition-colors">
-                  {algo.name}
-                </h3>
-                
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
-                  {algo.description}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {algo.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[9px] font-mono bg-zinc-100 dark:bg-zinc-950/60 border border-zinc-200 dark:border-zinc-850/60 text-zinc-500 px-2 py-0.5 rounded font-semibold"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+                );
+              })}
           </div>
         )}
       </main>
