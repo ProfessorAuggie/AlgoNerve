@@ -149,8 +149,9 @@ export const HomePage: React.FC = () => {
 
       {/* Footer */}
       <footer className="w-full border-t border-zinc-900 py-6 text-center text-xs font-mono text-zinc-600 z-10 bg-zinc-950/80 backdrop-blur-md">
-        © 2026 AlgoNerve Interactive Educational Platform. All Rights Reserved.
+        © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
       </footer>
+
     </div>
   );
 };

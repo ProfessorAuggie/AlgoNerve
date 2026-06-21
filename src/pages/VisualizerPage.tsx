@@ -202,10 +202,10 @@ export const VisualizerPage: React.FC = () => {
         </section>
       </main>
 
-      {/* Mini footer */}
       <footer className="w-full border-t border-zinc-900 py-4 text-center text-[10px] font-mono text-zinc-700 bg-zinc-950/80 backdrop-blur-sm mt-auto z-10">
-        AlgoNerve Visualizer Dashboard • Accessibly optimized with narration feeds
+        AlgoNerve • Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a> • Accessibly optimized with narration feeds
       </footer>
+
 
     </div>
   );
