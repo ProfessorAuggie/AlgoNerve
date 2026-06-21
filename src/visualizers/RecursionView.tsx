@@ -12,7 +12,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
   const { callStack = [], currentFrameId, result, pegs } = payload;
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-zinc-900/40 rounded-xl border border-zinc-800/80 backdrop-blur-sm">
+    <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
       {/* Hanoi Visualization */}
       {pegs ? (
         <div className="flex-1 w-full flex flex-col items-center justify-center min-h-[300px]">
@@ -23,7 +23,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
               return (
                 <div key={pegKey} className="flex flex-col items-center relative w-1/3 h-full">
                   {/* Peg Rod */}
-                  <div className="absolute w-2 h-full bg-zinc-700 rounded-t-md bottom-0" />
+                  <div className="absolute w-2 h-full bg-zinc-400 dark:bg-zinc-700 rounded-t-md bottom-0 transition-colors" />
                   
                   {/* Disks */}
                   <div className="absolute bottom-0 flex flex-col-reverse items-center w-full z-10">
@@ -33,12 +33,12 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                       
                       // Harmonious spectrum colors for disks
                       const diskColors = [
-                        'bg-rose-500 border-rose-400 shadow-rose-950/50',
-                        'bg-amber-500 border-amber-400 shadow-amber-950/50',
-                        'bg-emerald-500 border-emerald-400 shadow-emerald-950/50',
-                        'bg-cyan-500 border-cyan-400 shadow-cyan-950/50',
-                        'bg-indigo-500 border-indigo-400 shadow-indigo-950/50',
-                        'bg-fuchsia-500 border-fuchsia-400 shadow-fuchsia-950/50',
+                        'bg-rose-500 border-rose-400 shadow-rose-950/20',
+                        'bg-amber-500 border-amber-400 shadow-amber-950/20',
+                        'bg-emerald-500 border-emerald-400 shadow-emerald-950/20',
+                        'bg-cyan-500 border-cyan-400 shadow-cyan-950/20',
+                        'bg-indigo-500 border-indigo-400 shadow-indigo-950/20',
+                        'bg-fuchsia-500 border-fuchsia-400 shadow-fuchsia-950/20',
                       ];
                       
                       const colorClass = diskColors[(diskVal - 1) % diskColors.length];
@@ -56,7 +56,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                   </div>
 
                   {/* Peg Base Label */}
-                  <div className="absolute -bottom-8 font-mono text-xs font-bold bg-zinc-800 border border-zinc-750 px-2 py-0.5 rounded text-zinc-300">
+                  <div className="absolute -bottom-8 font-mono text-xs font-bold bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-750 px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-300 transition-colors">
                     Peg {pegKey}
                   </div>
                 </div>
@@ -75,21 +75,21 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                 const isActive = frame.id === currentFrameId;
                 const isReturning = frame.isReturning;
                 
-                let borderClass = 'border-zinc-800';
-                let bgClass = 'bg-zinc-950/40 text-zinc-400';
+                let borderClass = 'border-zinc-200 dark:border-zinc-800';
+                let bgClass = 'bg-zinc-100 dark:bg-zinc-950/40 text-zinc-650 dark:text-zinc-400';
                 let actionText = '';
 
                 if (isActive && isReturning) {
                   borderClass = 'border-emerald-500';
-                  bgClass = 'bg-emerald-950/30 text-emerald-300';
+                  bgClass = 'bg-emerald-100 dark:bg-emerald-955/30 text-emerald-700 dark:text-emerald-300';
                   actionText = `→ Returns ${frame.returnValue}`;
                 } else if (isActive) {
                   borderClass = 'border-violet-500';
-                  bgClass = 'bg-violet-950/30 text-violet-300 ring-2 ring-violet-500/30';
+                  bgClass = 'bg-violet-100 dark:bg-violet-955/30 text-violet-750 dark:text-violet-300 ring-2 ring-violet-500/30';
                   actionText = 'Active Execution';
                 } else if (isReturning) {
-                  borderClass = 'border-emerald-600/50';
-                  bgClass = 'bg-emerald-950/10 text-emerald-400/80';
+                  borderClass = 'border-emerald-500/50 dark:border-emerald-600/50';
+                  bgClass = 'bg-emerald-100/40 dark:bg-emerald-955/10 text-emerald-650 dark:text-emerald-450';
                   actionText = `Returns ${frame.returnValue}`;
                 }
 
@@ -107,7 +107,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
                       </span>
                     </div>
                     {actionText && (
-                      <span className="font-semibold text-[10px] bg-zinc-900 border border-zinc-800 px-2 py-0.5 rounded">
+                      <span className="font-semibold text-[10px] bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 px-2 py-0.5 rounded text-zinc-700 dark:text-zinc-300 transition-colors">
                         {actionText}
                       </span>
                     )}
@@ -121,22 +121,22 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
 
       {/* Result Indicator */}
       {result !== undefined && (
-        <div className="w-full flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 font-mono text-sm font-semibold">
+        <div className="w-full flex items-center justify-center gap-2 mt-4 px-4 py-2 bg-emerald-100/40 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-lg text-emerald-700 dark:text-emerald-400 font-mono text-sm font-semibold transition-colors">
           Final Output: {String(result)}
         </div>
       )}
 
       {/* Hanoi Legend */}
       {pegs && (
-        <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-800/60 text-xs font-medium">
+        <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-550 dark:text-zinc-400">
           <div className="flex items-center gap-2">
-            <span className="text-zinc-400">Peg A: Source</span>
+            <span>Peg A: Source</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-zinc-400">Peg B: Auxiliary</span>
+            <span>Peg B: Auxiliary</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-zinc-400">Peg C: Destination</span>
+            <span>Peg C: Destination</span>
           </div>
         </div>
       )}

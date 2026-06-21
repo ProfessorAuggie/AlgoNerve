@@ -57,8 +57,8 @@ export const GraphInput: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2.5 p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-xl backdrop-blur-sm shadow-md">
-      <h4 className="font-semibold text-zinc-200 text-sm">Graph Configuration</h4>
+    <div className="flex flex-col gap-2.5 p-4 bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-xl backdrop-blur-sm shadow-md transition-colors duration-300">
+      <h4 className="font-semibold text-zinc-805 dark:text-zinc-200 text-sm">Graph Configuration</h4>
       
       {/* Start Node Selector */}
       <div className="flex flex-col gap-1">
@@ -66,7 +66,7 @@ export const GraphInput: React.FC = () => {
         <select
           value={graphStartNode}
           onChange={handleStartNodeChange}
-          className="bg-zinc-950 border border-zinc-800 text-zinc-300 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-violet-500 font-semibold"
+          className="bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-violet-500 font-semibold transition-colors"
         >
           {graphData.nodes.map((node) => (
             <option key={node.id} value={node.id}>
@@ -77,24 +77,24 @@ export const GraphInput: React.FC = () => {
       </div>
 
       {/* Preset configurations */}
-      <div className="flex flex-col gap-1 border-t border-zinc-850 pt-2.5 mt-1">
+      <div className="flex flex-col gap-1 border-t border-zinc-200 dark:border-zinc-850 pt-2.5 mt-1">
         <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-1">Graph Presets</label>
         <div className="grid grid-cols-3 gap-2">
           <button
             onClick={() => loadPreset('default')}
-            className="bg-zinc-850 hover:bg-zinc-850/80 border border-zinc-800 text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-850 dark:hover:bg-zinc-850/80 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
           >
             Mesh Default
           </button>
           <button
             onClick={() => loadPreset('linear')}
-            className="bg-zinc-850 hover:bg-zinc-850/80 border border-zinc-800 text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-850 dark:hover:bg-zinc-850/80 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
           >
             Linear Chain
           </button>
           <button
             onClick={() => loadPreset('cycle')}
-            className="bg-zinc-850 hover:bg-zinc-850/80 border border-zinc-800 text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-850 dark:hover:bg-zinc-850/80 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium text-[10px] py-1 px-2 rounded transition-colors"
           >
             Closed Ring
           </button>

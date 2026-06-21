@@ -13,7 +13,7 @@ export const SpeedControl: React.FC = () => {
   ];
 
   return (
-    <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 p-1 rounded-lg">
+    <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-1 rounded-lg transition-colors duration-300">
       {speeds.map((s) => {
         const isActive = speed === s.delay;
         return (
@@ -22,8 +22,8 @@ export const SpeedControl: React.FC = () => {
             onClick={() => setSpeed(s.delay)}
             className={`px-3 py-1 text-xs font-mono font-bold rounded-md transition-all duration-200 ${
               isActive
-                ? 'bg-zinc-800 text-violet-400 border border-zinc-700 shadow-sm'
-                : 'text-zinc-500 hover:text-zinc-300'
+                ? 'bg-white dark:bg-zinc-800 text-violet-650 dark:text-violet-400 border border-zinc-200 dark:border-zinc-700 shadow-sm'
+                : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             {s.label}

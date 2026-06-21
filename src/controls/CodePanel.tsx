@@ -269,12 +269,12 @@ export const CodePanel: React.FC = () => {
   const highlightedLine = currentStep ? currentStep.codeLine : -1;
 
   return (
-    <div className="w-full flex flex-col bg-zinc-900/60 border border-zinc-800/80 rounded-xl overflow-hidden backdrop-blur-sm shadow-md">
-      <div className="bg-zinc-900 px-4 py-3 border-b border-zinc-800/60 flex items-center justify-between">
-        <h4 className="text-xs uppercase font-mono font-semibold text-zinc-400 tracking-wider">
+    <div className="w-full flex flex-col bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 rounded-xl overflow-hidden backdrop-blur-sm shadow-md transition-colors duration-300">
+      <div className="bg-zinc-50 dark:bg-zinc-900 px-4 py-3 border-b border-zinc-200 dark:border-zinc-800/60 flex items-center justify-between transition-colors">
+        <h4 className="text-xs uppercase font-mono font-semibold text-zinc-600 dark:text-zinc-400 tracking-wider">
           Pseudocode Execution
         </h4>
-        <span className="text-[10px] font-mono text-zinc-600 bg-zinc-950 px-2 py-0.5 rounded">
+        <span className="text-[10px] font-mono text-zinc-550 dark:text-zinc-600 bg-zinc-200/50 dark:bg-zinc-950 px-2 py-0.5 rounded transition-colors">
           Sync Active
         </span>
       </div>
@@ -296,12 +296,12 @@ export const CodePanel: React.FC = () => {
                 key={idx}
                 className={`flex w-full items-center py-0.5 px-2 rounded transition-colors duration-200 ${
                   isHighlighted
-                    ? 'bg-violet-950/80 text-violet-300 font-semibold border-l-2 border-violet-500 shadow-sm'
-                    : 'text-zinc-400 hover:bg-zinc-800/20'
+                    ? 'bg-violet-100 dark:bg-violet-950/80 text-violet-750 dark:text-violet-300 font-semibold border-l-2 border-violet-500 shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/40 dark:hover:bg-zinc-800/20'
                 }`}
               >
                 {/* Line number spacer */}
-                <span className="text-zinc-600 select-none mr-4 w-4 text-right">
+                <span className="text-zinc-400 dark:text-zinc-600 select-none mr-4 w-4 text-right">
                   {lineNum}
                 </span>
 

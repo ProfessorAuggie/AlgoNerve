@@ -83,12 +83,12 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
   traverseAndFlatten(renderRoot);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-zinc-900/40 rounded-xl border border-zinc-800/80 backdrop-blur-sm">
-      <div className="relative w-full flex-1 min-h-[350px] flex items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
+      <div className="relative w-full flex-1 min-h-[350px] flex items-center justify-center overflow-x-auto overflow-y-hidden select-none scrollbar-none">
         {nodesList.length === 0 ? (
           <div className="text-zinc-500 font-medium text-sm">Tree is empty. Add values to build a BST.</div>
         ) : (
-          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full max-w-[650px] overflow-visible">
+          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full min-w-[550px] max-w-[650px] overflow-visible">
             {/* Draw connections */}
             {edgesList.map((edge, idx) => {
               const isSourceCurrent = current === edge.source.id;
@@ -96,18 +96,18 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
               const isSourceVisited = visited.includes(edge.source.id);
               const isTargetVisited = visited.includes(edge.target.id);
               
-              let stroke = '#27272a'; // zinc-800
+              let edgeClass = 'stroke-zinc-300 dark:stroke-zinc-800';
               let strokeWidth = 2;
               let strokeDash = '';
 
               if (isTargetCurrent && isSourceCurrent) {
-                stroke = '#a78bfa'; // violet
+                edgeClass = 'stroke-violet-400';
                 strokeWidth = 3;
               } else if (isTargetVisited && isSourceVisited) {
-                stroke = '#10b981'; // emerald
+                edgeClass = 'stroke-emerald-500';
                 strokeWidth = 2;
               } else if (isTargetCurrent || isSourceCurrent) {
-                stroke = '#a78bfa';
+                edgeClass = 'stroke-violet-400';
                 strokeWidth = 2;
                 strokeDash = '3,3';
               }
@@ -119,10 +119,9 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                   y1={edge.source.y}
                   x2={edge.target.x}
                   y2={edge.target.y}
-                  stroke={stroke}
+                  className={`${edgeClass} transition-all duration-300`}
                   strokeWidth={strokeWidth}
                   strokeDasharray={strokeDash}
-                  className="transition-all duration-300"
                 />
               );
             })}
@@ -133,24 +132,20 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
               const isComparing = comparing === node.id;
               const isVisited = visited.includes(node.id);
 
-              let fill = '#18181b'; // zinc-900
-              let stroke = '#3f3f46'; // zinc-700
+              let circleClass = 'fill-white dark:fill-zinc-955 stroke-zinc-300 dark:stroke-zinc-700';
               let strokeWidth = 2;
               let filter = '';
 
               if (isComparing) {
-                fill = '#f59e0b'; // amber-500
-                stroke = '#fcd34d';
+                circleClass = 'fill-amber-500 stroke-amber-300 dark:stroke-amber-400';
                 strokeWidth = 3;
                 filter = 'drop-shadow(0 0 6px rgba(245, 158, 11, 0.5))';
               } else if (isCurrent) {
-                fill = '#8b5cf6'; // violet-500
-                stroke = '#c4b5fd';
+                circleClass = 'fill-violet-500 stroke-violet-300 dark:stroke-violet-400';
                 strokeWidth = 3;
                 filter = 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))';
               } else if (isVisited) {
-                fill = '#10b981'; // emerald-500
-                stroke = '#6ee7b7';
+                circleClass = 'fill-emerald-500 stroke-emerald-355 dark:stroke-emerald-400';
               }
 
               return (
@@ -162,15 +157,17 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                 >
                   <circle
                     r="20"
-                    fill={fill}
-                    stroke={stroke}
+                    className={`${circleClass} transition-all duration-300`}
                     strokeWidth={strokeWidth}
-                    className="transition-all duration-300"
                   />
                   <text
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className="text-xs font-bold fill-white select-none"
+                    className={`text-xs font-bold select-none ${
+                      isCurrent || isComparing || isVisited
+                        ? 'fill-white font-bold'
+                        : 'fill-zinc-800 dark:fill-zinc-200'
+                    }`}
                   >
                     {node.value}
                   </text>
@@ -179,7 +176,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                     <text
                       y="-28"
                       textAnchor="middle"
-                      className="text-[9px] font-bold fill-cyan-400 font-mono"
+                      className="text-[9px] font-bold fill-cyan-600 dark:fill-cyan-400 font-mono"
                     >
                       bal={node.balance}
                     </text>
@@ -194,23 +191,23 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
 
       {/* Traversal Output Results & Call Stack */}
       {result.length > 0 && (
-        <div className="w-full flex flex-col gap-2 mt-4 px-4 py-3 bg-zinc-900/60 rounded-lg border border-zinc-800 text-xs font-mono">
+        <div className="w-full flex flex-col gap-2 mt-4 px-4 py-3 bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-xs font-mono transition-colors duration-300">
           <div className="flex items-center gap-2">
             <span className="text-zinc-500 uppercase font-semibold">Output:</span>
             <div className="flex gap-1.5 flex-wrap">
               {result.map((val, idx) => (
-                <span key={idx} className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">
+                <span key={idx} className="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-250 dark:border-emerald-500/30 px-2 py-0.5 rounded font-bold">
                   {val}
                 </span>
               ))}
             </div>
           </div>
           {callStack.length > 0 && (
-            <div className="flex items-center gap-2 border-t border-zinc-800/60 pt-2 mt-1">
+            <div className="flex items-center gap-2 border-t border-zinc-200 dark:border-zinc-800/60 pt-2 mt-1">
               <span className="text-zinc-500 uppercase font-semibold">Recursion Stack:</span>
               <div className="flex gap-1 overflow-x-auto">
                 {callStack.map((frame, idx) => (
-                  <span key={idx} className="bg-violet-950/80 text-violet-300 border border-violet-800/80 px-2 py-0.5 rounded text-[10px]">
+                  <span key={idx} className="bg-violet-100 dark:bg-violet-950/80 text-violet-750 dark:text-violet-300 border border-violet-200 dark:border-violet-800/80 px-2 py-0.5 rounded text-[10px] whitespace-nowrap">
                     {frame}
                   </span>
                 ))}
@@ -221,22 +218,22 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
       )}
 
       {/* Legend */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-800/60 text-xs font-medium">
+      <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-650 dark:text-zinc-300">
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-[#8b5cf6] border border-violet-400" />
-          <span className="text-zinc-300">Current Node</span>
+          <span>Current Node</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-amber-500 border border-amber-400" />
-          <span className="text-zinc-300">Comparing</span>
+          <span>Comparing</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3.0 h-3.0 rounded bg-[#10b981] border border-emerald-400" />
-          <span className="text-zinc-300">Traversed</span>
+          <span>Traversed</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-zinc-950 border border-zinc-700" />
-          <span className="text-zinc-300">Default</span>
+          <div className="w-3.0 h-3.0 rounded bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700" />
+          <span>Default</span>
         </div>
       </div>
     </div>
