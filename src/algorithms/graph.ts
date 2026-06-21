@@ -1,5 +1,4 @@
-import type { Step, GraphData, GraphPayload } from './types';
-
+import type { Step, GraphData, GraphPayload, GraphEdge } from './types';
 
 function createGraphStep(
   id: number,
@@ -13,7 +12,8 @@ function createGraphStep(
   current?: string,
   distances?: Record<string, number>,
   previous?: Record<string, string | null>,
-  path?: string[]
+  path?: string[],
+  mstEdges?: GraphEdge[]
 ): Step {
   return {
     id,
@@ -29,9 +29,11 @@ function createGraphStep(
       distances: distances ? { ...distances } : undefined,
       previous: previous ? { ...previous } : undefined,
       path: path ? [...path] : undefined,
+      mstEdges: mstEdges ? [...mstEdges] : undefined,
     } as GraphPayload,
   };
 }
+
 
 // Helper to get neighbors
 function getNeighbors(graph: GraphData, nodeId: string): { node: string; weight: number }[] {
@@ -277,3 +279,447 @@ export function generateDijkstraSteps(graph: GraphData, startNode: string): Step
 
   return steps;
 }
+
+// Heuristic straight line distance mappings to node 'F' for standard coordinate node sets.
+const HEURISTICS: Record<string, number> = {
+  A: 450,
+  B: 308,
+  C: 308,
+  D: 165,
+  E: 165,
+  F: 0,
+};
+
+// ─── A* Search Algorithm ─────────────────────────────────────────────────────
+export function generateAStarSteps(graph: GraphData, startNode: string, endNode: string = 'F'): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+
+  const visited: string[] = [];
+  const gScores: Record<string, number> = {};
+  const fScores: Record<string, number> = {};
+  const previous: Record<string, string | null> = {};
+  const openSet: string[] = [startNode];
+
+  for (const node of graph.nodes) {
+    gScores[node.id] = Infinity;
+    fScores[node.id] = Infinity;
+    previous[node.id] = null;
+  }
+
+  gScores[startNode] = 0;
+  fScores[startNode] = HEURISTICS[startNode] || 0;
+
+  steps.push(createGraphStep(
+    stepId++,
+    'init',
+    `Initialize A* Search from node ${startNode} to target ${endNode}. Set start node g(start) = 0 and f(start) = h(start) = ${fScores[startNode]}.`,
+    1,
+    graph,
+    visited,
+    openSet,
+    undefined,
+    undefined,
+    gScores,
+    previous
+  ));
+
+  while (openSet.length > 0) {
+    // Find node in openSet with lowest fScore
+    let current = openSet[0];
+    let minF = fScores[current];
+    for (const node of openSet) {
+      if (fScores[node] < minF) {
+        minF = fScores[node];
+        current = node;
+      }
+    }
+
+    steps.push(createGraphStep(
+      stepId++,
+      'select-min-f',
+      `Select node ${current} with minimum f(x) = ${fScores[current]} from open list.`,
+      3,
+      graph,
+      visited,
+      openSet,
+      undefined,
+      current,
+      gScores,
+      previous
+    ));
+
+    if (current === endNode) {
+      // Reconstruct path
+      const path: string[] = [];
+      let temp: string | null = current;
+      while (temp) {
+        path.unshift(temp);
+        temp = previous[temp];
+      }
+
+      visited.push(current);
+      steps.push(createGraphStep(
+        stepId++,
+        'done',
+        `Goal node ${endNode} reached! Shortest path: [${path.join(' → ')}]. Cost: ${gScores[endNode]}.`,
+        8,
+        graph,
+        visited,
+        openSet,
+        undefined,
+        current,
+        gScores,
+        previous,
+        path
+      ));
+      return steps;
+    }
+
+    // Move current from openSet to closedSet
+    const idx = openSet.indexOf(current);
+    openSet.splice(idx, 1);
+    visited.push(current);
+
+    const neighbors = getNeighbors(graph, current);
+    for (const nInfo of neighbors) {
+      const neighbor = nInfo.node;
+      const weight = nInfo.weight;
+
+      if (visited.includes(neighbor)) {
+        steps.push(createGraphStep(
+          stepId++,
+          'skip-visited',
+          `Neighbor ${neighbor} is already evaluated (in closed list). Skip.`,
+          5,
+          graph,
+          visited,
+          openSet,
+          undefined,
+          current,
+          gScores,
+          previous
+        ));
+        continue;
+      }
+
+      const tentativeG = gScores[current] + weight;
+      
+      steps.push(createGraphStep(
+        stepId++,
+        'check-relaxation',
+        `Evaluate neighbor ${neighbor}. Calculated tentative g(${neighbor}) = g(${current}) + ${weight} = ${tentativeG}.`,
+        6,
+        graph,
+        visited,
+        openSet,
+        undefined,
+        current,
+        gScores,
+        previous
+      ));
+
+      if (tentativeG < gScores[neighbor]) {
+        previous[neighbor] = current;
+        gScores[neighbor] = tentativeG;
+        const h = HEURISTICS[neighbor] || 0;
+        fScores[neighbor] = tentativeG + h;
+
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
+        }
+
+        steps.push(createGraphStep(
+          stepId++,
+          'relax',
+          `Shorter route to ${neighbor} found via ${current}! Update g(${neighbor}) = ${tentativeG}, f(${neighbor}) = g(${tentativeG}) + h(${h}) = ${fScores[neighbor]}. Add to open list.`,
+          7,
+          graph,
+          visited,
+          openSet,
+          undefined,
+          current,
+          gScores,
+          previous
+        ));
+      }
+    }
+  }
+
+  steps.push(createGraphStep(
+    stepId++,
+    'fail',
+    `Open set is empty but target ${endNode} was not reached. No path exists.`,
+    9,
+    graph,
+    visited,
+    openSet,
+    undefined,
+    undefined,
+    gScores,
+    previous
+  ));
+
+  return steps;
+}
+
+// ─── Prim's MST Algorithm ────────────────────────────────────────────────────
+export function generatePrimSteps(graph: GraphData, startNode: string): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+
+  const visited: string[] = [];
+  const mstEdges: GraphEdge[] = [];
+  const remainingNodes = graph.nodes.map(n => n.id);
+
+  // Distances to MST
+  const keys: Record<string, number> = {};
+  const parent: Record<string, string | null> = {};
+
+  for (const node of graph.nodes) {
+    keys[node.id] = Infinity;
+    parent[node.id] = null;
+  }
+
+  keys[startNode] = 0;
+
+  steps.push(createGraphStep(
+    stepId++,
+    'init',
+    `Start Prim's MST from node ${startNode}. Initialize keys to ∞ and parent to null.`,
+    1,
+    graph,
+    visited,
+    undefined,
+    undefined,
+    undefined,
+    keys,
+    undefined,
+    undefined,
+    mstEdges
+  ));
+
+  while (visited.length < graph.nodes.length) {
+    // Select vertex with min key among unvisited
+    let minKey = Infinity;
+    let u = '';
+    for (const node of remainingNodes) {
+      if (!visited.includes(node) && keys[node] < minKey) {
+        minKey = keys[node];
+        u = node;
+      }
+    }
+
+    if (!u) break;
+
+    visited.push(u);
+    
+    // Add selected edge to MST list
+    if (parent[u]) {
+      mstEdges.push({ source: parent[u]!, target: u, weight: minKey });
+    }
+
+    steps.push(createGraphStep(
+      stepId++,
+      'add-to-mst',
+      `Extract vertex ${u} with minimum key (${minKey}) and add it to the MST.`,
+      4,
+      graph,
+      visited,
+      undefined,
+      undefined,
+      u,
+      keys,
+      undefined,
+      undefined,
+      mstEdges
+    ));
+
+    const neighbors = getNeighbors(graph, u);
+    for (const nInfo of neighbors) {
+      const v = nInfo.node;
+      const weight = nInfo.weight;
+
+      if (!visited.includes(v)) {
+        steps.push(createGraphStep(
+          stepId++,
+          'check-edge',
+          `Evaluate edge (${u} - ${v}) with weight ${weight}. Key at ${v} is currently ${keys[v]}.`,
+          5,
+          graph,
+          visited,
+          undefined,
+          undefined,
+          u,
+          keys,
+          undefined,
+          undefined,
+          mstEdges
+        ));
+
+        if (weight < keys[v]) {
+          keys[v] = weight;
+          parent[v] = u;
+
+          steps.push(createGraphStep(
+            stepId++,
+            'update-key',
+            `Edge weight ${weight} < keys[${v}] (${keys[v]}). Update keys[${v}] = ${weight} and parent[${v}] = ${u}.`,
+            6,
+            graph,
+            visited,
+            undefined,
+            undefined,
+            u,
+            keys,
+            undefined,
+            undefined,
+            mstEdges
+          ));
+        }
+      }
+    }
+  }
+
+  steps.push(createGraphStep(
+    stepId++,
+    'done',
+    `Prim's MST complete! Constructed minimum spanning tree with ${mstEdges.length} edges.`,
+    8,
+    graph,
+    visited,
+    undefined,
+    undefined,
+    undefined,
+    keys,
+    undefined,
+    undefined,
+    mstEdges
+  ));
+
+  return steps;
+}
+
+// ─── Kruskal's MST Algorithm ─────────────────────────────────────────────────
+export function generateKruskalSteps(graph: GraphData): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+
+  const visited: string[] = [];
+  const mstEdges: GraphEdge[] = [];
+  
+  // Sort edges by weight
+  const sortedEdges = [...graph.edges].sort((a, b) => (a.weight ?? 0) - (b.weight ?? 0));
+
+  // Disjoint set parent map
+  const parent: Record<string, string> = {};
+  for (const node of graph.nodes) {
+    parent[node.id] = node.id;
+  }
+
+  function find(id: string): string {
+    if (parent[id] === id) return id;
+    return find(parent[id]);
+  }
+
+  function union(root1: string, root2: string) {
+    parent[root1] = root2;
+  }
+
+  steps.push(createGraphStep(
+    stepId++,
+    'init',
+    `Start Kruskal's MST. Sort all ${sortedEdges.length} edges by ascending weight. Initialize disjoint set clusters.`,
+    1,
+    graph,
+    visited,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    mstEdges
+  ));
+
+  for (const edge of sortedEdges) {
+    const rootU = find(edge.source);
+    const rootV = find(edge.target);
+
+    steps.push(createGraphStep(
+      stepId++,
+      'evaluate-edge',
+      `Examine edge (${edge.source} - ${edge.target}) with weight ${edge.weight}. Roots check: find(${edge.source}) = ${rootU}, find(${edge.target}) = ${rootV}.`,
+      3,
+      graph,
+      visited,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      mstEdges
+    ));
+
+    if (rootU !== rootV) {
+      union(rootU, rootV);
+      mstEdges.push(edge);
+      
+      // Update visited nodes for visual feedback
+      if (!visited.includes(edge.source)) visited.push(edge.source);
+      if (!visited.includes(edge.target)) visited.push(edge.target);
+
+      steps.push(createGraphStep(
+        stepId++,
+        'union-edge',
+        `No cycle created by adding this edge (different root clusters). Union roots and add edge (${edge.source} - ${edge.target}) to the MST.`,
+        4,
+        graph,
+        visited,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        mstEdges
+      ));
+    } else {
+      steps.push(createGraphStep(
+        stepId++,
+        'cycle-detected',
+        `Adding edge (${edge.source} - ${edge.target}) would cause a cycle (same root cluster: ${rootU}). Discard edge.`,
+        5,
+        graph,
+        visited,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        mstEdges
+      ));
+    }
+  }
+
+  steps.push(createGraphStep(
+    stepId++,
+    'done',
+    `Kruskal's MST complete! Minimum spanning tree constructed.`,
+    7,
+    graph,
+    visited,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    mstEdges
+  ));
+
+  return steps;
+}
+

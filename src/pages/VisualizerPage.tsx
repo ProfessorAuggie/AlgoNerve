@@ -6,6 +6,8 @@ import { GraphView } from '../visualizers/GraphView';
 import { TreeView } from '../visualizers/TreeView';
 import { DPView } from '../visualizers/DPView';
 import { RecursionView } from '../visualizers/RecursionView';
+import { ChessboardView } from '../visualizers/ChessboardView';
+
 
 import { Player } from '../controls/Player';
 import { SpeedControl } from '../controls/SpeedControl';
@@ -104,6 +106,8 @@ export const VisualizerPage: React.FC = () => {
         return <DPView step={currentStep} />;
       case 'recursion':
         return <RecursionView step={currentStep} />;
+      case 'backtracking':
+        return <ChessboardView step={currentStep} />;
       default:
         return null;
     }
@@ -119,6 +123,7 @@ export const VisualizerPage: React.FC = () => {
       case 'tree':
       case 'dp':
       case 'recursion':
+      case 'backtracking':
         return <DPInput />;
       default:
         return null;

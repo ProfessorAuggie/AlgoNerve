@@ -56,7 +56,7 @@ export const HomePage: React.FC = () => {
             Documentation
           </a>
           <button className="bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300">
-            Portfolio Version
+            Interactive Console
           </button>
         </div>
       </header>
@@ -78,7 +78,7 @@ export const HomePage: React.FC = () => {
         </h1>
 
         <p className="text-sm md:text-base text-zinc-400 max-w-xl mb-12 leading-relaxed">
-          Step into recursion stacks, watch DP memory grids compile, debug graph traversals, and animate sorting operations. Designed for developer portfolios.
+          Step into recursion stacks, watch DP memory grids compile, debug graph traversals, and animate sorting operations. A high-performance simulation platform.
         </p>
 
         {/* Category Filters */}
@@ -152,7 +152,7 @@ export const HomePage: React.FC = () => {
 
       {/* Footer */}
       <footer className="w-full border-t border-zinc-900 py-6 text-center text-xs font-mono text-zinc-600 z-10 bg-zinc-950/80 backdrop-blur-md">
-        © 2026 AlgoNerve Interactive Educational Platform. Open Source Portfolio.
+        © 2026 AlgoNerve Interactive Educational Platform. All Rights Reserved.
       </footer>
     </div>
   );

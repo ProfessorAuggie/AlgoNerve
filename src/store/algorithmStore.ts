@@ -3,10 +3,12 @@ import type { Step, AlgorithmMeta } from '../algorithms/types';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 
 import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps } from '../algorithms/sorting';
-import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps } from '../algorithms/graph';
-import { generateBSTInsertSteps, generateTraversalSteps } from '../algorithms/tree';
-import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps } from '../algorithms/dp';
+import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps, generateAStarSteps, generatePrimSteps, generateKruskalSteps } from '../algorithms/graph';
+import { generateBSTInsertSteps, generateTraversalSteps, generateAVLSteps } from '../algorithms/tree';
+import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps } from '../algorithms/dp';
 import { generateFactorialSteps, generateHanoiSteps } from '../algorithms/recursion';
+import { generateNQueensSteps } from '../algorithms/backtracking';
+
 
 // Sample graph data for visualization
 const DEFAULT_GRAPH = {
@@ -237,6 +239,15 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
       case 'dijkstra':
         generated = generateDijkstraSteps(state.graphData, state.graphStartNode);
         break;
+      case 'a-star':
+        generated = generateAStarSteps(state.graphData, state.graphStartNode, 'F');
+        break;
+      case 'prim':
+        generated = generatePrimSteps(state.graphData, state.graphStartNode);
+        break;
+      case 'kruskal':
+        generated = generateKruskalSteps(state.graphData);
+        break;
 
       // Tree
       case 'bst':
@@ -255,6 +266,9 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         const traversalSteps = generateTraversalSteps(currentRoot, 'inorder');
         generated = [...insertStepsList, ...traversalSteps];
         break;
+      case 'avl-tree':
+        generated = generateAVLSteps(state.treeValues);
+        break;
 
       // DP
       case 'fibonacci-dp':
@@ -266,6 +280,9 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
       case 'edit-distance':
         generated = generateEditDistanceSteps(state.dpString1, state.dpString2);
         break;
+      case 'knapsack-dp':
+        generated = generateKnapsackSteps([1, 2, 3], [15, 20, 30], 5);
+        break;
 
       // Recursion
       case 'factorial':
@@ -273,6 +290,11 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         break;
       case 'tower-of-hanoi':
         generated = generateHanoiSteps(Math.min(state.recursionN, 6)); // Bounded at 6 max for visual sanity
+        break;
+
+      // Backtracking
+      case 'n-queens':
+        generated = generateNQueensSteps(Math.min(state.recursionN, 8)); // Bounded at 8 max for board visual sanity
         break;
 
       default:

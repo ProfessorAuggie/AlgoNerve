@@ -13,6 +13,7 @@ interface RenderNode {
   left?: RenderNode | null;
   right?: RenderNode | null;
   parentId?: string | null;
+  balance?: number;
 }
 
 export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
@@ -38,6 +39,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
       x,
       y,
       parentId: node.parent,
+      balance: node.balance,
     };
 
     if (node.left) {
@@ -49,6 +51,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
 
     return renderNode;
   };
+
 
   // Build list of all flat nodes and edges for easy SVG looping
   const nodesList: RenderNode[] = [];
@@ -171,8 +174,19 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                   >
                     {node.value}
                   </text>
+                  
+                  {node.balance !== undefined && (
+                    <text
+                      y="-28"
+                      textAnchor="middle"
+                      className="text-[9px] font-bold fill-cyan-400 font-mono"
+                    >
+                      bal={node.balance}
+                    </text>
+                  )}
                 </g>
               );
+
             })}
           </svg>
         )}

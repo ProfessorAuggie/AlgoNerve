@@ -19,7 +19,7 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
   const payload = step.payload as GraphPayload;
   if (!payload || !payload.graph) return null;
 
-  const { graph, visited = [], queue = [], stack = [], current, distances = {}, previous = {} } = payload;
+  const { graph, visited = [], queue = [], stack = [], current, distances = {}, previous = {}, mstEdges = [] } = payload;
   const { nodes, edges } = graph;
 
   // Fallback position calculation for arbitrary new custom nodes
@@ -76,12 +76,22 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
             const isTargetCurrent = current === edge.target;
             const isTraversed = visited.includes(edge.source) && visited.includes(edge.target);
             const isPath = previous[edge.target] === edge.source || previous[edge.source] === edge.target;
+            
+            // Check if this edge is in Minimum Spanning Tree
+            const inMST = mstEdges.some(
+              (mstE) =>
+                (mstE.source === edge.source && mstE.target === edge.target) ||
+                (!graph.directed && mstE.source === edge.target && mstE.target === edge.source)
+            );
 
             let strokeColor = '#3f3f46'; // zinc-700
             let strokeWidth = 2;
             let strokeDash = '';
 
-            if (isPath) {
+            if (inMST) {
+              strokeColor = '#10b981'; // emerald-550
+              strokeWidth = 3.5;
+            } else if (isPath) {
               strokeColor = '#10b981'; // emerald-500
               strokeWidth = 3;
             } else if (isSourceCurrent || isTargetCurrent) {
@@ -92,6 +102,7 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
               strokeColor = '#4f46e5'; // indigo-600
               strokeWidth = 2;
             }
+
 
             // Edge coordinates
             const midX = (fromPos.x + toPos.x) / 2;

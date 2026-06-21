@@ -351,3 +351,151 @@ export function generateEditDistanceSteps(s1: string, s2: string): Step[] {
 
   return steps;
 }
+
+// ─── 0/1 Knapsack (DP) ───────────────────────────────────────────────────────
+export function generateKnapsackSteps(weights: number[] = [1, 2, 3], values: number[] = [15, 20, 30], capacity: number = 5): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+
+  const n = weights.length;
+  const W = capacity;
+
+  // Initialize matrix table
+  const table: number[][] = Array.from({ length: n + 1 }, () => Array(W + 1).fill(-1));
+  const rows = ['Ø', ...weights.map((w, idx) => `Item ${idx+1} (w=${w}, v=${values[idx]})`)];
+  const cols = Array.from({ length: W + 1 }, (_, i) => `w=${i}`);
+
+  steps.push(createDPStep(stepId++, 'init', `Initialize DP table of size ${n + 1}x${W + 1} with -1. Max capacity is ${W}.`, 1, table, rows, cols));
+
+  // Initialize base cases: Row 0 and Col 0 to 0
+  for (let i = 0; i <= n; i++) {
+    table[i][0] = 0;
+  }
+  for (let j = 0; j <= W; j++) {
+    table[0][j] = 0;
+  }
+  steps.push(createDPStep(stepId++, 'base-cases', 'Base cases: capacity 0 or picking from 0 items yields value 0.', 2, table, rows, cols));
+
+  for (let i = 1; i <= n; i++) {
+    const itemWeight = weights[i - 1];
+    const itemValue = values[i - 1];
+
+    for (let w = 1; w <= W; w++) {
+      steps.push(createDPStep(
+        stepId++,
+        'check-weight',
+        `Evaluate Item ${i} (w=${itemWeight}, v=${itemValue}) at capacity limit ${w}.`,
+        3,
+        table,
+        rows,
+        cols,
+        [i, w]
+      ));
+
+      if (itemWeight <= w) {
+        // We can either include or exclude the item
+        const excludeVal = table[i - 1][w];
+        const includeVal = table[i - 1][w - itemWeight] + itemValue;
+        
+        steps.push(createDPStep(
+          stepId++,
+          'evaluate-choices',
+          `Item fits. Compare Exclude: value above [${i-1}, ${w}] (${excludeVal}) vs Include: value at [${i-1}, ${w-itemWeight}] + value (${table[i-1][w-itemWeight]} + ${itemValue} = ${includeVal}).`,
+          5,
+          table,
+          rows,
+          cols,
+          [i, w],
+          [[i - 1, w], [i - 1, w - itemWeight]]
+        ));
+
+        table[i][w] = Math.max(excludeVal, includeVal);
+        steps.push(createDPStep(
+          stepId++,
+          'fill-match',
+          `Write value to cell [${i}, ${w}] = max(${excludeVal}, ${includeVal}) = ${table[i][w]}.`,
+          6,
+          table,
+          rows,
+          cols,
+          [i, w]
+        ));
+      } else {
+        // Item weight exceeds capacity, must exclude
+        table[i][w] = table[i - 1][w];
+        steps.push(createDPStep(
+          stepId++,
+          'exclude-item',
+          `Item too heavy (weight ${itemWeight} > capacity ${w}). Copy value from cell directly above: ${table[i][w]}.`,
+          4,
+          table,
+          rows,
+          cols,
+          [i, w],
+          [[i - 1, w]]
+        ));
+      }
+    }
+  }
+
+  // Backtracking path
+  const includedItems: number[] = [];
+  let backtrackW = W;
+  steps.push(createDPStep(
+    stepId++,
+    'backtrack-start',
+    `Backtrack from bottom-right cell [${n}, ${W}] (Max Value = ${table[n][W]}) to identify selected items.`,
+    8,
+    table,
+    rows,
+    cols,
+    [n, W]
+  ));
+
+  for (let i = n; i > 0 && backtrackW > 0; i--) {
+    if (table[i][backtrackW] !== table[i - 1][backtrackW]) {
+      includedItems.push(i);
+      const prevW = backtrackW;
+      backtrackW -= weights[i - 1];
+      steps.push(createDPStep(
+        stepId++,
+        'backtrack-include',
+        `Value changed from row above. Item ${i} was included. Capacity decreases: ${prevW} - ${weights[i - 1]} = ${backtrackW}. Move to [${i-1}, ${backtrackW}].`,
+        9,
+        table,
+        rows,
+        cols,
+        [i, prevW],
+        [[i - 1, backtrackW]]
+      ));
+    } else {
+      steps.push(createDPStep(
+        stepId++,
+        'backtrack-exclude',
+        `Value matches row above. Item ${i} was excluded. Move to [${i-1}, ${backtrackW}].`,
+        10,
+        table,
+        rows,
+        cols,
+        [i, backtrackW],
+        [[i - 1, backtrackW]]
+      ));
+    }
+  }
+
+  steps.push(createDPStep(
+    stepId++,
+    'done',
+    `Knapsack optimization complete! Max achievable value is ${table[n][W]}. Items selected: [${includedItems.map(x => `Item ${x}`).reverse().join(', ')}].`,
+    12,
+    table,
+    rows,
+    cols,
+    [n, W],
+    undefined,
+    table[n][W]
+  ));
+
+  return steps;
+}
+

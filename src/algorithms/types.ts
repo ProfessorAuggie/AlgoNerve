@@ -53,6 +53,7 @@ export interface GraphPayload {
   distances?: Record<string, number>;
   previous?: Record<string, string | null>;
   path?: string[];
+  mstEdges?: GraphEdge[];
 }
 
 // ─── Tree ───────────────────────────────────────────────────────────────────
@@ -64,6 +65,7 @@ export interface TreeNode {
   right?: TreeNode | null;
   height?: number;
   parent?: string | null;
+  balance?: number;
 }
 
 export interface TreePayload {
@@ -73,6 +75,7 @@ export interface TreePayload {
   callStack?: string[];
   result?: number[];
   comparing?: string | null;
+  rotationType?: string;
 }
 
 // ─── Dynamic Programming ────────────────────────────────────────────────────
@@ -85,6 +88,16 @@ export interface DPPayload {
   dependsOn?: Array<[number, number]>;
   result?: number;
   memo?: Record<string, number>;
+}
+
+// ─── Backtracking (N-Queens) ────────────────────────────────────────────────
+
+export interface BacktrackingPayload {
+  grid: number[][]; // 0 for empty, 1 for queen, 2 for conflict/checked
+  row?: number;
+  col?: number;
+  solutionsCount?: number;
+  currentQueens?: Array<[number, number]>;
 }
 
 // ─── Recursion ──────────────────────────────────────────────────────────────
@@ -107,7 +120,7 @@ export interface RecursionPayload {
 
 // ─── Algorithm Metadata ─────────────────────────────────────────────────────
 
-export type AlgorithmCategory = 'sorting' | 'graph' | 'tree' | 'dp' | 'recursion';
+export type AlgorithmCategory = 'sorting' | 'graph' | 'tree' | 'dp' | 'recursion' | 'backtracking';
 
 export interface AlgorithmMeta {
   id: string;
@@ -194,6 +207,33 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     description: 'Finds shortest paths from a source to all other nodes.',
     tags: ['graph', 'weighted', 'shortest-path', 'greedy'],
   },
+  {
+    id: 'a-star',
+    name: 'A* Search Algorithm',
+    category: 'graph',
+    timeComplexity: 'O(E log V)',
+    spaceComplexity: 'O(V)',
+    description: 'Heuristic-guided shortest path search algorithm.',
+    tags: ['graph', 'heuristic', 'shortest-path'],
+  },
+  {
+    id: 'prim',
+    name: "Prim's MST Algorithm",
+    category: 'graph',
+    timeComplexity: 'O(E log V)',
+    spaceComplexity: 'O(V)',
+    description: 'Greedy algorithm to find a Minimum Spanning Tree for a weighted graph.',
+    tags: ['graph', 'mst', 'greedy'],
+  },
+  {
+    id: 'kruskal',
+    name: "Kruskal's MST Algorithm",
+    category: 'graph',
+    timeComplexity: 'O(E log E)',
+    spaceComplexity: 'O(V)',
+    description: 'Builds a Minimum Spanning Tree by sorting edges and using Disjoint Set.',
+    tags: ['graph', 'mst', 'union-find'],
+  },
   // Tree
   {
     id: 'bst',
@@ -203,6 +243,15 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Insert values into a BST and visualize in/pre/post-order traversals.',
     tags: ['tree', 'binary-search', 'recursive'],
+  },
+  {
+    id: 'avl-tree',
+    name: 'AVL Tree (Rotations)',
+    category: 'tree',
+    timeComplexity: 'O(log n)',
+    spaceComplexity: 'O(n)',
+    description: 'Self-balancing BST using Left, Right, Left-Right, and Right-Left rotations.',
+    tags: ['tree', 'self-balancing', 'rotations'],
   },
   // DP
   {
@@ -232,6 +281,15 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     description: 'Minimum operations to transform one string into another.',
     tags: ['dp', 'strings', '2D-table', 'levenshtein'],
   },
+  {
+    id: 'knapsack-dp',
+    name: '0/1 Knapsack (DP)',
+    category: 'dp',
+    timeComplexity: 'O(n × W)',
+    spaceComplexity: 'O(n × W)',
+    description: 'Maximize item values in a knapsack of limited weight capacity W.',
+    tags: ['dp', 'optimization', '2D-table'],
+  },
   // Recursion
   {
     id: 'factorial',
@@ -251,4 +309,15 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     description: 'Move disks between pegs using recursive decomposition.',
     tags: ['recursion', 'classic', 'divide-and-conquer'],
   },
+  // Backtracking
+  {
+    id: 'n-queens',
+    name: 'N-Queens (Backtracking)',
+    category: 'backtracking',
+    timeComplexity: 'O(n!)',
+    spaceComplexity: 'O(n)',
+    description: 'Place N non-attacking queens on an N×N chessboard.',
+    tags: ['backtracking', 'recursion', 'chessboard'],
+  },
 ];
+
