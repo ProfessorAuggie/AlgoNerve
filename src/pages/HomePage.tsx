@@ -39,10 +39,10 @@ export const HomePage: React.FC = () => {
       <header className="max-w-7xl mx-auto w-full px-6 py-8 flex items-center justify-between border-b border-zinc-900 z-10">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-950/50">
-            <span className="font-extrabold text-lg text-white select-none">AV</span>
+            <span className="font-extrabold text-lg text-white select-none">AN</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-base tracking-tight text-white leading-none">AlgoVisual</span>
+            <span className="font-bold text-base tracking-tight text-white leading-none">AlgoNerve</span>
             <span className="text-[10px] text-zinc-500 font-mono">v1.0.0 Stable</span>
           </div>
         </div>
@@ -152,7 +152,7 @@ export const HomePage: React.FC = () => {
 
       {/* Footer */}
       <footer className="w-full border-t border-zinc-900 py-6 text-center text-xs font-mono text-zinc-600 z-10 bg-zinc-950/80 backdrop-blur-md">
-        © 2026 AlgoVisual Interactive Educational Platform. Open Source Portfolio.
+        © 2026 AlgoNerve Interactive Educational Platform. Open Source Portfolio.
       </footer>
     </div>
   );
