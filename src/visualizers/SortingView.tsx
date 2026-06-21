@@ -78,24 +78,24 @@ export const SortingView: React.FC<SortingViewProps> = ({ step }) => {
       {/* Legend Indicators */}
       <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-indigo-500/80 border border-indigo-400" />
+          <div className="w-3 h-3 rounded bg-indigo-500/80 border border-indigo-400" />
           <span>Unsorted</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-amber-500 border border-amber-400" />
+          <div className="w-3 h-3 rounded bg-amber-500 border border-amber-400" />
           <span>Comparing</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-rose-500 border border-rose-400" />
+          <div className="w-3 h-3 rounded bg-rose-500 border border-rose-400" />
           <span>Swapping</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-emerald-500/80 border border-emerald-400" />
+          <div className="w-3 h-3 rounded bg-emerald-500/80 border border-emerald-400" />
           <span>Sorted</span>
         </div>
         {pivot !== undefined && (
           <div className="flex items-center gap-2">
-            <div className="w-3.0 h-3.0 rounded bg-fuchsia-500 border border-fuchsia-400" />
+            <div className="w-3 h-3 rounded bg-fuchsia-500 border border-fuchsia-400" />
             <span>Pivot</span>
           </div>
         )}

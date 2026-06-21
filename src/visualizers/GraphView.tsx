@@ -251,27 +251,27 @@ export const GraphView: React.FC<GraphViewProps> = ({ step }) => {
       {/* Legend */}
       <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-[#8b5cf6] border border-violet-400" />
+          <div className="w-3 h-3 rounded bg-[#8b5cf6] border border-violet-400" />
           <span>Active Node</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-[#10b981] border border-emerald-400" />
+          <div className="w-3 h-3 rounded bg-[#10b981] border border-emerald-400" />
           <span>Visited</span>
         </div>
         {queue.length > 0 && (
           <div className="flex items-center gap-2">
-            <div className="w-3.0 h-3.0 rounded bg-amber-500 border border-amber-300" />
+            <div className="w-3 h-3 rounded bg-amber-500 border border-amber-300" />
             <span>Queued</span>
           </div>
         )}
         {stack.length > 0 && (
           <div className="flex items-center gap-2">
-            <div className="w-3.0 h-3.0 rounded bg-pink-500 border border-pink-300" />
+            <div className="w-3 h-3 rounded bg-pink-500 border border-pink-300" />
             <span>On Stack</span>
           </div>
         )}
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700" />
+          <div className="w-3 h-3 rounded bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-700" />
           <span>Unvisited</span>
         </div>
       </div>

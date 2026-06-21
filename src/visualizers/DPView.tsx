@@ -95,19 +95,19 @@ export const DPView: React.FC<DPViewProps> = ({ step }) => {
       {/* Legend */}
       <div className="w-full flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800/60 text-xs font-medium text-zinc-600 dark:text-zinc-300">
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-violet-600 ring-2 ring-violet-400" />
+          <div className="w-3 h-3 rounded bg-violet-600 ring-2 ring-violet-400" />
           <span>Active Cell</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-amber-100 dark:bg-amber-950/60 border border-amber-500" />
+          <div className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-950/60 border border-amber-500" />
           <span>Dependency (Read)</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-emerald-100 dark:bg-emerald-950/20 border border-emerald-500/30 dark:border-emerald-900" />
+          <div className="w-3 h-3 rounded bg-emerald-100 dark:bg-emerald-950/20 border border-emerald-500/30 dark:border-emerald-900" />
           <span>Calculated</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3.0 h-3.0 rounded bg-zinc-100/20 dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-800" />
+          <div className="w-3 h-3 rounded bg-zinc-100/20 dark:bg-zinc-950/20 border border-zinc-200 dark:border-zinc-800" />
           <span>Uncomputed</span>
         </div>
       </div>
