@@ -8,7 +8,7 @@ Designed for software engineers, students, and educators, it provides step-by-st
 
 ## 🌟 Key Features
 
-- **20+ Algorithms Visualized**: Custom step-generators for Sorting, Graph theory, Trees, Dynamic Programming, Recursion, and Backtracking.
+- **40+ Algorithms & Layout Engines**: Step-by-step interactive animations and premium concept views for Searching, Sorting, Data Structures, Graph Theory, Binary Search Trees, Dynamic Programming, and Recursion/Backtracking.
 - **Interactive Control Board**: Play/pause simulation, adjust speed dynamically (from 0.5x delay to 4x fast-forward), and scrub directly through the execution timeline.
 - **Live State Narration**: Trace panel updates with a narration feed that updates status variables accessibly.
 - **Sync Pseudocode Panel**: Highlights the exact line of code currently executing in real-time.
@@ -30,36 +30,67 @@ Designed for software engineers, students, and educators, it provides step-by-st
 
 ## 📚 Supported Algorithms Registry
 
-### 1. Sorting Algorithms
-- **Bubble Sort**: Pairwise comparisons and element swaps.
-- **Insertion Sort**: Shifting unsorted keys into correct sorted divisions.
-- **Merge Sort**: Divide-and-conquer splitting and merging steps.
-- **Quick Sort**: Partition tracking around chosen pivot index.
-- **Heap Sort**: Build max-heap and extract root elements.
+### 1. Searching Algorithms
+- **Linear Search** (Interactive): Scan elements one-by-one to find a matching target value.
+- **Binary Search** (Interactive): Search a sorted range by repeatedly dividing the search range in half.
 
-### 2. Graph Theory
-- **Breadth-First Search (BFS)**: Level-order traversal using queue tracking.
-- **Depth-First Search (DFS)**: Depth traversal utilizing call stack tracking.
-- **Dijkstra's Algorithm**: Single-source shortest path tracking using distance grids.
-- **A\* Search**: Heuristic-guided grid path calculations.
-- **Prim's Algorithm**: MST (Minimum Spanning Tree) greedy expansion.
-- **Kruskal's Algorithm**: Edge sorting and Disjoint Set Union operations.
+### 2. Sorting Algorithms
+- **Bubble Sort** (Interactive): Pairwise comparisons and element swaps.
+- **Selection Sort** (Interactive): Repeatedly select the minimum element and place at boundaries.
+- **Insertion Sort** (Interactive): Shifting unsorted keys into correct sorted divisions.
+- **Merge Sort** (Interactive): Divide-and-conquer splitting and merging steps.
+- **Quick Sort** (Interactive): Partition tracking around chosen pivot index.
+- **Heap Sort** (Interactive): Build max-heap and extract root elements.
 
-### 3. Binary Search Trees & AVL
-- **BST Insertion & Search**: Value comparisons and branch insertion paths.
-- **BST Traversals**: Inorder, Preorder, and Postorder recursive logs.
-- **AVL Tree Balancing**: Tree height rebalancing and left/right single/double rotations.
+### 3. Data Structures
+- **Stack Operations** (Interactive): Push, Pop, and Peek actions on a LIFO stack.
+- **Queue Operations** (Interactive): Enqueue, Dequeue, and Front/Rear markers on a FIFO queue.
+- **Singly Linked List** (Interactive): Insert, delete, and traverse node blocks connected sequentially.
+- **Postfix Evaluation** (Concept): Using a stack to evaluate Reverse Polish mathematical expressions.
+- **Prefix Evaluation** (Concept): Scanning mathematical expressions right-to-left using a stack.
+- **Double-Ended Queue (Deque)** (Concept): Insert/delete from both front and rear ends of a queue.
+- **Circular Queue (Ring Buffer)** (Concept): Wrapping index pointers using modulo division to avoid slot wastage.
+- **Priority Queue** (Concept): Elements retrieved based on heap-based priorities.
+- **Doubly Linked List** (Concept): Bidirectional node traversal using next and prev pointer attributes.
+- **Circular Linked List** (Concept): End node pointing back to head, forming a circular sequence loop.
 
-### 4. Dynamic Programming (DP)
-- **Fibonacci DP**: Comparison between recursion stack vs dynamic programming tabulation.
-- **Longest Common Subsequence (LCS)**: String character match compilation and alignment backtrack path.
-- **Edit Distance**: Cost matrix computations for Insert, Delete, and Replace actions.
-- **0/1 Knapsack**: DP tabulation and backtracking item selections.
+### 4. Graph Theory & Representations
+- **Breadth-First Search (BFS)** (Interactive): Level-order traversal using queue tracking.
+- **Depth-First Search (DFS)** (Interactive): Depth traversal utilizing call stack tracking.
+- **Dijkstra's Algorithm** (Interactive): Single-source shortest path tracking using distance grids.
+- **A\* Search** (Interactive): Heuristic-guided grid path calculations.
+- **Prim's Algorithm** (Interactive): MST (Minimum Spanning Tree) greedy expansion.
+- **Kruskal's Algorithm** (Interactive): Edge sorting and Disjoint Set Union operations.
+- **Topological Sort** (Concept): Graph sorting representing task dependency trees in DAGs.
+- **Adjacency Matrix** (Concept): Quadratic 2D array representing edge weight records.
+- **Adjacency List** (Concept): Vertex-linked lists storing connected neighborhood maps.
 
-### 5. Recursion & Backtracking
-- **Factorial**: Recursive depth stacks showing active returns.
-- **Tower of Hanoi**: Disk movements across Pegs A, B, and C.
-- **N-Queens Backtracking**: Valid row-column checks and recursive backtracking state shifts.
+### 5. Binary Trees, AVL & Advanced Trees
+- **BST Insertion & Search** (Interactive): Value comparisons and branch insertion paths.
+- **AVL Tree Balancing** (Interactive): Height balance updates and left/right single/double rotations.
+- **Red-Black Tree** (Concept): Self-balancing BST using Red/Black colored node rules.
+- **B-Tree** (Concept): High-order self-balancing trees designed for page-disk reads in databases.
+- **Trie (Prefix Tree)** (Concept): Alphabet path mapping optimized for word suggestion systems.
+- **Segment Tree** (Concept): Interval structure answering dynamic range queries.
+- **Fenwick Tree (BIT)** (Concept): Binary indexed tree for prefix sum updates.
+- **Lowest Common Ancestor (LCA)** (Concept): Deeper node ancestor of two given leaves.
+- **Tree Diameter** (Concept): Length of the longest path between any leaf pair in a tree.
+- **Tree Isomorphism** (Concept): Checking structural equality mapping between tree sets.
+- **Serialization & Deserialization** (Concept): Tracing tree nodes into streams and rebuilding them.
+- **Huffman Coding** (Concept): Priority-based prefix tree compilation for data compression.
+- **Decision Tree** (Concept): Conditional branches classifying classifications.
+- **Abstract Syntax Tree (AST)** (Concept): Hierarchical parser representations of code syntax.
+
+### 6. Dynamic Programming (DP)
+- **Fibonacci DP** (Interactive): Tabulation vs recursive call stack computation comparison.
+- **Longest Common Subsequence (LCS)** (Interactive): Subsequence character mapping matrix alignment.
+- **Edit Distance** (Interactive): Levinshtein calculation cost vectors (Replace, Insert, Delete).
+- **0/1 Knapsack** (Interactive): Capacity item optimizations using DP grids.
+
+### 7. Recursion & Backtracking
+- **Factorial** (Interactive): Recursive depth stacks showing active returns.
+- **Tower of Hanoi** (Interactive): Disk movements across Pegs A, B, and C.
+- **N-Queens Backtracking** (Interactive): Valid row-column checks and recursive backtracking state shifts.
 
 ---
 

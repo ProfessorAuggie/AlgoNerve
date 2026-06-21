@@ -316,14 +316,32 @@ export const DocumentationPage: React.FC = () => {
                   <p className="text-xs text-zinc-650 dark:text-zinc-350 leading-relaxed mb-4">
                     Vaibhav is a software engineer passionate about developer tooling, backend microservices, performance tuning, and interactive educational visualizations. He built AlgoNerve to bridge the gap between algorithmic theory and visual state execution tracing.
                   </p>
-                  <a
-                    href="https://www.linkedin.com/in/professorauggie/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-violet-650 hover:bg-violet-600 text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 shadow-md shadow-violet-950/30"
-                  >
-                    Connect on LinkedIn
-                  </a>
+                  <div className="flex flex-wrap gap-2.5">
+                    <a
+                      href="https://www.linkedin.com/in/professorauggie/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-violet-650 hover:bg-violet-600 text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 shadow-md shadow-violet-950/30"
+                    >
+                      Connect on LinkedIn
+                    </a>
+                    <a
+                      href="https://professor-auggie.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-zinc-250 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-705 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-750 shadow-sm"
+                    >
+                      Visit Portfolio
+                    </a>
+                    <a
+                      href="https://github.com/ProfessorAuggie"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-zinc-250 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-705 text-zinc-800 dark:text-white font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 border border-zinc-300 dark:border-zinc-750 shadow-sm"
+                    >
+                      Explore GitHub
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,8 +351,12 @@ export const DocumentationPage: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-550 dark:text-zinc-600 z-10 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
+      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-550 dark:text-zinc-650 z-10 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
         © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
+        <span className="mx-2">|</span>
+        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
+        <span className="mx-2">|</span>
+        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
       </footer>
     </div>
   );
