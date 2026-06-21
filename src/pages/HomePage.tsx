@@ -189,8 +189,12 @@ export const HomePage: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-550 dark:text-zinc-650 z-10 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
+      <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-6 text-center text-xs font-mono text-zinc-550 dark:text-zinc-655 z-10 bg-zinc-50 dark:bg-zinc-955/80 backdrop-blur-md transition-colors duration-300">
         © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.
+        <span className="mx-2">|</span>
+        <a href="https://professor-auggie.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Portfolio</a>
+        <span className="mx-2">|</span>
+        <a href="https://github.com/ProfessorAuggie" target="_blank" rel="noopener noreferrer" className="text-violet-650 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">GitHub</a>
       </footer>
     </div>
   );
