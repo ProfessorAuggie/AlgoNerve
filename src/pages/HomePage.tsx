@@ -38,14 +38,11 @@ export const HomePage: React.FC = () => {
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 py-8 flex items-center justify-between border-b border-zinc-900 z-10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-violet-950/50">
-            <span className="font-extrabold text-lg text-white select-none">AN</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-base tracking-tight text-white leading-none">AlgoNerve</span>
-            <span className="text-[10px] text-zinc-500 font-mono">v1.0.0 Stable</span>
-          </div>
+          <span className="font-extrabold text-2xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-emerald-400 select-none">
+            AlgoNerve
+          </span>
         </div>
+
         <div className="flex items-center gap-6">
           <a
             href="https://github.com"
