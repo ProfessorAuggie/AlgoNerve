@@ -10,6 +10,26 @@ import { generateBSTInsertSteps, generateTraversalSteps, generateAVLSteps } from
 import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps, generateCoinChangeSteps } from '../algorithms/dp';
 import { generateFactorialSteps, generateHanoiSteps } from '../algorithms/recursion';
 import { generateNQueensSteps } from '../algorithms/backtracking';
+import {
+  generatePostfixEvalSteps,
+  generatePrefixEvalSteps,
+  generateDequeSteps,
+  generateCircularQueueSteps,
+  generatePriorityQueueSteps,
+  generateDoublyLinkedListSteps,
+  generateCircularLinkedListSteps,
+  generateLCATreeSteps,
+  generateTreeDiameterSteps,
+  generateTreeIsomorphismSteps,
+  generateTreeSerializeSteps,
+  generateSyntaxTreeSteps,
+  generateRedBlackTreeSteps,
+  generateBTreeSteps,
+  generateAdjacencyMatrixSteps,
+  generateAdjacencyListSteps,
+  generateTopologicalSortSteps,
+  generateFenwickTreeSteps
+} from '../algorithms/conceptSteps';
 
 
 // Sample graph data for visualization
@@ -325,6 +345,62 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
       // Backtracking
       case 'n-queens':
         generated = generateNQueensSteps(Math.min(state.recursionN, 8)); // Bounded at 8 max for board visual sanity
+        break;
+
+      // 18 new interactive concept algorithms
+      case 'postfix-eval':
+        generated = generatePostfixEvalSteps(state.dpString1);
+        break;
+      case 'prefix-eval':
+        generated = generatePrefixEvalSteps(state.dpString1);
+        break;
+      case 'double-ended-queue':
+        generated = generateDequeSteps(state.inputArray);
+        break;
+      case 'circular-queue':
+        generated = generateCircularQueueSteps(state.inputArray);
+        break;
+      case 'priority-queue':
+        generated = generatePriorityQueueSteps(state.inputArray);
+        break;
+      case 'doubly-linked-list':
+        generated = generateDoublyLinkedListSteps(state.inputArray);
+        break;
+      case 'circular-linked-list':
+        generated = generateCircularLinkedListSteps(state.inputArray);
+        break;
+      case 'lca-tree':
+        generated = generateLCATreeSteps(state.treeValues);
+        break;
+      case 'tree-diameter':
+        generated = generateTreeDiameterSteps(state.treeValues);
+        break;
+      case 'tree-isomorphism':
+        generated = generateTreeIsomorphismSteps(state.treeValues);
+        break;
+      case 'tree-serialize':
+        generated = generateTreeSerializeSteps(state.treeValues);
+        break;
+      case 'syntax-tree':
+        generated = generateSyntaxTreeSteps();
+        break;
+      case 'red-black-tree':
+        generated = generateRedBlackTreeSteps(state.treeValues);
+        break;
+      case 'b-tree':
+        generated = generateBTreeSteps(state.treeValues);
+        break;
+      case 'adjacency-matrix':
+        generated = generateAdjacencyMatrixSteps(state.graphData);
+        break;
+      case 'adjacency-list':
+        generated = generateAdjacencyListSteps(state.graphData);
+        break;
+      case 'topological-sort':
+        generated = generateTopologicalSortSteps(state.graphData);
+        break;
+      case 'fenwick-tree':
+        generated = generateFenwickTreeSteps(state.inputArray);
         break;
 
       default:

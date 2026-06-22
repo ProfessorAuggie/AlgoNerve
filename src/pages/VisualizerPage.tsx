@@ -115,6 +115,7 @@ export const VisualizerPage: React.FC = () => {
     switch (selectedAlgo.category) {
       case 'searching':
       case 'sorting':
+      case 'segmenttrees':
         return <SortingView step={currentStep} />;
       case 'stack':
       case 'queue-deque':
@@ -123,9 +124,11 @@ export const VisualizerPage: React.FC = () => {
       case 'graphtraversal':
       case 'shortestpath':
       case 'mst':
+      case 'topological':
         return <GraphView step={currentStep} />;
       case 'bst':
       case 'balancedtrees':
+      case 'binarytrees':
         return <TreeView step={currentStep} />;
       case 'dp':
         return <DPView step={currentStep} />;
@@ -156,13 +159,16 @@ export const VisualizerPage: React.FC = () => {
       case 'stack':
       case 'queue-deque':
       case 'linkedlist':
+      case 'segmenttrees':
         return <ArrayInput />;
       case 'graphtraversal':
       case 'shortestpath':
       case 'mst':
+      case 'topological':
         return <GraphInput />;
       case 'bst':
       case 'balancedtrees':
+      case 'binarytrees':
       case 'dp':
       case 'recursion':
       case 'backtracking':

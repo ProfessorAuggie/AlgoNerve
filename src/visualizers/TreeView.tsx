@@ -14,6 +14,9 @@ interface RenderNode {
   right?: RenderNode | null;
   parentId?: string | null;
   balance?: number;
+  color?: 'RED' | 'BLACK';
+  isAST?: boolean;
+  operator?: string;
 }
 
 export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
@@ -40,6 +43,9 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
       y,
       parentId: node.parent,
       balance: node.balance,
+      color: node.color,
+      isAST: node.isAST,
+      operator: node.operator
     };
 
     if (node.left) {
@@ -136,6 +142,12 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
               let strokeWidth = 2;
               let filter = '';
 
+              if (node.color === 'RED') {
+                circleClass = 'fill-rose-600 stroke-rose-450 dark:stroke-rose-500';
+              } else if (node.color === 'BLACK') {
+                circleClass = 'fill-zinc-800 stroke-zinc-700 dark:fill-zinc-900 dark:stroke-zinc-800';
+              }
+
               if (isComparing) {
                 circleClass = 'fill-amber-500 stroke-amber-300 dark:stroke-amber-400';
                 strokeWidth = 3;
@@ -145,7 +157,11 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                 strokeWidth = 3;
                 filter = 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.6))';
               } else if (isVisited) {
-                circleClass = 'fill-emerald-500 stroke-emerald-400 dark:stroke-emerald-400';
+                if (node.color) {
+                  strokeWidth = 3.5;
+                } else {
+                  circleClass = 'fill-emerald-500 stroke-emerald-400 dark:stroke-emerald-400';
+                }
               }
 
               return (
@@ -164,12 +180,12 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
                     textAnchor="middle"
                     dominantBaseline="middle"
                     className={`text-xs font-bold select-none ${
-                      isCurrent || isComparing || isVisited
+                      isCurrent || isComparing || isVisited || node.color === 'RED' || node.color === 'BLACK'
                         ? 'fill-white font-bold'
                         : 'fill-zinc-800 dark:fill-zinc-200'
                     }`}
                   >
-                    {node.value}
+                    {node.isAST && node.operator !== undefined ? node.operator : node.value}
                   </text>
                   
                   {node.balance !== undefined && (

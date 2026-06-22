@@ -20,6 +20,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     activeNodeId,
     actionNodeId,
     actionType,
+    headId,
   } = payload;
 
   const renderStack = () => {
@@ -157,11 +158,14 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
   };
 
   const renderLinkedList = () => {
-    // Render Singly Linked List
+    const isDoubly = nodes.some(n => n.hasOwnProperty('prevId') || n.prevId !== undefined);
+    const isCircular = nodes.length > 0 && nodes[nodes.length - 1].nextId === headId;
+    const listTitle = isDoubly ? 'Doubly Linked List' : isCircular ? 'Circular Linked List' : 'Singly Linked List';
+
     return (
       <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6 px-4 overflow-x-auto">
         <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-6 uppercase tracking-wider shrink-0">
-          Singly Linked List
+          {listTitle}
         </div>
 
         <div className="flex items-center gap-1 min-h-[140px] px-4 w-full justify-start md:justify-center overflow-x-auto py-4">
@@ -243,12 +247,16 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
                   {idx < nodes.length - 1 ? (
                     <div className="w-10 flex items-center justify-center shrink-0">
                       <svg className="w-full h-6 text-zinc-400 dark:text-zinc-700" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 40 24">
-                        <path d="M0 12h32M24 6l8 6-8 6" strokeLinecap="round" strokeLinejoin="round" />
+                        {isDoubly ? (
+                          <path d="M8 12h24M14 6l-6 6 6 6M26 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                        ) : (
+                          <path d="M0 12h32M24 6l8 6-8 6" strokeLinecap="round" strokeLinejoin="round" />
+                        )}
                       </svg>
                     </div>
                   ) : (
-                    <div className="w-10 flex items-center justify-center text-xs font-mono font-extrabold text-zinc-400 dark:text-zinc-600 shrink-0 select-none">
-                      → Null
+                    <div className="w-12 flex items-center justify-center text-xs font-mono font-extrabold text-zinc-450 dark:text-zinc-550 shrink-0 select-none">
+                      → {isCircular ? 'Head' : 'Null'}
                     </div>
                   )}
                 </React.Fragment>

@@ -66,6 +66,9 @@ export interface TreeNode {
   height?: number;
   parent?: string | null;
   balance?: number;
+  color?: 'RED' | 'BLACK';
+  isAST?: boolean;
+  operator?: string;
 }
 
 export interface TreePayload {
@@ -601,7 +604,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Evaluation of mathematical expressions in Postfix (Reverse Polish) notation using a Stack.',
     tags: ['stack', 'expression', 'postfix', 'polish'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'prefix-eval',
@@ -611,7 +614,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Evaluation of mathematical expressions in Prefix notation using a Stack.',
     tags: ['stack', 'expression', 'prefix', 'polish'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'balanced-parentheses',
@@ -723,7 +726,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A queue where insertion and deletion can occur at both front and rear ends.',
     tags: ['queue', 'deque', 'double-ended'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'circular-queue',
@@ -733,7 +736,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A linear queue that wraps around the end of the array to reuse empty slots.',
     tags: ['queue', 'circular', 'ring-buffer'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'priority-queue',
@@ -743,7 +746,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'An abstract data type where elements have priorities, served highest priority first.',
     tags: ['queue', 'heap', 'priority'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'sliding-window-maximum',
@@ -795,7 +798,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Nodes containing values and two pointers pointing to the next and previous nodes.',
     tags: ['linked-list', 'doubly-linked', 'pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'circular-linked-list',
@@ -805,7 +808,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A linked list where the last node points back to the first node, forming a loop.',
     tags: ['linked-list', 'circular', 'pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'reverse-linked-list',
@@ -1007,7 +1010,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the lowest node in a tree that has both given nodes as descendants.',
     tags: ['tree', 'lca', 'ancestor'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-diameter',
@@ -1017,7 +1020,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the length of the longest path between any two nodes in a tree.',
     tags: ['tree', 'diameter', 'path'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-isomorphism',
@@ -1027,7 +1030,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Determines if two trees are structurally identical regardless of node values/order.',
     tags: ['tree', 'isomorphism', 'structure'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-serialize',
@@ -1037,7 +1040,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Convert a tree structure into string format and reconstruct the tree back.',
     tags: ['tree', 'serialization', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'syntax-tree',
@@ -1047,7 +1050,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Represents the hierarchical syntactic structure of source code written in a programming language.',
     tags: ['tree', 'compiler', 'parsing'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 9. Binary Search Trees (BST)
@@ -1141,7 +1144,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A self-balancing binary search tree where each node has a color attribute (Red or Black).',
     tags: ['tree', 'self-balancing', 'red-black'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'splay-tree',
@@ -1171,7 +1174,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A self-balancing search tree designed to work well on direct-access storage devices.',
     tags: ['tree', 'self-balancing', 'multi-way'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'b-plus-tree',
@@ -1409,7 +1412,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V²)',
     description: 'A 2D array representation of a graph where indices indicate edge presence and weight.',
     tags: ['graph', 'matrix', 'representation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'adjacency-list',
@@ -1419,7 +1422,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V + E)',
     description: 'An array of lists representing the vertices connected to each vertex in the graph.',
     tags: ['graph', 'list', 'representation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 15. Shortest Path
@@ -1525,7 +1528,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Linear ordering of vertices in a DAG such that for every directed edge uv, u comes before v.',
     tags: ['graph', 'dag', 'ordering'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'topological-kahn',
@@ -2179,7 +2182,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A compact array representation that enables dynamic prefix sum updates and query ranges in O(log n) time.',
     tags: ['tree', 'prefix-sum', 'bit'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'rurq-fenwick',
