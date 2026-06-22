@@ -360,3 +360,188 @@ export function generatePigeonholeSortSteps(arr: number[]): Step[] {
   steps.push(createSortingStep(stepId++, 'done', 'Pigeonhole Sort complete! The array is fully sorted.', 13, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
+
+// ─── Shell Sort ─────────────────────────────────────────────────────────────
+export function generateShellSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  const array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    steps.push(createSortingStep(stepId++, 'gap-change', `Compare elements with gap distance of ${gap}.`, 2, array, [], [], []));
+
+    for (let i = gap; i < n; i++) {
+      const temp = array[i];
+      let j = i;
+      steps.push(createSortingStep(stepId++, 'compare', `Pick array[${i}] (${temp}) as current key to insert.`, 3, array, [i], [], []));
+
+      while (j >= gap && array[j - gap] > temp) {
+        steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j - gap}] (${array[j - gap]}) with key (${temp}). Since it's greater, shift array[${j - gap}] to index ${j}.`, 4, array, [j - gap, j], [], []));
+        array[j] = array[j - gap];
+        j -= gap;
+        steps.push(createSortingStep(stepId++, 'shift', `Shift element and move index left by gap.`, 5, array, [], [j, j + gap], []));
+      }
+      array[j] = temp;
+      steps.push(createSortingStep(stepId++, 'insert', `Place key (${temp}) at index ${j}.`, 6, array, [], [j], []));
+    }
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Shell Sort complete! The array is fully sorted.', 8, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}
+
+// ─── Counting Sort ───────────────────────────────────────────────────────────
+export function generateCountingSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  const array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  if (n === 0) return [];
+
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  // Find max element
+  let max = array[0];
+  for (let i = 1; i < n; i++) {
+    if (array[i] > max) max = array[i];
+  }
+  max = Math.min(Math.max(max, 0), 100); // safety cap
+
+  steps.push(createSortingStep(stepId++, 'compare', `Scan array to find maximum element: max = ${max}. Range is [0, ${max}].`, 2, array, [], [], []));
+
+  const count = Array(max + 1).fill(0);
+
+  for (let i = 0; i < n; i++) {
+    const val = array[i];
+    if (val >= 0 && val <= max) {
+      count[val]++;
+      steps.push(createSortingStep(stepId++, 'count', `Increment count for value ${val}: count[${val}] = ${count[val]}.`, 4, array, [i], [], []));
+    }
+  }
+
+  for (let i = 1; i <= max; i++) {
+    count[i] += count[i - 1];
+  }
+  steps.push(createSortingStep(stepId++, 'prefix-sums', 'Accumulate prefix sums in count array to determine final element positions.', 6, array, [], [], []));
+
+  const output = Array(n).fill(0);
+  const sortedIndices: number[] = [];
+  for (let i = n - 1; i >= 0; i--) {
+    const val = array[i];
+    if (val >= 0 && val <= max) {
+      const pos = count[val] - 1;
+      output[pos] = val;
+      count[val]--;
+      sortedIndices.push(pos);
+      steps.push(createSortingStep(stepId++, 'place', `Place value ${val} from index ${i} to sorted index ${pos} using count[${val}].`, 8, [...output], [i], [pos], [...sortedIndices]));
+    }
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Counting Sort complete! Output array is fully sorted.', 10, output, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}
+
+// ─── Radix Sort ──────────────────────────────────────────────────────────────
+export function generateRadixSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  let array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  if (n === 0) return [];
+
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  let max = Math.max(...array);
+  max = Math.max(max, 1);
+
+  steps.push(createSortingStep(stepId++, 'compare', `Find maximum value ${max} to determine number of digits.`, 2, array, [], [], []));
+
+  for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
+    steps.push(createSortingStep(stepId++, 'digit-pass', `Sorting elements by digit position: 10^${Math.log10(exp)} place.`, 4, array, [], [], []));
+
+    const output = Array(n).fill(0);
+    const count = Array(10).fill(0);
+
+    for (let i = 0; i < n; i++) {
+      const digit = Math.floor(array[i] / exp) % 10;
+      count[digit]++;
+    }
+
+    for (let i = 1; i < 10; i++) {
+      count[i] += count[i - 1];
+    }
+
+    for (let i = n - 1; i >= 0; i--) {
+      const val = array[i];
+      const digit = Math.floor(val / exp) % 10;
+      const pos = count[digit] - 1;
+      output[pos] = val;
+      count[digit]--;
+      steps.push(createSortingStep(stepId++, 'place', `Place ${val} at sorted position ${pos} based on digit ${digit}.`, 6, [...output], [i], [pos], []));
+    }
+
+    array = [...output];
+    steps.push(createSortingStep(stepId++, 'digit-sorted', `Sorted pass complete for digit exponent ${exp}. Current array state updated.`, 8, array, [], [], []));
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Radix Sort complete! The array is fully sorted digit by digit.', 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}
+
+// ─── Bucket Sort ─────────────────────────────────────────────────────────────
+export function generateBucketSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  const array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  if (n === 0) return [];
+
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  let min = array[0];
+  let max = array[0];
+  for (let i = 1; i < n; i++) {
+    if (array[i] < min) min = array[i];
+    if (array[i] > max) max = array[i];
+  }
+
+  steps.push(createSortingStep(stepId++, 'compare', `Found min: ${min}, max: ${max}. Creating buckets.`, 2, array, [], [], []));
+
+  const bucketCount = Math.max(Math.floor(Math.sqrt(n)), 3);
+  const buckets: number[][] = Array(bucketCount).fill(null).map(() => []);
+
+  const range = max - min;
+  for (let i = 0; i < n; i++) {
+    const val = array[i];
+    let bucketIdx = Math.floor(((val - min) / (range || 1)) * (bucketCount - 1));
+    bucketIdx = Math.min(Math.max(bucketIdx, 0), bucketCount - 1);
+    buckets[bucketIdx].push(val);
+    steps.push(createSortingStep(stepId++, 'place', `Distribute value ${val} from index ${i} into bucket ${bucketIdx}.`, 4, array, [i], [], []));
+  }
+
+  let index = 0;
+  const sortedIndices: number[] = [];
+  for (let b = 0; b < bucketCount; b++) {
+    if (buckets[b].length > 0) {
+      steps.push(createSortingStep(stepId++, 'sort-bucket', `Sorting bucket ${b} containing: [${buckets[b].join(', ')}].`, 6, array, [], [], []));
+      buckets[b].sort((x, y) => x - y);
+
+      while (buckets[b].length > 0) {
+        const val = buckets[b].shift()!;
+        array[index] = val;
+        sortedIndices.push(index);
+        steps.push(createSortingStep(stepId++, 'gather', `Gather value ${val} from bucket ${b} to output index ${index}.`, 8, [...array], [], [index], [...sortedIndices]));
+        index++;
+      }
+    }
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Bucket Sort complete! The array is fully sorted.', 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}

@@ -245,3 +245,304 @@ export function generateHanoiSteps(numDisks: number): Step[] {
 
   return steps;
 }
+
+// ─── Fibonacci (Recursive) ──────────────────────────────────────────────────
+export function generateFibonacciRecursiveSteps(n: number): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+  const callStack: StackFrame[] = [];
+
+  steps.push(createRecursionStep(
+    stepId++,
+    'init',
+    `Start computing Fibonacci(${n}) recursively.`,
+    1,
+    callStack
+  ));
+
+  function fib(val: number): number {
+    const frameId = `fib-${stepId}-${val}`;
+    const frame: StackFrame = {
+      id: frameId,
+      funcName: 'fibonacci',
+      args: { n: val },
+    };
+
+    callStack.push(frame);
+    steps.push(createRecursionStep(
+      stepId++,
+      'call',
+      `Call fibonacci(${val}). Push new stack frame.`,
+      2,
+      callStack,
+      frameId
+    ));
+
+    if (val <= 1) {
+      frame.returnValue = val;
+      frame.isReturning = true;
+      steps.push(createRecursionStep(
+        stepId++,
+        'base-case',
+        `Base case hit: n = ${val} <= 1. Return ${val}.`,
+        3,
+        callStack,
+        frameId
+      ));
+      callStack.pop();
+      return val;
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'recurse-left',
+      `n = ${val} > 1. Compute left sub-tree: fibonacci(${val - 1}).`,
+      5,
+      callStack,
+      frameId
+    ));
+
+    const left = fib(val - 1);
+
+    // Re-sync parent frame in stack view after left branch returned
+    const pIdx = callStack.findIndex(f => f.id === frameId);
+    if (pIdx !== -1) {
+      callStack[pIdx].args = { n: val, leftResult: left };
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'recurse-right',
+      `Left branch fibonacci(${val - 1}) resolved to ${left}. Compute right sub-tree: fibonacci(${val - 2}).`,
+      5,
+      callStack,
+      frameId
+    ));
+
+    const right = fib(val - 2);
+
+    const ans = left + right;
+    
+    // Re-sync parent frame returning state
+    const pIdx2 = callStack.findIndex(f => f.id === frameId);
+    if (pIdx2 !== -1) {
+      callStack[pIdx2].returnValue = ans;
+      callStack[pIdx2].isReturning = true;
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'add',
+      `Sum results: fibonacci(${val - 1}) + fibonacci(${val - 2}) = ${left} + ${right} = ${ans}. Return ${ans}.`,
+      6,
+      callStack,
+      frameId
+    ));
+
+    callStack.pop();
+    return ans;
+  }
+
+  const finalResult = fib(n);
+  steps.push(createRecursionStep(
+    stepId++,
+    'done',
+    `Fibonacci(${n}) calculation complete! Result is ${finalResult}.`,
+    8,
+    callStack,
+    undefined,
+    finalResult
+  ));
+
+  return steps;
+}
+
+// ─── Sum of N Numbers ───────────────────────────────────────────────────────
+export function generateSumOfNRecursiveSteps(n: number): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+  const callStack: StackFrame[] = [];
+
+  steps.push(createRecursionStep(
+    stepId++,
+    'init',
+    `Start computing Sum of first ${n} natural numbers recursively.`,
+    1,
+    callStack
+  ));
+
+  function sumOfN(val: number): number {
+    const frameId = `sum-${stepId}-${val}`;
+    const frame: StackFrame = {
+      id: frameId,
+      funcName: 'sumOfN',
+      args: { n: val },
+    };
+
+    callStack.push(frame);
+    steps.push(createRecursionStep(
+      stepId++,
+      'call',
+      `Call sumOfN(${val}). Push new stack frame.`,
+      2,
+      callStack,
+      frameId
+    ));
+
+    if (val <= 0) {
+      frame.returnValue = 0;
+      frame.isReturning = true;
+      steps.push(createRecursionStep(
+        stepId++,
+        'base-case',
+        `Base case hit: n = 0. Return 0.`,
+        3,
+        callStack,
+        frameId
+      ));
+      callStack.pop();
+      return 0;
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'recurse',
+      `n = ${val} > 0. Compute sumOfN(${val - 1}) first.`,
+      5,
+      callStack,
+      frameId
+    ));
+
+    const subSum = sumOfN(val - 1);
+
+    const ans = val + subSum;
+    const pIdx = callStack.findIndex(f => f.id === frameId);
+    if (pIdx !== -1) {
+      callStack[pIdx].returnValue = ans;
+      callStack[pIdx].isReturning = true;
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'add',
+      `Resolve call: sumOfN(${val}) = ${val} + sumOfN(${val - 1}) = ${val} + ${subSum} = ${ans}. Return ${ans}.`,
+      6,
+      callStack,
+      frameId
+    ));
+
+    callStack.pop();
+    return ans;
+  }
+
+  const finalResult = sumOfN(n);
+  steps.push(createRecursionStep(
+    stepId++,
+    'done',
+    `Sum of N complete! Sum of first ${n} numbers is ${finalResult}.`,
+    8,
+    callStack,
+    undefined,
+    finalResult
+  ));
+
+  return steps;
+}
+
+// ─── Power Function (x^n) ───────────────────────────────────────────────────
+export function generatePowerFunctionRecursiveSteps(n: number): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+  const callStack: StackFrame[] = [];
+  const x = 2; // base is 2
+
+  steps.push(createRecursionStep(
+    stepId++,
+    'init',
+    `Start computing power(${x}, ${n}) recursively using divide-and-conquer.`,
+    1,
+    callStack
+  ));
+
+  function power(base: number, exp: number): number {
+    const frameId = `power-${stepId}-${base}-${exp}`;
+    const frame: StackFrame = {
+      id: frameId,
+      funcName: 'power',
+      args: { x: base, n: exp },
+    };
+
+    callStack.push(frame);
+    steps.push(createRecursionStep(
+      stepId++,
+      'call',
+      `Call power(${base}, ${exp}). Push new stack frame.`,
+      2,
+      callStack,
+      frameId
+    ));
+
+    if (exp === 0) {
+      frame.returnValue = 1;
+      frame.isReturning = true;
+      steps.push(createRecursionStep(
+        stepId++,
+        'base-case',
+        `Base case hit: exponent n = 0. Return 1.`,
+        3,
+        callStack,
+        frameId
+      ));
+      callStack.pop();
+      return 1;
+    }
+
+    const halfExp = Math.floor(exp / 2);
+    steps.push(createRecursionStep(
+      stepId++,
+      'recurse',
+      `Divide: Compute power(${base}, ${halfExp}) (half of exponent ${exp}).`,
+      5,
+      callStack,
+      frameId
+    ));
+
+    const halfPower = power(base, halfExp);
+
+    const isEven = exp % 2 === 0;
+    const ans = isEven ? halfPower * halfPower : base * halfPower * halfPower;
+
+    const pIdx = callStack.findIndex(f => f.id === frameId);
+    if (pIdx !== -1) {
+      callStack[pIdx].returnValue = ans;
+      callStack[pIdx].isReturning = true;
+    }
+
+    steps.push(createRecursionStep(
+      stepId++,
+      'multiply',
+      isEven
+        ? `Exponent ${exp} is even: power(${base}, ${halfExp})² = ${halfPower} * ${halfPower} = ${ans}. Return ${ans}.`
+        : `Exponent ${exp} is odd: ${base} * power(${base}, ${halfExp})² = ${base} * ${halfPower} * ${halfPower} = ${ans}. Return ${ans}.`,
+      6,
+      callStack,
+      frameId
+    ));
+
+    callStack.pop();
+    return ans;
+  }
+
+  const finalResult = power(x, n);
+  steps.push(createRecursionStep(
+    stepId++,
+    'done',
+    `Power function complete! ${x}^${n} is ${finalResult}.`,
+    8,
+    callStack,
+    undefined,
+    finalResult
+  ));
+
+  return steps;
+}

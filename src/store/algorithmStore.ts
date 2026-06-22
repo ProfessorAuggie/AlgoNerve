@@ -27,8 +27,18 @@ import { generateStackSteps, generateQueueSteps, generateLinkedListSteps } from 
 import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps, generateAStarSteps, generatePrimSteps, generateKruskalSteps } from '../algorithms/graph';
 import { generateBSTInsertSteps, generateTraversalSteps, generateAVLSteps } from '../algorithms/tree';
 import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps, generateCoinChangeSteps } from '../algorithms/dp';
-import { generateFactorialSteps, generateHanoiSteps } from '../algorithms/recursion';
-import { generateNQueensSteps } from '../algorithms/backtracking';
+import {
+  generateFactorialSteps,
+  generateHanoiSteps,
+  generateFibonacciRecursiveSteps,
+  generateSumOfNRecursiveSteps,
+  generatePowerFunctionRecursiveSteps
+} from '../algorithms/recursion';
+import {
+  generateNQueensSteps,
+  generateSudokuSolverSteps,
+  generateRatInAMazeSteps
+} from '../algorithms/backtracking';
 import {
   generatePostfixEvalSteps,
   generatePrefixEvalSteps,
@@ -376,10 +386,25 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
       case 'tower-of-hanoi':
         generated = generateHanoiSteps(Math.min(state.recursionN, 6)); // Bounded at 6 max for visual sanity
         break;
+      case 'fibonacci-recursive':
+        generated = generateFibonacciRecursiveSteps(state.recursionN);
+        break;
+      case 'sum-of-n-recursive':
+        generated = generateSumOfNRecursiveSteps(state.recursionN);
+        break;
+      case 'power-function-recursive':
+        generated = generatePowerFunctionRecursiveSteps(state.recursionN);
+        break;
 
       // Backtracking
       case 'n-queens':
         generated = generateNQueensSteps(Math.min(state.recursionN, 8)); // Bounded at 8 max for board visual sanity
+        break;
+      case 'sudoku-solver':
+        generated = generateSudokuSolverSteps();
+        break;
+      case 'rat-in-a-maze':
+        generated = generateRatInAMazeSteps();
         break;
 
       // 18 new interactive concept algorithms

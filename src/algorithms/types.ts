@@ -96,11 +96,13 @@ export interface DPPayload {
 // ─── Backtracking (N-Queens) ────────────────────────────────────────────────
 
 export interface BacktrackingPayload {
-  grid: number[][]; // 0 for empty, 1 for queen, 2 for conflict/checked
+  grid: number[][];
   row?: number;
   col?: number;
   solutionsCount?: number;
   currentQueens?: Array<[number, number]>;
+  initialGrid?: number[][];
+  conflictCell?: [number, number] | null;
 }
 
 // ─── Recursion ──────────────────────────────────────────────────────────────
