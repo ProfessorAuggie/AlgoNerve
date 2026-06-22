@@ -123,7 +123,7 @@ export const DocumentationPage: React.FC = () => {
             <div className="flex flex-col gap-6">
               <div>
                 <h1 className="text-2xl font-extrabold tracking-tight mb-2 text-zinc-900 dark:text-white">Supported Algorithms Registry</h1>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 160+ Algorithms & Layout Engines</p>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 166 Algorithms & Layout Engines</p>
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
               
@@ -188,11 +188,9 @@ export const DocumentationPage: React.FC = () => {
                             <div className="flex flex-col gap-1">
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200">{algo.name}</span>
-                                {algo.mode === 'concept' && (
-                                  <span className="text-[9px] font-mono px-1.5 py-0.2 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded">
-                                    Concept
-                                  </span>
-                                )}
+                                <span className="text-[9px] font-mono px-1.5 py-0.2 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-250 dark:border-emerald-800/30 rounded">
+                                  Interactive
+                                </span>
                               </div>
                               <span className="text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">{algo.description}</span>
                             </div>
