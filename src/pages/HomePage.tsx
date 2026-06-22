@@ -43,7 +43,7 @@ export const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   React.useEffect(() => {
-    document.title = "AlgoNerve | Interactive Algorithm Visualizer & CS Curriculum Guide";
+    document.title = "AlgoNerve";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute('content', 'An interactive algorithm visualizer animating recursion stacks, dynamic programming tables, sorting operations, and graph traversals in real-time.');
