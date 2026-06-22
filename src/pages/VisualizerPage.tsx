@@ -207,14 +207,12 @@ export const VisualizerPage: React.FC = () => {
 
         {/* Short info/help guides */}
         <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
-          {selectedAlgo.mode !== 'concept' && (
-            <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">Space</kbd> Play/Pause</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">←</kbd> Prev</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">→</kbd> Next</span>
-              <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">R</kbd> Reset</span>
-            </div>
-          )}
+          <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
+            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">Space</kbd> Play/Pause</span>
+            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">←</kbd> Prev</span>
+            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">→</kbd> Next</span>
+            <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">R</kbd> Reset</span>
+          </div>
           <Link
             to="/documentation"
             className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors"
@@ -236,31 +234,20 @@ export const VisualizerPage: React.FC = () => {
           </div>
 
           {/* Bottom control hub */}
-          {selectedAlgo.mode !== 'concept' ? (
-            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <Player />
-                <SpeedControl />
-              </div>
-              
-              <div className="w-full">
-                <Timeline />
-              </div>
+          <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <Player />
+              <SpeedControl />
+            </div>
+            
+            <div className="w-full">
+              <Timeline />
+            </div>
 
-              <div className="w-full">
-                <NarrationPanel />
-              </div>
+            <div className="w-full">
+              <NarrationPanel />
             </div>
-          ) : (
-            <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col items-center justify-center py-6 px-4 transition-colors duration-300 text-center">
-              <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400 uppercase tracking-widest mb-1">
-                Conceptual Mode Active
-              </span>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 max-w-md font-sans">
-                This algorithm runs in conceptual overview mode. Read the properties, applications, and pseudocode. Step simulation is disabled.
-              </p>
-            </div>
-          )}
+          </div>
         </section>
 
         {/* Right Details Config Panel (1 col) */}

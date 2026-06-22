@@ -30,6 +30,7 @@ import {
   generateTopologicalSortSteps,
   generateFenwickTreeSteps
 } from '../algorithms/conceptSteps';
+import { CONCEPT_DATABASE, CATEGORY_LABELS } from '../algorithms/conceptDatabase';
 
 
 // Sample graph data for visualization
@@ -408,14 +409,67 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
 
       default:
         if (algo.mode === 'concept') {
+          let concept = CONCEPT_DATABASE[algo.id];
+          if (!concept) {
+            const categoryName = CATEGORY_LABELS[algo.category] || algo.category;
+            concept = {
+              title: algo.name,
+              categoryName,
+              properties: [
+                `Category: ${categoryName}`,
+                `Best/Avg Time Complexity: ${algo.timeComplexity}`,
+                `Auxiliary Space Complexity: ${algo.spaceComplexity}`,
+                ...(algo.tags && algo.tags.length > 0 ? [`Keywords: ${algo.tags.join(', ')}`] : []),
+              ],
+              applications: [
+                'Solving curriculum exercises, coding interviews, and competitive programming challenges.',
+                'Optimizing system efficiency in real-world application pipelines.',
+                'Learning structural operations of complex data structures and algorithmic designs.',
+              ],
+              explanation: algo.description || 'This algorithm is part of the CS curriculum study guide. Examine the details, complexity thresholds, and properties below.',
+              operations: [
+                { name: 'Time Complexity', complexity: algo.timeComplexity, desc: 'Calculated execution growth pattern relative to input size.' },
+                { name: 'Space Complexity', complexity: algo.spaceComplexity, desc: 'Auxiliary memory overhead utilized during runtime execution.' },
+              ],
+            };
+          }
+
           generated = [
             {
               id: 0,
               action: 'concept',
-              description: `Concept Overview of ${algo.name}. Refer to properties and applications.`,
+              description: `Overview of ${concept.title}: ${concept.explanation}`,
               codeLine: 1,
-              payload: {},
-            }
+              payload: { stage: 'intro' },
+            },
+            {
+              id: 1,
+              action: 'concept',
+              description: `Key Properties of ${concept.title}: ${concept.properties.join(' ')}`,
+              codeLine: 2,
+              payload: { stage: 'properties' },
+            },
+            {
+              id: 2,
+              action: 'concept',
+              description: `Core Operations & Complexities: Time = ${algo.timeComplexity}, Space = ${algo.spaceComplexity}. Operations details are highlighted.`,
+              codeLine: 3,
+              payload: { stage: 'complexity' },
+            },
+            {
+              id: 3,
+              action: 'concept',
+              description: `Applications of ${concept.title}: ${concept.applications.join(' ')}`,
+              codeLine: 4,
+              payload: { stage: 'applications' },
+            },
+            {
+              id: 4,
+              action: 'concept',
+              description: `Completed conceptual walkthrough of ${concept.title}. Code execution paths and metrics can be analyzed.`,
+              codeLine: 5,
+              payload: { stage: 'summary' },
+            },
           ];
         }
         break;
