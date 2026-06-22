@@ -48,6 +48,17 @@ export const VisualizerPage: React.FC = () => {
     }
   }, [id, selectAlgorithm]);
 
+  // Dynamic SEO Metadata updates
+  useEffect(() => {
+    if (selectedAlgo) {
+      document.title = `${selectedAlgo.name} Visualizer | AlgoNerve`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `${selectedAlgo.name} simulation on AlgoNerve. ${selectedAlgo.description} Learn space complexity, time complexity, and step execution.`);
+      }
+    }
+  }, [selectedAlgo]);
+
   // Keyboard Shortcuts Setup
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

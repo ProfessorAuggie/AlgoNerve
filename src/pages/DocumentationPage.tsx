@@ -9,6 +9,14 @@ export const DocumentationPage: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'overview' | 'algorithms' | 'controls' | 'shortcuts' | 'accessibility' | 'setup' | 'creator'>('overview');
 
+  React.useEffect(() => {
+    document.title = "AlgoNerve Documentation | Guides & Reference Manual";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Explore the comprehensive reference manual of AlgoNerve. Review supported algorithms, keyboard bindings, and local setup configurations.');
+    }
+  }, []);
+
   const tabs = [
     { id: 'overview' as const, label: 'Overview', icon: BookOpen },
     { id: 'algorithms' as const, label: 'Supported Algorithms', icon: Cpu },
