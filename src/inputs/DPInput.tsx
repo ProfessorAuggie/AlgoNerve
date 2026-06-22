@@ -23,7 +23,7 @@ export const DPInput: React.FC = () => {
 
   const isDPStringAlgo = selectedAlgo.id === 'lcs' || selectedAlgo.id === 'edit-distance';
   const isTreeAlgo = selectedAlgo.id === 'bst';
-  const isRecursionAlgo = selectedAlgo.id === 'factorial' || selectedAlgo.id === 'tower-of-hanoi' || selectedAlgo.id === 'fibonacci-dp';
+  const isRecursionAlgo = selectedAlgo.id === 'factorial' || selectedAlgo.id === 'tower-of-hanoi' || selectedAlgo.id === 'fibonacci-dp' || selectedAlgo.id === 'coin-change-dp';
 
   const handleApplyStrings = () => {
     setError('');
@@ -58,6 +58,11 @@ export const DPInput: React.FC = () => {
 
     if (selectedAlgo.id === 'tower-of-hanoi' && (num < 2 || num > 6)) {
       setError('Limit Tower of Hanoi disks to between 2 and 6.');
+      return;
+    }
+
+    if (selectedAlgo.id === 'coin-change-dp' && (num < 1 || num > 10)) {
+      setError('Limit Coin Change amount to between 1 and 10.');
       return;
     }
 
@@ -174,7 +179,11 @@ export const DPInput: React.FC = () => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-1">
             <label className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
-              {selectedAlgo.id === 'tower-of-hanoi' ? 'Number of Disks' : 'Value of n'}
+              {selectedAlgo.id === 'tower-of-hanoi' 
+                ? 'Number of Disks' 
+                : selectedAlgo.id === 'coin-change-dp' 
+                ? 'Target Amount' 
+                : 'Value of n'}
             </label>
             <input
               type="number"

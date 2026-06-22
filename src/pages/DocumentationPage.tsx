@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, BookOpen, Cpu, Settings, Keyboard, Accessibility, User, HelpCircle } from 'lucide-react';
 import { ThemeToggle } from '../controls/ThemeToggle';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
+import type { AlgorithmCategory } from '../algorithms/types';
 
 export const DocumentationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export const DocumentationPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-x-hidden transition-colors duration-300">
       {/* Background Decorative Gradients */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/5 dark:bg-emerald-900/10 blur-[120px] pointer-events-none" />
@@ -50,7 +51,7 @@ export const DocumentationPage: React.FC = () => {
       </header>
 
       {/* Main Split Content */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-8 z-10 overflow-hidden">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row gap-8 z-10 overflow-y-auto md:overflow-visible">
         {/* Left Navigation Sidebar */}
         <nav className="w-full md:w-64 shrink-0 flex flex-row md:flex-col gap-1.5 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 border-b md:border-b-0 md:border-r border-zinc-200 dark:border-zinc-900 md:pr-6 scrollbar-none">
           {tabs.map((tab) => {
@@ -112,25 +113,61 @@ export const DocumentationPage: React.FC = () => {
             <div className="flex flex-col gap-6">
               <div>
                 <h1 className="text-2xl font-extrabold tracking-tight mb-2 text-zinc-900 dark:text-white">Supported Algorithms Registry</h1>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 40+ Algorithms & Layout Engines</p>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">Current Count: 160+ Algorithms & Layout Engines</p>
               </div>
               <hr className="border-zinc-200 dark:border-zinc-800/60" />
               
               <div className="flex flex-col gap-6">
-                {(['searching', 'sorting', 'datastructures', 'graph', 'tree', 'dp', 'recursion', 'backtracking'] as const).map((cat) => {
+                {([
+                  'searching', 'sorting', 'recursion', 'backtracking', 'stack', 'queue-deque', 'linkedlist',
+                  'binarytrees', 'bst', 'balancedtrees', 'heap', 'trie', 'hashing', 'graphtraversal',
+                  'shortestpath', 'mst', 'topological', 'connectivity', 'cycledetection', 'dp', 'greedy',
+                  'divideandconquer', 'strings', 'bitmanipulation', 'numbertheory', 'matrix', 'geometry',
+                  'networkflow', 'segmenttrees', 'advancedgraph', 'randomized', 'parallel', 'ml'
+                ] as AlgorithmCategory[]).map((cat) => {
                   const items = ALGORITHM_REGISTRY.filter((x) => x.category === cat);
                   if (items.length === 0) return null;
+
+                  const categoryLabels: Record<AlgorithmCategory, string> = {
+                    searching: 'Searching',
+                    sorting: 'Sorting',
+                    recursion: 'Recursion',
+                    backtracking: 'Backtracking',
+                    stack: 'Stack',
+                    'queue-deque': 'Queue & Deque',
+                    linkedlist: 'Linked List',
+                    binarytrees: 'Binary Trees',
+                    bst: 'BSTs',
+                    balancedtrees: 'Balanced Trees',
+                    heap: 'Heaps & Priority Queues',
+                    trie: 'Tries',
+                    hashing: 'Hashing',
+                    graphtraversal: 'Graph Traversal',
+                    shortestpath: 'Shortest Path',
+                    mst: 'Minimum Spanning Tree',
+                    topological: 'Topological Sort',
+                    connectivity: 'Graph Connectivity',
+                    cycledetection: 'Cycle Detection',
+                    dp: 'Dynamic Programming',
+                    greedy: 'Greedy Algorithms',
+                    divideandconquer: 'Divide & Conquer',
+                    strings: 'String Algorithms',
+                    bitmanipulation: 'Bit Manipulation',
+                    numbertheory: 'Number Theory',
+                    matrix: 'Matrix',
+                    geometry: 'Computational Geometry',
+                    networkflow: 'Network Flow',
+                    segmenttrees: 'Segment & Fenwick Trees',
+                    advancedgraph: 'Advanced Graph',
+                    randomized: 'Randomized',
+                    parallel: 'Parallel & Distributed',
+                    ml: 'Machine Learning',
+                  };
                   
                   return (
                     <div key={cat} className="flex flex-col gap-3">
                       <h3 className="text-sm font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 font-mono border-b border-zinc-200 dark:border-zinc-800 pb-1">
-                        {cat === 'dp' 
-                          ? 'Dynamic Programming' 
-                          : cat === 'datastructures' 
-                          ? 'Data Structures' 
-                          : cat === 'searching' 
-                          ? 'Searching' 
-                          : cat}
+                        {categoryLabels[cat] || cat}
                       </h3>
                       <div className="grid grid-cols-1 gap-2.5">
                         {items.map((algo) => (
@@ -139,7 +176,14 @@ export const DocumentationPage: React.FC = () => {
                             className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                           >
                             <div className="flex flex-col gap-1">
-                              <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200">{algo.name}</span>
+                              <div className="flex items-center gap-2">
+                                <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200">{algo.name}</span>
+                                {algo.mode === 'concept' && (
+                                  <span className="text-[9px] font-mono px-1.5 py-0.2 bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded">
+                                    Concept
+                                  </span>
+                                )}
+                              </div>
                               <span className="text-zinc-500 dark:text-zinc-400 leading-relaxed font-sans">{algo.description}</span>
                             </div>
                             <div className="flex items-center gap-3 font-mono text-[10px] shrink-0 text-zinc-500 dark:text-zinc-500">

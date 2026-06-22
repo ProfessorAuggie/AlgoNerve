@@ -3,11 +3,11 @@ import type { Step, AlgorithmMeta } from '../algorithms/types';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 
 import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps } from '../algorithms/sorting';
-import { generateLinearSearchSteps, generateBinarySearchSteps } from '../algorithms/searching';
+import { generateLinearSearchSteps, generateBinarySearchSteps, generateTernarySearchSteps } from '../algorithms/searching';
 import { generateStackSteps, generateQueueSteps, generateLinkedListSteps } from '../algorithms/datastructures';
 import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps, generateAStarSteps, generatePrimSteps, generateKruskalSteps } from '../algorithms/graph';
 import { generateBSTInsertSteps, generateTraversalSteps, generateAVLSteps } from '../algorithms/tree';
-import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps } from '../algorithms/dp';
+import { generateFibonacciDPSteps, generateLCSSteps, generateEditDistanceSteps, generateKnapsackSteps, generateCoinChangeSteps } from '../algorithms/dp';
 import { generateFactorialSteps, generateHanoiSteps } from '../algorithms/recursion';
 import { generateNQueensSteps } from '../algorithms/backtracking';
 
@@ -221,6 +221,9 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
       case 'binary-search':
         generated = generateBinarySearchSteps(state.inputArray, state.recursionN);
         break;
+      case 'ternary-search':
+        generated = generateTernarySearchSteps(state.inputArray, state.recursionN);
+        break;
 
       // Sorting
       case 'bubble-sort':
@@ -306,6 +309,9 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         break;
       case 'knapsack-dp':
         generated = generateKnapsackSteps([1, 2, 3], [15, 20, 30], 5);
+        break;
+      case 'coin-change-dp':
+        generated = generateCoinChangeSteps(state.recursionN);
         break;
 
       // Recursion

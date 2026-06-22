@@ -499,3 +499,169 @@ export function generateKnapsackSteps(weights: number[] = [1, 2, 3], values: num
   return steps;
 }
 
+// ─── Coin Change (DP) ────────────────────────────────────────────────────────
+export function generateCoinChangeSteps(amount: number): Step[] {
+  const steps: Step[] = [];
+  let stepId = 0;
+
+  const coins = [1, 3, 4];
+  const n = coins.length;
+  const W = amount;
+
+  // Initialize table with -1
+  const table: number[][] = Array.from({ length: n + 1 }, () => Array(W + 1).fill(-1));
+  const rows = ['Ø', ...coins.map(c => `Coin ${c}`)];
+  const cols = Array.from({ length: W + 1 }, (_, i) => `Amt=${i}`);
+
+  steps.push(createDPStep(
+    stepId++,
+    'init',
+    `Initialize DP table of size ${n + 1}x${W + 1} with -1. Target amount is ${W}. Coins available: [${coins.join(', ')}].`,
+    2,
+    table,
+    rows,
+    cols
+  ));
+
+  // Base cases: amount 0 requires 0 coins
+  for (let i = 0; i <= n; i++) {
+    table[i][0] = 0;
+  }
+  // Base case: amount > 0 with no coins is impossible (represented by 99 as infinity)
+  for (let j = 1; j <= W; j++) {
+    table[0][j] = 99; 
+  }
+  
+  steps.push(createDPStep(
+    stepId++,
+    'base-cases',
+    `Base cases: Amount 0 requires 0 coins. Amount > 0 with no coins (Ø) is impossible (represented as Infinity = 99).`,
+    3,
+    table,
+    rows,
+    cols
+  ));
+
+  for (let i = 1; i <= n; i++) {
+    const coin = coins[i - 1];
+    for (let w = 1; w <= W; w++) {
+      steps.push(createDPStep(
+        stepId++,
+        'check-coin',
+        `Evaluate Coin ${coin} at target amount ${w}.`,
+        4,
+        table,
+        rows,
+        cols,
+        [i, w]
+      ));
+
+      if (coin <= w) {
+        const excludeVal = table[i - 1][w];
+        const includeVal = table[i][w - coin] !== 99 ? table[i][w - coin] + 1 : 99;
+
+        steps.push(createDPStep(
+          stepId++,
+          'evaluate-choices',
+          `Coin fits. Compare Exclude: value above [${i-1}, ${w}] (${excludeVal === 99 ? '∞' : excludeVal}) vs Include: value at [${i}, ${w-coin}] + 1 (${table[i][w-coin] === 99 ? '∞' : table[i][w-coin]} + 1 = ${includeVal === 99 ? '∞' : includeVal}).`,
+          7,
+          table,
+          rows,
+          cols,
+          [i, w],
+          [[i - 1, w], [i, w - coin]]
+        ));
+
+        table[i][w] = Math.min(excludeVal, includeVal);
+        steps.push(createDPStep(
+          stepId++,
+          'fill-cell',
+          `Write minimum value to cell [${i}, ${w}] = min(${excludeVal === 99 ? '∞' : excludeVal}, ${includeVal === 99 ? '∞' : includeVal}) = ${table[i][w] === 99 ? '∞' : table[i][w]}.`,
+          7,
+          table,
+          rows,
+          cols,
+          [i, w]
+        ));
+      } else {
+        table[i][w] = table[i - 1][w];
+        steps.push(createDPStep(
+          stepId++,
+          'exclude-coin',
+          `Coin too large (value ${coin} > amount ${w}). Copy value from cell directly above: ${table[i][w] === 99 ? '∞' : table[i][w]}.`,
+          9,
+          table,
+          rows,
+          cols,
+          [i, w],
+          [[i - 1, w]]
+        ));
+      }
+    }
+  }
+
+  // Backtracking path
+  const selectedCoins: number[] = [];
+  let backtrackW = W;
+  steps.push(createDPStep(
+    stepId++,
+    'backtrack-start',
+    `Backtrack from bottom-right cell [${n}, ${W}] (Min Coins = ${table[n][W] === 99 ? '∞' : table[n][W]}) to identify selected coins.`,
+    13,
+    table,
+    rows,
+    cols,
+    [n, W]
+  ));
+
+  let currRow = n;
+  while (backtrackW > 0 && currRow > 0) {
+    if (table[currRow][backtrackW] !== table[currRow - 1][backtrackW]) {
+      selectedCoins.push(coins[currRow - 1]);
+      const prevW = backtrackW;
+      backtrackW -= coins[currRow - 1];
+      steps.push(createDPStep(
+        stepId++,
+        'backtrack-include',
+        `Value changed from row above. Coin ${coins[currRow - 1]} was included. Remaining amount: ${prevW} - ${coins[currRow - 1]} = ${backtrackW}. Move to cell [${currRow}, ${backtrackW}].`,
+        13,
+        table,
+        rows,
+        cols,
+        [currRow, prevW],
+        [[currRow, backtrackW]]
+      ));
+    } else {
+      const prevRow = currRow;
+      currRow--;
+      steps.push(createDPStep(
+        stepId++,
+        'backtrack-exclude',
+        `Value matches row above. Coin ${coins[prevRow - 1]} was excluded. Move up to cell [${currRow}, ${backtrackW}].`,
+        13,
+        table,
+        rows,
+        cols,
+        [prevRow, backtrackW],
+        [[currRow, backtrackW]]
+      ));
+    }
+  }
+
+  steps.push(createDPStep(
+    stepId++,
+    'done',
+    `Coin Change DP complete! Minimum coins needed for amount ${W} is ${table[n][W] === 99 ? 'impossible' : table[n][W]}. Coins selected: [${selectedCoins.join(', ')}].`,
+    13,
+    table,
+    rows,
+    cols,
+    [n, W],
+    undefined,
+    table[n][W] === 99 ? -1 : table[n][W]
+  ));
+
+  return steps;
+}
+
+

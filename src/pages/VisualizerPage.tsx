@@ -105,11 +105,16 @@ export const VisualizerPage: React.FC = () => {
       case 'searching':
       case 'sorting':
         return <SortingView step={currentStep} />;
-      case 'datastructures':
+      case 'stack':
+      case 'queue-deque':
+      case 'linkedlist':
         return <ListStructureView step={currentStep} />;
-      case 'graph':
+      case 'graphtraversal':
+      case 'shortestpath':
+      case 'mst':
         return <GraphView step={currentStep} />;
-      case 'tree':
+      case 'bst':
+      case 'balancedtrees':
         return <TreeView step={currentStep} />;
       case 'dp':
         return <DPView step={currentStep} />;
@@ -137,11 +142,16 @@ export const VisualizerPage: React.FC = () => {
     switch (selectedAlgo.category) {
       case 'searching':
       case 'sorting':
-      case 'datastructures':
+      case 'stack':
+      case 'queue-deque':
+      case 'linkedlist':
         return <ArrayInput />;
-      case 'graph':
+      case 'graphtraversal':
+      case 'shortestpath':
+      case 'mst':
         return <GraphInput />;
-      case 'tree':
+      case 'bst':
+      case 'balancedtrees':
       case 'dp':
       case 'recursion':
       case 'backtracking':
@@ -152,7 +162,7 @@ export const VisualizerPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-x-hidden transition-colors duration-300">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[40%] h-[40%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
 
@@ -201,7 +211,7 @@ export const VisualizerPage: React.FC = () => {
       </header>
 
       {/* Core split layout */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6 z-10 overflow-hidden">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6 z-10 overflow-y-auto lg:overflow-visible">
         {/* Left Visualizer Dashboard Panel (2 cols) */}
         <section className="lg:col-span-2 flex flex-col gap-6 h-full justify-between">
           <div className="flex-1 min-h-[350px] relative">

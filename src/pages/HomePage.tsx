@@ -4,7 +4,36 @@ import { ALGORITHM_REGISTRY } from '../algorithms/types';
 import type { AlgorithmCategory } from '../algorithms/types';
 
 import { useAlgorithmStore } from '../store/algorithmStore';
-import { Sparkles, Terminal, Code, Cpu, Layers, Search, Database, HelpCircle } from 'lucide-react';
+import {
+  Sparkles,
+  Code,
+  Cpu,
+  Layers,
+  Search,
+  HelpCircle,
+  Repeat,
+  Undo,
+  SquareStack,
+  RefreshCw,
+  Link as LinkIcon,
+  Scale,
+  Type,
+  Hash,
+  Share2,
+  Navigation,
+  RotateCw,
+  Grid,
+  Coins,
+  Split,
+  FileText,
+  Percent,
+  Table,
+  Shapes,
+  Activity,
+  Shuffle,
+  Brain,
+  Workflow
+} from 'lucide-react';
 import { ThemeToggle } from '../controls/ThemeToggle';
 
 export const HomePage: React.FC = () => {
@@ -17,12 +46,37 @@ export const HomePage: React.FC = () => {
     { key: 'all', label: 'All', icon: Sparkles },
     { key: 'searching', label: 'Searching', icon: Search },
     { key: 'sorting', label: 'Sorting', icon: Layers },
-    { key: 'datastructures', label: 'Data Structures', icon: Database },
-    { key: 'graph', label: 'Graph Theory', icon: Cpu },
-    { key: 'tree', label: 'Trees & BSTs', icon: Code },
-    { key: 'dp', label: 'Dynamic Programming', icon: Terminal },
-    { key: 'recursion', label: 'Recursion', icon: Terminal },
-    { key: 'backtracking', label: 'Backtracking', icon: Sparkles },
+    { key: 'recursion', label: 'Recursion', icon: Repeat },
+    { key: 'backtracking', label: 'Backtracking', icon: Undo },
+    { key: 'stack', label: 'Stack', icon: SquareStack },
+    { key: 'queue-deque', label: 'Queue & Deque', icon: RefreshCw },
+    { key: 'linkedlist', label: 'Linked List', icon: LinkIcon },
+    { key: 'binarytrees', label: 'Binary Trees', icon: Workflow },
+    { key: 'bst', label: 'BSTs', icon: Code },
+    { key: 'balancedtrees', label: 'Balanced Trees', icon: Scale },
+    { key: 'heap', label: 'Heaps & Priority Queues', icon: Hash },
+    { key: 'trie', label: 'Tries', icon: Type },
+    { key: 'hashing', label: 'Hashing', icon: Hash },
+    { key: 'graphtraversal', label: 'Graph Traversal', icon: Share2 },
+    { key: 'shortestpath', label: 'Shortest Path', icon: Navigation },
+    { key: 'mst', label: 'Minimum Spanning Tree', icon: Share2 },
+    { key: 'topological', label: 'Topological Sort', icon: Table },
+    { key: 'connectivity', label: 'Graph Connectivity', icon: Workflow },
+    { key: 'cycledetection', label: 'Cycle Detection', icon: RotateCw },
+    { key: 'dp', label: 'Dynamic Programming', icon: Grid },
+    { key: 'greedy', label: 'Greedy Algorithms', icon: Coins },
+    { key: 'divideandconquer', label: 'Divide & Conquer', icon: Split },
+    { key: 'strings', label: 'String Algorithms', icon: FileText },
+    { key: 'bitmanipulation', label: 'Bit Manipulation', icon: Cpu },
+    { key: 'numbertheory', label: 'Number Theory', icon: Percent },
+    { key: 'matrix', label: 'Matrix', icon: Table },
+    { key: 'geometry', label: 'Computational Geometry', icon: Shapes },
+    { key: 'networkflow', label: 'Network Flow', icon: Activity },
+    { key: 'segmenttrees', label: 'Segment & Fenwick Trees', icon: Code },
+    { key: 'advancedgraph', label: 'Advanced Graph', icon: Share2 },
+    { key: 'randomized', label: 'Randomized', icon: Shuffle },
+    { key: 'parallel', label: 'Parallel & Distributed', icon: Cpu },
+    { key: 'ml', label: 'Machine Learning', icon: Brain },
   ];
 
   const filteredAlgos = ALGORITHM_REGISTRY.filter((algo) => {
@@ -40,7 +94,7 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-x-hidden transition-colors duration-300">
       {/* Background Decorative Gradients */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/5 dark:bg-emerald-900/10 blur-[120px] pointer-events-none" />
@@ -88,7 +142,7 @@ export const HomePage: React.FC = () => {
         </p>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 max-w-2xl">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 max-w-5xl">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = activeCategory === cat.key;

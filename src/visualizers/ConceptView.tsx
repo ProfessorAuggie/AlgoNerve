@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAlgorithmStore } from '../store/algorithmStore';
-import { BookOpen, HelpCircle, Layers, Settings, Award } from 'lucide-react';
+import { BookOpen, Layers, Settings, Award } from 'lucide-react';
 
 interface ConceptData {
   title: string;
@@ -449,23 +449,70 @@ const CONCEPT_DATABASE: Record<string, ConceptData> = {
   },
 };
 
+const CATEGORY_LABELS: Record<string, string> = {
+  searching: 'Searching Algorithms',
+  sorting: 'Sorting Algorithms',
+  recursion: 'Recursion',
+  backtracking: 'Backtracking',
+  stack: 'Stack',
+  'queue-deque': 'Queue & Deque',
+  linkedlist: 'Linked List',
+  binarytrees: 'Binary Trees',
+  bst: 'Binary Search Trees (BST)',
+  balancedtrees: 'Balanced Trees',
+  heap: 'Heap / Priority Queue',
+  trie: 'Trie',
+  hashing: 'Hashing',
+  graphtraversal: 'Graph Traversal',
+  shortestpath: 'Shortest Path',
+  mst: 'Minimum Spanning Tree (MST)',
+  topological: 'Topological Sort',
+  connectivity: 'Graph Connectivity',
+  cycledetection: 'Cycle Detection',
+  dp: 'Dynamic Programming (DP)',
+  greedy: 'Greedy Algorithms',
+  divideandconquer: 'Divide and Conquer',
+  strings: 'String Algorithms',
+  bitmanipulation: 'Bit Manipulation',
+  numbertheory: 'Number Theory',
+  matrix: 'Matrix Algorithms',
+  geometry: 'Geometric Algorithms',
+  networkflow: 'Network Flow',
+  segmenttrees: 'Segment & Fenwick Trees',
+  advancedgraph: 'Advanced Graph Algorithms',
+  randomized: 'Randomized Algorithms',
+  parallel: 'Parallel & Distributed',
+  ml: 'Machine Learning Concepts',
+};
+
 export const ConceptView: React.FC = () => {
   const { selectedAlgo } = useAlgorithmStore();
   if (!selectedAlgo) return null;
 
-  const concept = CONCEPT_DATABASE[selectedAlgo.id];
+  let concept = CONCEPT_DATABASE[selectedAlgo.id];
 
   if (!concept) {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-        <HelpCircle size={32} className="text-zinc-400 dark:text-zinc-600 animate-pulse mb-3" />
-        <h2 className="font-bold text-lg text-zinc-800 dark:text-zinc-200 mb-2">{selectedAlgo.name}</h2>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center max-w-sm">
-          Interactive visualizer animation and concept cards for this algorithm are in active development.
-          Explore the pseudocode and complexity metrics on the right panel.
-        </p>
-      </div>
-    );
+    const categoryName = CATEGORY_LABELS[selectedAlgo.category] || selectedAlgo.category;
+    concept = {
+      title: selectedAlgo.name,
+      categoryName,
+      properties: [
+        `Category: ${categoryName}`,
+        `Best/Avg Time Complexity: ${selectedAlgo.timeComplexity}`,
+        `Auxiliary Space Complexity: ${selectedAlgo.spaceComplexity}`,
+        ...(selectedAlgo.tags && selectedAlgo.tags.length > 0 ? [`Keywords: ${selectedAlgo.tags.join(', ')}`] : []),
+      ],
+      applications: [
+        'Solving curriculum exercises, coding interviews, and competitive programming challenges.',
+        'Optimizing system execution efficiency in real-world application pipelines.',
+        'Learning structural operations of complex data structures and algorithmic designs.',
+      ],
+      explanation: selectedAlgo.description || 'This algorithm is part of the CS curriculum study guide. Examine the details, complexity thresholds, and properties below.',
+      operations: [
+        { name: 'Time Complexity', complexity: selectedAlgo.timeComplexity, desc: 'Calculated execution growth pattern relative to input size.' },
+        { name: 'Space Complexity', complexity: selectedAlgo.spaceComplexity, desc: 'Auxiliary memory overhead utilized during runtime execution.' },
+      ],
+    };
   }
 
   return (
