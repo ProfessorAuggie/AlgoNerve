@@ -226,7 +226,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Searches in a sorted array by jumping ahead by fixed steps (usually √n) and then performing a linear search.',
     tags: ['array', 'search', 'block-search', 'sorted'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'exponential-search',
@@ -236,7 +236,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds a range where the target resides by doubling indices exponentially, then applies binary search in that range.',
     tags: ['array', 'search', 'exponential', 'sorted'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'interpolation-search',
@@ -246,7 +246,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'An improved binary search variant for uniformly distributed sorted arrays, estimating target location like searching a phonebook.',
     tags: ['array', 'search', 'sorted', 'uniform-distribution'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'fibonacci-search',
@@ -256,7 +256,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'A comparison-based search algorithm that uses Fibonacci numbers to divide the search intervals in a sorted array.',
     tags: ['array', 'search', 'fibonacci', 'sorted'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 2. Sorting Algorithms
@@ -328,7 +328,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Non-comparison based sorting using counts of keys in a specific range.',
     tags: ['non-comparison', 'stable', 'integer-sorting'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'radix-sort',
@@ -338,7 +338,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n + k)',
     description: 'Sorts integers digit by digit, from least significant to most significant, using Counting Sort as a subroutine.',
     tags: ['non-comparison', 'stable', 'integer-sorting', 'digit-by-digit'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bucket-sort',
@@ -348,7 +348,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n + k)',
     description: 'Distributes elements into buckets, sorts each bucket individually, and gathers them back.',
     tags: ['non-comparison', 'distribution', 'stable'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'shell-sort',
@@ -358,7 +358,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'An extension of Insertion Sort that allows swapping of far apart elements, narrowing gaps progressively.',
     tags: ['comparison', 'in-place', 'unstable', 'diminishing-increment'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tim-sort',
@@ -368,7 +368,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Hybrid sorting algorithm derived from Merge Sort and Insertion Sort. Used as standard in Python and Java.',
     tags: ['hybrid', 'stable', 'adaptive', 'runs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'introsort',
@@ -378,7 +378,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(log n)',
     description: 'Hybrid sort starting with Quick Sort, switching to Heap Sort if recursion depth is too high, and Insertion Sort for small arrays.',
     tags: ['hybrid', 'unstable', 'comparison', 'introspective'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'cycle-sort',
@@ -388,7 +388,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'In-place sorting algorithm that minimizes the number of memory writes, theoretically optimal for memory write cost.',
     tags: ['in-place', 'unstable', 'write-optimal'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'comb-sort',
@@ -398,7 +398,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Improves Bubble Sort by using a gap size larger than 1 to eliminate turtles (small values near the end of list).',
     tags: ['comparison', 'in-place', 'unstable'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'pigeonhole-sort',
@@ -440,7 +440,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Calculates Fibonacci numbers recursively without memoization, demonstrating exponential call tree growth.',
     tags: ['recursion', 'fibonacci', 'exponential'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'sum-of-n-recursive',
@@ -450,7 +450,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Computes sum of first N natural numbers recursively to illustrate base case and head/tail recursion.',
     tags: ['recursion', 'basic'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'power-function-recursive',
@@ -460,7 +460,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(log n)',
     description: 'Computes power of a number recursively using fast modular exponentiation (divide-and-conquer multiplication).',
     tags: ['recursion', 'divide-and-conquer', 'math'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'binary-search-recursive',
@@ -470,7 +470,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(log n)',
     description: 'Performs binary search in a sorted array using recursive boundary partitioning instead of iteration.',
     tags: ['recursion', 'search', 'sorted'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-traversals-recursive',
@@ -480,7 +480,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Traverses binary tree recursively in Inorder, Preorder, and Postorder styles using system stack frames.',
     tags: ['recursion', 'tree', 'traversal'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 4. Backtracking
@@ -502,7 +502,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n²)',
     description: 'Solves a standard 9x9 Sudoku grid by recursively trying digits and backtracking on conflicts.',
     tags: ['backtracking', 'recursion', 'grid'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'rat-in-a-maze',
@@ -512,7 +512,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n²)',
     description: 'Finds a path for a rat from source to destination in a maze grid containing obstacles.',
     tags: ['backtracking', 'recursion', 'maze', 'grid'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'word-search',
@@ -522,7 +522,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(L)',
     description: 'Finds if a word exists in a 2D character board by traversing adjacent cells recursively.',
     tags: ['backtracking', 'depth-first-search', 'grid', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'knights-tour',
@@ -532,7 +532,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N²)',
     description: 'Attempts to move a knight across every single chessboard square exactly once.',
     tags: ['backtracking', 'chessboard', 'puzzle'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hamiltonian-path',
@@ -542,7 +542,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Determines if there is a path in a graph that visits every vertex exactly once.',
     tags: ['backtracking', 'graph', 'np-complete'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'combination-sum',
@@ -552,7 +552,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(t)',
     description: 'Finds all unique combinations of candidates that sum up to a target number.',
     tags: ['backtracking', 'recursion', 'combinations'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'subset-generation',
@@ -562,7 +562,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Generates all subsets (power set) of a given array of elements.',
     tags: ['backtracking', 'recursion', 'sets'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'permutations-backtracking',
@@ -572,7 +572,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Generates all possible orderings (permutations) of a set of distinct elements.',
     tags: ['backtracking', 'recursion', 'permutations'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'generate-parentheses',
@@ -582,7 +582,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Generates all combinations of well-formed parentheses containing n open and closed brackets.',
     tags: ['backtracking', 'recursion', 'catalan'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 5. Stack Algorithms
@@ -624,7 +624,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Validates bracket nesting in an expression using an open-bracket stack push/pop mapping.',
     tags: ['stack', 'brackets', 'validation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'next-greater-element',
@@ -634,7 +634,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the nearest greater element to the right for each array item in a single pass using a stack.',
     tags: ['stack', 'array', 'monotonic-stack'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'previous-greater-element',
@@ -644,7 +644,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the nearest greater element to the left for each array item using a monotonic stack.',
     tags: ['stack', 'array', 'monotonic-stack'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'stock-span',
@@ -654,7 +654,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Calculates the span of stock prices (consecutive days of lesser/equal price) using a stack.',
     tags: ['stack', 'monotonic-stack', 'finance'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'largest-rectangle-histogram',
@@ -664,7 +664,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the maximum rectangular area in a histogram array using a monotonic stack.',
     tags: ['stack', 'monotonic-stack', 'optimization'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'min-stack',
@@ -674,7 +674,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A stack that supports push, pop, top, and retrieving the minimum element in constant O(1) time.',
     tags: ['stack', 'data-structure-design'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'infix-to-postfix',
@@ -684,7 +684,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Converts a standard mathematical Infix expression (e.g. A+B) to Postfix (e.g. AB+) using stack operator precedence parsing.',
     tags: ['stack', 'expression', 'compiler'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'prefix-conversion',
@@ -694,7 +694,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Converts an Infix expression to Prefix notation by reversing strings and parsing operators.',
     tags: ['stack', 'expression', 'compiler'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'monotonic-stack',
@@ -704,7 +704,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A stack skeleton that maintains elements in strict increasing or decreasing order for range queries.',
     tags: ['stack', 'utility'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 6. Queue & Deque
@@ -756,7 +756,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Finds the maximum value in every sliding subarray window of size k using a Deque.',
     tags: ['queue', 'deque', 'sliding-window', 'monotonic'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'first-negative-integer',
@@ -766,7 +766,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Finds the first negative number in every window of size k in an array using a queue.',
     tags: ['queue', 'sliding-window'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'deque-operations',
@@ -776,7 +776,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Visualizes pointer changes when appending/deleting from head/tail of a deque.',
     tags: ['queue', 'deque', 'pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 7. Linked List
@@ -818,7 +818,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Inverts node pointer directions so the head points to the tail and nodes link backwards.',
     tags: ['linked-list', 'pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'reverse-k-groups',
@@ -828,7 +828,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Reverses segments of a linked list in chunks of size k recursively.',
     tags: ['linked-list', 'pointers', 'recursion'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'detect-cycle-linked-list',
@@ -838,7 +838,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds if a loop exists in pointers using Floyd’s Tortoise and Hare pointers.',
     tags: ['linked-list', 'pointers', 'floyd-cycle'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'find-middle-linked-list',
@@ -848,7 +848,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Locates middle node in a single pass using slow and fast runner pointers.',
     tags: ['linked-list', 'pointers', 'two-pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'merge-linked-lists',
@@ -858,7 +858,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Combines two sorted lists into one sorted output list by splicing pointers.',
     tags: ['linked-list', 'pointers', 'merge'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'palindrome-linked-list',
@@ -868,7 +868,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Checks if linked values are identical forward/backward by reversing half the list.',
     tags: ['linked-list', 'pointers', 'palindrome'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'remove-nth-node',
@@ -878,7 +878,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Deletes the N-th node from the tail using a pointer gap offset.',
     tags: ['linked-list', 'pointers', 'two-pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'intersection-point-linked-list',
@@ -888,7 +888,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds the node where two lists merge using length differences or pointer resets.',
     tags: ['linked-list', 'pointers', 'intersection'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'flatten-linked-list',
@@ -898,7 +898,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Transforms a multi-level list with down and next links into a flat single list.',
     tags: ['linked-list', 'pointers', 'flatten'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'lru-cache',
@@ -908,7 +908,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(c)',
     description: 'Least Recently Used Cache implementation using a Doubly Linked List and Hash Map.',
     tags: ['data-structure-design', 'hashmap', 'linked-list', 'cache'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 8. Binary Trees
@@ -920,7 +920,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Traverses binary tree nodes in Left -> Root -> Right sequence.',
     tags: ['tree', 'traversal', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-preorder',
@@ -930,7 +930,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Traverses binary tree nodes in Root -> Left -> Right sequence.',
     tags: ['tree', 'traversal', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-postorder',
@@ -940,7 +940,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Traverses binary tree nodes in Left -> Right -> Root sequence.',
     tags: ['tree', 'traversal', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-levelorder',
@@ -950,7 +950,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(w)',
     description: 'Traverses binary tree breadth-first (BFS) level by level using a queue.',
     tags: ['tree', 'traversal', 'bfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-zigzag',
@@ -960,7 +960,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Traverses tree level-by-level, reversing directions (left-to-right then right-to-left) dynamically.',
     tags: ['tree', 'traversal', 'stack'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-height',
@@ -970,7 +970,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Computes maximum depth of a binary tree (max path length from root to leaf).',
     tags: ['tree', 'recursion', 'depth'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-max-path-sum',
@@ -980,7 +980,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Finds the path in a tree that has the maximum sum of node values, which does not need to pass through root.',
     tags: ['tree', 'recursion', 'path-sum'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-boundary',
@@ -990,7 +990,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Prints left boundary nodes, leaves, and reverse right boundary nodes of a binary tree.',
     tags: ['tree', 'traversal', 'boundary'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tree-vertical',
@@ -1000,7 +1000,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Traverses a tree from left to right vertical lines, mapped by nodes’ horizontal coordinates.',
     tags: ['tree', 'traversal', 'coordinates'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'lca-tree',
@@ -1072,7 +1072,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Deletes a node from a BST, handling leaf nodes, single child nodes, and nodes with two children (inorder successor swap).',
     tags: ['tree', 'bst', 'deletion'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bst-search',
@@ -1082,7 +1082,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Finds if a key exists in a BST by traversing left or right based on comparisons.',
     tags: ['tree', 'bst', 'search'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'validate-bst',
@@ -1092,7 +1092,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Validates if a binary tree satisfies BST properties using lower and upper bounds.',
     tags: ['tree', 'bst', 'validation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'kth-smallest-bst',
@@ -1102,7 +1102,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Finds the K-th smallest node element in a BST using inorder traversal tracking.',
     tags: ['tree', 'bst', 'inorder'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bst-floor-ceil',
@@ -1112,7 +1112,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Calculates floor (largest key <= val) and ceil (smallest key >= val) values in a BST.',
     tags: ['tree', 'bst', 'search'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bst-range-queries',
@@ -1122,7 +1122,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(h)',
     description: 'Queries and returns all keys in a BST that fall within a range [L, R].',
     tags: ['tree', 'bst', 'range-query'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 10. Balanced Trees
@@ -1154,7 +1154,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Self-balancing BST where recently accessed elements are rotated (splayed) to the root for fast lookup.',
     tags: ['tree', 'self-balancing', 'splay', 'amortized'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'treap',
@@ -1164,7 +1164,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A randomized binary search tree where nodes are assigned random priorities and follow BST + Max-Heap structures.',
     tags: ['tree', 'randomized', 'bst', 'heap'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'b-tree',
@@ -1184,7 +1184,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A multi-way balanced tree variant where data elements are stored in leaf nodes only, linked sequentially.',
     tags: ['tree', 'self-balancing', 'database-index'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 11. Heap Algorithms
@@ -1196,7 +1196,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Shifts a node down a binary tree recursively to restore the Max/Min Heap property.',
     tags: ['heap', 'heapify', 'tree-structure'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'build-heap',
@@ -1206,7 +1206,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Converts an unordered array into a Max-Heap in linear time by running heapify on non-leaf nodes.',
     tags: ['heap', 'build-heap', 'linear'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'k-largest-elements',
@@ -1216,7 +1216,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Finds the K largest elements in a stream/array using a min-heap structure.',
     tags: ['heap', 'top-k', 'stream'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'median-stream',
@@ -1226,7 +1226,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the median of numbers added to a stream in real-time using Max-Heap and Min-Heap balances.',
     tags: ['heap', 'median', 'design'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'merge-k-lists',
@@ -1236,7 +1236,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Merges k sorted lists into a single sorted list using a min-heap tracking head nodes.',
     tags: ['heap', 'merge', 'multi-pointer'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'priority-scheduling',
@@ -1246,7 +1246,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Visualizes how tasks with varying priority attributes are scheduled and resolved using heaps.',
     tags: ['heap', 'os-scheduler'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 12. Trie (Prefix Trees)
@@ -1258,7 +1258,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(AL)',
     description: 'Inserts a word into a Trie by creating character node path segments.',
     tags: ['trie', 'insertion', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'trie-search',
@@ -1268,7 +1268,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Searches if a complete word exists in the prefix tree.',
     tags: ['trie', 'search', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'trie-prefix-search',
@@ -1278,7 +1278,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds if a prefix exists as a starting fragment of any word in the tree.',
     tags: ['trie', 'prefix', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'trie-autocomplete',
@@ -1288,7 +1288,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N)',
     description: 'Generates all suffix word suggestions matching a typed prefix query.',
     tags: ['trie', 'autocomplete', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'trie-word-dictionary',
@@ -1298,7 +1298,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'A trie supporting wildcards (like "." matching any character) using recursive backtracking search.',
     tags: ['trie', 'backtracking', 'regex'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'trie-xor-max-pair',
@@ -1308,7 +1308,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N)',
     description: 'Finds two numbers in an array that produce the maximum XOR result using a binary Trie.',
     tags: ['trie', 'binary', 'xor', 'bit-tricks'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 13. Hashing
@@ -1320,7 +1320,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(u)',
     description: 'Counts the occurrences of unique elements in a dataset in a single pass using a hash map.',
     tags: ['hashmap', 'counting'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hash-two-sum',
@@ -1330,7 +1330,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds indices of two elements that sum up to a target using hash map value check-ups.',
     tags: ['hashmap', 'two-pointers', 'arrays'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hash-group-anagrams',
@@ -1340,7 +1340,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Groups words that are anagrams of each other by sorting keys and mapping them in a hash table.',
     tags: ['hashmap', 'strings', 'anagrams'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hash-longest-consecutive',
@@ -1350,7 +1350,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the length of the longest consecutive elements sequence in an unsorted array using hash sets.',
     tags: ['hashset', 'sequences', 'arrays'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hash-rolling-hash',
@@ -1360,7 +1360,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Calculates hashes of sliding substrings efficiently in constant time using modular arithmetic offsets.',
     tags: ['hash', 'rolling', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hash-rabin-karp',
@@ -1370,7 +1370,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds occurrences of a pattern in a text using rolling hashes to compare substring hashes.',
     tags: ['hashing', 'search', 'strings', 'rolling-hash'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 14. Graph Traversal
@@ -1402,7 +1402,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Traverses graphs depth-first using an explicit stack structure instead of recursion.',
     tags: ['graph', 'stack', 'iterative'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'adjacency-matrix',
@@ -1454,7 +1454,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Computes single-source shortest paths on weighted graphs containing negative edges, detecting cycles.',
     tags: ['graph', 'shortest-path', 'negative-weights'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'floyd-warshall',
@@ -1464,7 +1464,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V²)',
     description: 'An all-pairs shortest path dynamic programming algorithm.',
     tags: ['graph', 'shortest-path', 'all-pairs', 'dp'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'johnson-algorithm',
@@ -1474,7 +1474,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V²)',
     description: 'All-pairs shortest path algorithm combining Bellman-Ford reweighting and Dijkstra.',
     tags: ['graph', 'shortest-path', 'reweighting'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'spfa',
@@ -1484,7 +1484,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Queue-optimized version of Bellman-Ford which is much faster on random graphs.',
     tags: ['graph', 'shortest-path', 'queue-optimized'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 16. Minimum Spanning Tree (MST)
@@ -1516,7 +1516,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Oldest MST algorithm, adding cheapest edges out of components in parallel phases.',
     tags: ['graph', 'mst', 'parallelizable'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 17. Topological Sorting
@@ -1538,7 +1538,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'BFS-style topological sorting using node indegrees and tracking queue states.',
     tags: ['graph', 'dag', 'bfs', 'indegree'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'topological-dfs',
@@ -1548,7 +1548,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Topological sorting using recursion stack callbacks and pushing to array upon backtrack.',
     tags: ['graph', 'dag', 'dfs', 'stack'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 18. Connectivity
@@ -1560,7 +1560,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N)',
     description: 'Keeps track of partitioned sets, optimized with union by rank and path compression.',
     tags: ['dsu', 'connectivity'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'dsu-ops',
@@ -1570,7 +1570,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N)',
     description: 'Highlights path compression and tree balance updates during union operations.',
     tags: ['dsu', 'utility'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'connected-components',
@@ -1580,7 +1580,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds subsets of connected nodes in undirected graphs using BFS/DFS traversals.',
     tags: ['graph', 'traversal'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'strongly-connected-components',
@@ -1590,7 +1590,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Locates components in directed graphs where every vertex is reachable from any other.',
     tags: ['graph', 'connectivity', 'scc'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'kosaraju',
@@ -1600,7 +1600,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds SCCs using graph transpose and double DFS traversals.',
     tags: ['graph', 'connectivity', 'scc'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tarjan',
@@ -1610,7 +1610,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds SCCs in a single DFS pass using node indices and low-link numbers.',
     tags: ['graph', 'connectivity', 'scc', 'low-link'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 19. Cycle Detection
@@ -1622,7 +1622,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Detects loops in undirected graphs by tracking node parent pointers during DFS traversal.',
     tags: ['graph', 'cycle', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'cycle-directed-dfs',
@@ -1632,7 +1632,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Detects cycles in directed graphs by tracking nodes currently in the recursion stack (back-edges).',
     tags: ['graph', 'cycle', 'dfs', 'directed'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'cycle-union-find',
@@ -1642,7 +1642,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds cycles in undirected graphs by adding edges to a DSU and checking if endpoints share a parent.',
     tags: ['graph', 'cycle', 'dsu'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'cycle-floyd',
@@ -1652,7 +1652,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Floyd’s loop detection using pointer speed differentials (tortoise and hare).',
     tags: ['pointers', 'cycle', 'two-pointers'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 20. Dynamic Programming (DP)
@@ -1674,7 +1674,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds total ways to reach step n taking 1 or 2 steps (combinatorial 1D DP).',
     tags: ['dp', '1d-dp', 'combinatorics'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'house-robber',
@@ -1684,7 +1684,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Maximizes rob amount without picking adjacent indexes (1D DP optimization).',
     tags: ['dp', '1d-dp', 'optimization'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'decode-ways',
@@ -1694,7 +1694,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Counts the number of ways to decode a numeric string into alphabet sequences.',
     tags: ['dp', '1d-dp', 'strings'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'lcs',
@@ -1736,7 +1736,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Maximizes the value of items placed in a knapsack of capacity W by taking fractions of items if needed.',
     tags: ['greedy', 'knapsack', 'optimization'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'activity-selection',
@@ -1746,7 +1746,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Selects the maximum number of mutually compatible activities that can be performed by a single person.',
     tags: ['greedy', 'scheduling', 'intervals'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'huffman-coding-greedy',
@@ -1756,7 +1756,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A greedy algorithm that assigns variable-length codes to input characters based on their frequencies of occurrence.',
     tags: ['greedy', 'compression', 'trees'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'job-sequencing',
@@ -1766,7 +1766,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Schedules jobs to maximize profit, ensuring each scheduled job is completed before its deadline.',
     tags: ['greedy', 'scheduling', 'deadlines'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'optimal-merge-patterns',
@@ -1776,7 +1776,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the optimal sequence to merge multiple sorted files such that the total comparison cost is minimized.',
     tags: ['greedy', 'merge', 'heap'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 22. Divide and Conquer
@@ -1788,7 +1788,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n²)',
     description: 'An efficient algorithm to multiply two square matrices using block division and fewer recursive multiplications.',
     tags: ['divide-and-conquer', 'matrix', 'math'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'median-of-medians',
@@ -1798,7 +1798,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'A deterministic selection algorithm that finds the k-th smallest element in an unsorted array in linear time.',
     tags: ['divide-and-conquer', 'selection', 'order-statistics'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'closest-pair',
@@ -1808,7 +1808,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the closest pair of points in a 2D coordinate plane using a recursive divide-and-conquer strategy.',
     tags: ['divide-and-conquer', 'geometry', 'points'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 23. Strings
@@ -1820,7 +1820,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(m)',
     description: 'Searches for a pattern within a text by precomputing a prefix lookup table to skip redundant matching alignments.',
     tags: ['strings', 'pattern-matching', 'lookup'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'z-algorithm',
@@ -1830,7 +1830,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n + m)',
     description: 'Finds occurrences of a pattern in a text using a Z-array where each element is the length of the longest common prefix starting at that index.',
     tags: ['strings', 'pattern-matching', 'prefix'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'manachers',
@@ -1840,7 +1840,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the longest palindromic substring in a given string in linear time using symmetry properties and boundary mirrors.',
     tags: ['strings', 'palindrome', 'symmetry'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'boyer-moore',
@@ -1850,7 +1850,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(Σ)',
     description: 'A highly efficient string searching algorithm that aligns pattern and shifts it from right to left using bad character and good suffix rules.',
     tags: ['strings', 'pattern-matching', 'search'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'aho-corasick',
@@ -1860,7 +1860,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(M × Σ)',
     description: 'A multi-pattern search algorithm that matches a dictionary of keywords simultaneously in a text using a trie-based state machine.',
     tags: ['strings', 'automaton', 'multi-pattern'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'lcp-array',
@@ -1870,7 +1870,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Constructs the Longest Common Prefix array of adjacent sorted suffixes using Kasai’s linear time algorithm.',
     tags: ['strings', 'suffix', 'array'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 24. Bit Manipulation
@@ -1882,7 +1882,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Identifies the unique number in an array where every other element appears twice, using XOR self-canceling properties.',
     tags: ['bits', 'xor', 'array'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'hamming-weight',
@@ -1892,7 +1892,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Counts the number of set bits (1s) in a word using bitwise subtraction masks or popcount updates.',
     tags: ['bits', 'bitwise', 'popcount'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'counting-bits',
@@ -1902,7 +1902,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Computes the number of set bits for all numbers in the range 0 to n using a 1D bitwise dynamic programming relation.',
     tags: ['bits', 'dp', 'bitwise'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'reverse-bits',
@@ -1912,7 +1912,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Reverses the binary digits of a 32-bit unsigned integer using hierarchical bitwise mask swaps.',
     tags: ['bits', 'bitwise', 'integer'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'power-of-two',
@@ -1922,7 +1922,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Determines if an integer is a power of two using the bitwise check n & (n - 1) == 0.',
     tags: ['bits', 'bitwise', 'math'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bitwise-and-range',
@@ -1932,7 +1932,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Calculates the bitwise AND of all numbers in a range [M, N] by identifying their common binary prefix.',
     tags: ['bits', 'bitwise', 'range'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 25. Number Theory
@@ -1944,7 +1944,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds the Greatest Common Divisor of two numbers recursively using remainder modulo updates.',
     tags: ['math', 'number-theory', 'gcd'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'extended-gcd',
@@ -1954,7 +1954,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(log(min(a,b)))',
     description: 'Calculates the GCD and finding the coefficients x, y such that ax + by = gcd(a,b), used in modular inverses.',
     tags: ['math', 'number-theory', 'gcd'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'sieve-eratosthenes',
@@ -1964,7 +1964,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Generates all prime numbers up to a given limit by iteratively marking multiples of found primes as composite.',
     tags: ['math', 'primes', 'number-theory'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'prime-factorization',
@@ -1974,7 +1974,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(log n)',
     description: 'Breaks down a number into its prime components, traversing up to its square root.',
     tags: ['math', 'primes', 'number-theory'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'modular-exponentiation',
@@ -1984,7 +1984,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Computes (base^power) % mod efficiently using binary base-squaring shifts.',
     tags: ['math', 'modular-arithmetic'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'euler-totient',
@@ -1994,7 +1994,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Calculates the count of positive integers up to n that are relatively prime (coprime) to n.',
     tags: ['math', 'primes', 'totient'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 26. Matrix
@@ -2006,7 +2006,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Rotates a square 2D array 90 degrees clockwise in-place by swapping transpose and horizontal reflect bounds.',
     tags: ['matrix', 'in-place', 'rotation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'spiral-traversal',
@@ -2016,7 +2016,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Traverses and prints a 2D matrix in a clockwise spiral outer boundary pattern.',
     tags: ['matrix', 'traversal', 'array'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'matrix-transpose',
@@ -2026,7 +2026,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(m × n)',
     description: 'Transforms rows of a matrix into columns and vice-versa, reflecting indices across the main diagonal.',
     tags: ['matrix', 'transpose'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'set-matrix-zeroes',
@@ -2036,7 +2036,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Finds cells containing 0 and sets their entire row and column to 0 using the matrix borders as state markers.',
     tags: ['matrix', 'in-place'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'flood-fill',
@@ -2046,7 +2046,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(m × n)',
     description: 'Fills connected components of target color pixels with a new replacement color using DFS/BFS boundaries.',
     tags: ['matrix', 'recursion', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 27. Geometry
@@ -2058,7 +2058,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Finds the convex hull of a set of 2D points by sorting polar angles and using orientation cross-product checks.',
     tags: ['geometry', 'convex-hull', 'polar-sort'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'jarvis-march',
@@ -2068,7 +2068,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Computes the convex hull perimeter points by repeatedly scanning coordinates to locate the leftmost orientations.',
     tags: ['geometry', 'convex-hull', 'gift-wrap'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'line-intersection',
@@ -2078,7 +2078,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Determines if two line segments cross in a plane using coordinate orientation collinearity checks.',
     tags: ['geometry', 'segments', 'orientation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'point-in-polygon',
@@ -2088,7 +2088,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Checks if a query coordinate point lies inside a custom polygon by casting a horizontal ray and counting edge crossings.',
     tags: ['geometry', 'ray-casting', 'polygon'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'shoelace-formula',
@@ -2098,7 +2098,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Calculates the area of a non-self-intersecting polygon using coordinate diagonal products.',
     tags: ['geometry', 'area', 'polygon'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 28. Network Flow
@@ -2110,7 +2110,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds the maximum network flow by repeatedly searching for augmenting paths in residual capacity networks.',
     tags: ['graph', 'network-flow', 'dfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'edmonds-karp',
@@ -2120,7 +2120,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V + E)',
     description: 'An implementation of Ford-Fulkerson using BFS to locate the shortest augmenting paths first.',
     tags: ['graph', 'network-flow', 'bfs'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'dinics',
@@ -2130,7 +2130,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V + E)',
     description: 'Accelerates network max flow search using level graphs created via BFS and blocking flows routed via DFS.',
     tags: ['graph', 'network-flow', 'level-graph'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'push-relabel',
@@ -2140,7 +2140,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V + E)',
     description: 'Maintains preflow states on nodes, pushing excess capacities to adjacent nodes and adjusting node heights.',
     tags: ['graph', 'network-flow', 'relabel'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'min-cut-max-flow',
@@ -2150,7 +2150,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Determines the minimum capacity cut dividing source and sink, proving it matches the maximum achievable flow.',
     tags: ['graph', 'network-flow', 'cut'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 29. Segment Trees & Fenwick Trees
@@ -2162,7 +2162,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Constructs a binary tree over an array range to answer range-min/sum queries and perform point updates in logarithmic time.',
     tags: ['tree', 'range-query', 'segment-tree'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'segment-tree-lazy',
@@ -2172,7 +2172,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Performs range updates on a segment tree efficiently by delaying updates to children until node values are accessed.',
     tags: ['tree', 'range-update', 'lazy'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'fenwick-tree',
@@ -2192,7 +2192,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Utilizes two internal Fenwick trees to support range-add operations alongside range-sum queries in logarithmic time.',
     tags: ['tree', 'prefix-sum', 'range'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 30. Advanced Graph
@@ -2204,7 +2204,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Finds a walk in a graph that visits every edge exactly once using recursive cycle merges.',
     tags: ['graph', 'eulerian', 'path'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'tsp-dp',
@@ -2214,7 +2214,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n × 2ⁿ)',
     description: 'Finds the optimal Traveling Salesman tour using subproblems tracked via state bitmasks.',
     tags: ['graph', 'tsp', 'dp', 'bitmask'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'two-sat',
@@ -2224,7 +2224,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V + E)',
     description: 'Solves 2-Satisfiability boolean problems in linear time by analyzing strongly connected components in implication graphs.',
     tags: ['graph', 'scc', 'sat'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'bridges-articulation',
@@ -2234,7 +2234,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(V)',
     description: 'Locates critical edges (bridges) and nodes (articulation points) whose removal increases graph component count using DFS traversal discovery logs.',
     tags: ['graph', 'dfs', 'connectivity', 'low-link'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 31. Randomized Algorithms
@@ -2246,7 +2246,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Shuffles array elements into unbiased random permutations by swapping elements with random index selections.',
     tags: ['randomized', 'shuffle', 'permutation'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'reservoir-sampling',
@@ -2256,7 +2256,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(k)',
     description: 'Selects K items randomly from a stream of unknown/infinite length with uniform probability using replacement logic.',
     tags: ['randomized', 'stream', 'sampling'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'monte-carlo',
@@ -2266,7 +2266,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Approximates complex values (like Pi or integrals) by running large numbers of randomized coordinate sampling trials.',
     tags: ['randomized', 'simulation', 'math'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'las-vegas-pivot',
@@ -2276,7 +2276,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Demonstrates algorithms that always return correct results but utilize randomized choices to optimize expected runtime boundaries.',
     tags: ['randomized', 'quicksort', 'pivot'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 32. Parallel / Distributed
@@ -2288,7 +2288,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Visualizes parallel chunk partitioning (Map stage) and aggregation sorting (Reduce stage) across nodes.',
     tags: ['distributed', 'parallel', 'mapreduce'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'parallel-merge-sort',
@@ -2298,7 +2298,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Divides sorting subproblems across multiple worker processes, merging sorted subsections concurrently.',
     tags: ['parallel', 'sorting', 'divide-and-conquer'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'producer-consumer',
@@ -2308,7 +2308,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(c)',
     description: 'Concurrently schedules producer threads writing to a buffer and consumer threads reading, using locks/semaphores.',
     tags: ['parallel', 'concurrency', 'semaphore'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'dining-philosophers',
@@ -2318,7 +2318,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Classic synchronization puzzle demonstrating resource deadlock and dynamic fork reservation checks to avoid starvation.',
     tags: ['parallel', 'concurrency', 'deadlock'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 33. Machine Learning (CS Curriculum)
@@ -2330,7 +2330,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'Optimizes linear regression line coefficients (w, b) by taking step offsets opposite to computed loss function derivatives.',
     tags: ['ml', 'optimization', 'math'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'k-means',
@@ -2340,7 +2340,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Partitions unlabeled data coordinates into K separate clusters, shifting centroids to coordinate averages iteratively.',
     tags: ['ml', 'clustering', 'unsupervised'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'knn',
@@ -2350,7 +2350,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(n)',
     description: 'Classifies coordinates based on label majorities among their K closest distance neighbors.',
     tags: ['ml', 'classification', 'lazy-learning'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'decision-tree-induction',
@@ -2360,7 +2360,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(nodes)',
     description: 'Constructs a classification flowchart tree by sorting attributes based on Information Gain split bounds.',
     tags: ['ml', 'classification', 'greedy'],
-    mode: 'concept',
+    mode: 'interactive',
   },
   {
     id: 'perceptron',
@@ -2370,7 +2370,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(1)',
     description: 'A basic neural network neuron that models binary classification boundaries by shifting weight vectors based on sign mistakes.',
     tags: ['ml', 'neural-network', 'classification'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 ];
 
