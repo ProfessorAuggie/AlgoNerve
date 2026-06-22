@@ -299,3 +299,64 @@ export function generateSelectionSortSteps(arr: number[]): Step[] {
   steps.push(createSortingStep(stepId++, 'done', 'Selection Sort complete! The array is fully sorted.', 11, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
+
+// ─── Pigeonhole Sort ─────────────────────────────────────────────────────────
+export function generatePigeonholeSortSteps(arr: number[]): Step[] {
+  const steps: Step[] = [];
+  const array = [...arr];
+  const n = array.length;
+  let stepId = 0;
+
+  if (n === 0) return [];
+
+  // Step 1: Initial state
+  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+
+  // Find min and max
+  let min = array[0];
+  let max = array[0];
+  steps.push(createSortingStep(stepId++, 'compare', `Scan first element array[0] (${array[0]}): set initial min = ${min}, max = ${max}.`, 2, array, [0], [], []));
+
+  for (let i = 1; i < n; i++) {
+    steps.push(createSortingStep(stepId++, 'compare', `Compare array[${i}] (${array[i]}) with current min (${min}) and max (${max}).`, 2, array, [i], [], []));
+    if (array[i] < min) {
+      min = array[i];
+      steps.push(createSortingStep(stepId++, 'compare', `New minimum found: ${min}.`, 2, array, [i], [], []));
+    }
+    if (array[i] > max) {
+      max = array[i];
+      steps.push(createSortingStep(stepId++, 'compare', `New maximum found: ${max}.`, 2, array, [i], [], []));
+    }
+  }
+
+  const range = max - min + 1;
+  steps.push(createSortingStep(stepId++, 'range', `Found min: ${min}, max: ${max}. Range size is ${range} holes.`, 3, array, [], [], []));
+
+  // Initialize holes
+  const holes: number[][] = Array(range).fill(null).map(() => []);
+
+  // Place elements in holes
+  for (let i = 0; i < n; i++) {
+    const val = array[i];
+    const holeIdx = val - min;
+    holes[holeIdx].push(val);
+    steps.push(createSortingStep(stepId++, 'place', `Place value ${val} from index ${i} into pigeonhole [${val} - ${min}] = hole ${holeIdx}.`, 5, array, [i], [], []));
+  }
+
+  // Put elements back
+  let index = 0;
+  const sortedIndices: number[] = [];
+  for (let h = 0; h < range; h++) {
+    while (holes[h].length > 0) {
+      const val = holes[h].shift()!;
+      array[index] = val;
+      sortedIndices.push(index);
+      
+      steps.push(createSortingStep(stepId++, 'restore', `Pop ${val} from hole ${h} and write to array index ${index}.`, 10, array, [], [index], [...sortedIndices]));
+      index++;
+    }
+  }
+
+  steps.push(createSortingStep(stepId++, 'done', 'Pigeonhole Sort complete! The array is fully sorted.', 13, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  return steps;
+}

@@ -408,7 +408,7 @@ export const ALGORITHM_REGISTRY: AlgorithmMeta[] = [
     spaceComplexity: 'O(N)',
     description: 'Suitable for sorting lists of elements where the number of elements (n) and length of range (N) are roughly the same.',
     tags: ['non-comparison', 'integer-sorting', 'stable'],
-    mode: 'concept',
+    mode: 'interactive',
   },
 
   // 3. Recursion

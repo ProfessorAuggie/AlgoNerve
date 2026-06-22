@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { Step, AlgorithmMeta } from '../algorithms/types';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 
-import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps } from '../algorithms/sorting';
+import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps, generatePigeonholeSortSteps } from '../algorithms/sorting';
 import { generateLinearSearchSteps, generateBinarySearchSteps, generateTernarySearchSteps } from '../algorithms/searching';
 import { generateStackSteps, generateQueueSteps, generateLinkedListSteps } from '../algorithms/datastructures';
 import { generateBFSSteps, generateDFSSteps, generateDijkstraSteps, generateAStarSteps, generatePrimSteps, generateKruskalSteps } from '../algorithms/graph';
@@ -263,6 +263,9 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
         break;
       case 'heap-sort':
         generated = generateHeapSortSteps(state.inputArray);
+        break;
+      case 'pigeonhole-sort':
+        generated = generatePigeonholeSortSteps(state.inputArray);
         break;
 
       // Data Structures
