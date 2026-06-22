@@ -272,7 +272,7 @@ export function generateSudokuSolverSteps(): Step[] {
           id: stepId++,
           action: 'place-digit',
           description: `Digit ${num} is valid at [Row ${r + 1}, Col ${c + 1}]. Try placing it.`,
-          codeLine: 4,
+          codeLine: 6,
           payload: {
             grid: grid.map(rowArr => [...rowArr]),
             row: r,
@@ -292,7 +292,7 @@ export function generateSudokuSolverSteps(): Step[] {
           id: stepId++,
           action: 'backtrack',
           description: `Path failed. Backtrack: clear [Row ${r + 1}, Col ${c + 1}] and try next number.`,
-          codeLine: 6,
+          codeLine: 8,
           payload: {
             grid: grid.map(rowArr => [...rowArr]),
             row: r,
@@ -329,7 +329,7 @@ export function generateSudokuSolverSteps(): Step[] {
     id: stepId++,
     action: 'done',
     description: success ? 'Sudoku solved successfully!' : 'No solution found for this Sudoku grid.',
-    codeLine: 8,
+    codeLine: 12,
     payload: {
       grid: grid.map(rowArr => [...rowArr]),
       initialGrid: initialGrid.map(rowArr => [...rowArr]),
@@ -424,7 +424,7 @@ export function generateRatInAMazeSteps(): Step[] {
         id: stepId++,
         action: 'check-cell',
         description: `Check if moving ${dir.name} to [Row ${nextR + 1}, Col ${nextC + 1}] is valid.`,
-        codeLine: 4,
+        codeLine: 5,
         payload: {
           grid: grid.map(row => [...row]),
           row: nextR,
@@ -445,7 +445,7 @@ export function generateRatInAMazeSteps(): Step[] {
       id: stepId++,
       action: 'backtrack',
       description: `No valid moves from [Row ${r + 1}, Col ${c + 1}]. Backtrack rat.`,
-      codeLine: 5,
+      codeLine: 9,
       payload: {
         grid: grid.map(row => [...row]),
         row: r,
@@ -462,7 +462,7 @@ export function generateRatInAMazeSteps(): Step[] {
     id: stepId++,
     action: 'done',
     description: success ? 'Maze search complete! Solved.' : 'No solution exists for this maze layout.',
-    codeLine: 6,
+    codeLine: 11,
     payload: {
       grid: grid.map(row => [...row]),
       row: undefined,

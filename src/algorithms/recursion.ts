@@ -314,7 +314,7 @@ export function generateFibonacciRecursiveSteps(n: number): Step[] {
       stepId++,
       'recurse-right',
       `Left branch fibonacci(${val - 1}) resolved to ${left}. Compute right sub-tree: fibonacci(${val - 2}).`,
-      5,
+      6,
       callStack,
       frameId
     ));
@@ -334,7 +334,7 @@ export function generateFibonacciRecursiveSteps(n: number): Step[] {
       stepId++,
       'add',
       `Sum results: fibonacci(${val - 1}) + fibonacci(${val - 2}) = ${left} + ${right} = ${ans}. Return ${ans}.`,
-      6,
+      7,
       callStack,
       frameId
     ));
@@ -440,7 +440,7 @@ export function generateSumOfNRecursiveSteps(n: number): Step[] {
     stepId++,
     'done',
     `Sum of N complete! Sum of first ${n} numbers is ${finalResult}.`,
-    8,
+    7,
     callStack,
     undefined,
     finalResult
@@ -538,7 +538,7 @@ export function generatePowerFunctionRecursiveSteps(n: number): Step[] {
     stepId++,
     'done',
     `Power function complete! ${x}^${n} is ${finalResult}.`,
-    8,
+    7,
     callStack,
     undefined,
     finalResult

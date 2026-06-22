@@ -554,15 +554,266 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  rightVal := evaluateAST(node.right)',
     '  return applyOperator(node.operator, leftVal, rightVal)',
   ],
+  'shell-sort': [
+    'procedure shellSort(A : list of sortable items)',
+    '  for gap := floor(n/2) down to 1 do',
+    '    for i := gap to n-1 do',
+    '      while j >= gap and A[j-gap] > key do',
+    '        A[j] := A[j-gap]',
+    '        j := j - gap',
+    '      end while',
+    '    end for',
+    '  end for',
+    'end procedure',
+  ],
+  'counting-sort': [
+    'procedure countingSort(A : list of integers)',
+    '  find max element in A to define range',
+    '  initialize count array with 0s',
+    '  for each val in A: count[val]++',
+    '  accumulate prefix sums: count[i] += count[i-1]',
+    '  for each val in A in reverse order:',
+    '    output[count[val] - 1] := val',
+    '    count[val]--',
+    '  end for',
+    '  copy output back to A',
+    'end procedure',
+  ],
+  'radix-sort': [
+    'procedure radixSort(A : list of integers)',
+    '  find max element in A to count digits',
+    '  for exponent exp := 1 to max by x10 do',
+    '    countingSortByDigit(A, exp)',
+    '    build count and output arrays',
+    '    place elements based on exp-th digit',
+    '    copy output back to A',
+    '  end for',
+    '  return A',
+    'end procedure',
+  ],
+  'bucket-sort': [
+    'procedure bucketSort(A : list)',
+    '  find min and max values in A',
+    '  create bucketCount empty buckets',
+    '  for each val in A: place val in bucketIdx',
+    '  for each bucket do',
+    '    sort(bucket) using insertion sort',
+    '    gather elements back to A',
+    '  end for',
+    '  return A',
+    'end procedure',
+  ],
+  'fibonacci-recursive': [
+    'procedure fibonacci(n):',
+    '  if n <= 1 then',
+    '    return n // Base case',
+    '  end if',
+    '  left := fibonacci(n - 1)',
+    '  right := fibonacci(n - 2)',
+    '  return left + right',
+    'end procedure',
+  ],
+  'sum-of-n-recursive': [
+    'procedure sumOfN(n):',
+    '  if n <= 0 then',
+    '    return 0 // Base case',
+    '  end if',
+    '  subSum := sumOfN(n - 1)',
+    '  return n + subSum',
+    'end procedure',
+  ],
+  'power-function-recursive': [
+    'procedure power(x, n):',
+    '  if n == 0 then',
+    '    return 1 // Base case',
+    '  end if',
+    '  halfPower := power(x, floor(n / 2))',
+    '  return n is even ? halfPower² : x * halfPower²',
+    'end procedure',
+  ],
+  'sudoku-solver': [
+    'procedure solveSudoku(grid):',
+    '  find next empty cell (row, col)',
+    '  if all cells filled return true',
+    '  for num := 1 to 9 do',
+    '    if isValid(grid, row, col, num) then',
+    '      grid[row][col] := num',
+    '      if solveSudoku(grid) return true',
+    '      grid[row][col] := 0 // Backtrack',
+    '    end if',
+    '  end for',
+    '  return false',
+    'end procedure',
+  ],
+  'rat-in-a-maze': [
+    'procedure solveMaze(grid, r, c):',
+    '  if reached destination return true',
+    '  mark cell [r, c] as visited',
+    '  for each direction (Down, Right, Up, Left) do',
+    '    if next cell is safe then',
+    '      if solveMaze(grid, nextR, nextC) return true',
+    '    end if',
+    '  end for',
+    '  mark cell [r, c] as dead-end // Backtrack',
+    '  return false',
+    'end procedure',
+  ],
 };
 
+function getFallbackPseudocode(algoName: string, category: string): string[] {
+  const procName = algoName.toLowerCase().replace(/[^a-z0-9]/g, '');
+  
+  switch (category) {
+    case 'searching':
+      return [
+        `procedure ${procName}(A : sorted list, target : value)`,
+        `  initialize search boundaries`,
+        `  while search bounds are valid do`,
+        `    compute probe index / partition pointers`,
+        `    if A[pointer] == target then`,
+        `      return pointer // Target found`,
+        `    else if A[pointer] < target then`,
+        `      adjust search range (move right/up)`,
+        `    else`,
+        `      adjust search range (move left/down)`,
+        `    end if`,
+        `  end while`,
+        `  return -1 // Target not found`,
+        `end procedure`
+      ];
+    case 'sorting':
+      return [
+        `procedure ${procName}(A : list of sortable items)`,
+        `  n := length(A)`,
+        `  initialize division boundaries or pass counts`,
+        `  for each pass through the array do`,
+        `    select element or compare element pairs`,
+        `    if elements out of order then`,
+        `      swap or shift elements to correct position`,
+        `    end if`,
+        `  end for`,
+        `  return sorted list A`,
+        `end procedure`
+      ];
+    case 'recursion':
+    case 'divideandconquer':
+      return [
+        `procedure ${procName}(args)`,
+        `  if baseCaseCondition(args) then`,
+        `    return baseCaseValue`,
+        `  end if`,
+        `  divide problem into smaller subproblems`,
+        `  subResult := ${procName}(subProblemArgs)`,
+        `  result := combine(subResult, currentArgs)`,
+        `  return result`,
+        `end procedure`
+      ];
+    case 'backtracking':
+      return [
+        `procedure ${procName}(state, candidateIndex)`,
+        `  if goalReached(state) then`,
+        `    recordSolution(state)`,
+        `    return true`,
+        `  end if`,
+        `  for each candidate choice c do`,
+        `    if isValid(c, state) then`,
+        `      makeChoice(c, state)`,
+        `      if ${procName}(state, candidateIndex + 1) return true`,
+        `      removeChoice(c, state) // Backtrack`,
+        `    end if`,
+        `  end for`,
+        `  return false`,
+        `end procedure`
+      ];
+    case 'stack':
+    case 'queue-deque':
+    case 'linkedlist':
+      return [
+        `class ${algoName.replace(/\s+/g, '')}:`,
+        `  procedure initialize():`,
+        `    set front, rear, or top pointers`,
+        `  procedure push_enqueue_insert(val):`,
+        `    if structure is full return overflow`,
+        `    allocate node or adjust pointers`,
+        `    insert value at target position`,
+        `  procedure pop_dequeue_delete():`,
+        `    if structure is empty return underflow`,
+        `    retrieve value and update pointers`,
+        `    return value`,
+        `  procedure traverse_display():`,
+        `    visit each node sequentially`
+      ];
+    case 'bst':
+    case 'balancedtrees':
+    case 'binarytrees':
+      return [
+        `procedure ${procName}(node, val)`,
+        `  if node is null return new Node(val)`,
+        `  if val < node.value then`,
+        `    node.left := ${procName}(node.left, val)`,
+        `  else`,
+        `    node.right := ${procName}(node.right, val)`,
+        `  end if`,
+        `  balance/restructure tree if required`,
+        `  return node`,
+        `end procedure`
+      ];
+    case 'dp':
+      return [
+        `procedure ${procName}(input)`,
+        `  allocate table or memoization array`,
+        `  initialize base cases in table`,
+        `  for each state transition do`,
+        `    table[state] := computeTransition(table, state)`,
+        `  end for`,
+        `  return table[finalState]`,
+        `end procedure`
+      ];
+    case 'graphtraversal':
+    case 'shortestpath':
+    case 'mst':
+    case 'topological':
+    case 'connectivity':
+    case 'cycledetection':
+    case 'networkflow':
+    case 'advancedgraph':
+      return [
+        `procedure ${procName}(Graph G, source)`,
+        `  initialize status structures (dist, visited, parent)`,
+        `  add source node to processing container (Q / S / Heap)`,
+        `  while container is not empty do`,
+        `    u := extractNextNode(container)`,
+        `    for each neighbor v of u do`,
+        `      if weight/relax condition matches then`,
+        `        update neighbor state and enqueue/push v`,
+        `      end if`,
+        `      process edge (u, v)`,
+        `    end for`,
+        `  end while`,
+        `  return result path / structure`,
+        `end procedure`
+      ];
+    default:
+      return [
+        `procedure ${procName}(input)`,
+        `  initialize variables`,
+        `  for each step of execution do`,
+        `    evaluate algorithm conditions`,
+        `    perform state adjustments`,
+        `    update visualization step output`,
+        `  end for`,
+        `  return final result`,
+        `end procedure`
+      ];
+  }
+}
 
 export const CodePanel: React.FC = () => {
   const { selectedAlgo, steps, currentStepIndex } = useAlgorithmStore();
 
   if (!selectedAlgo) return null;
 
-  const lines = PSEUDOCODE_REGISTRY[selectedAlgo.id] || [];
+  const lines = PSEUDOCODE_REGISTRY[selectedAlgo.id] || getFallbackPseudocode(selectedAlgo.name, selectedAlgo.category);
   const currentStep = steps[currentStepIndex];
   const highlightedLine = currentStep ? currentStep.codeLine : -1;
 
