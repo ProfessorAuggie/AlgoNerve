@@ -104,8 +104,10 @@ export const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col relative overflow-x-hidden transition-colors duration-300">
       {/* Background Decorative Gradients */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/5 dark:bg-emerald-900/10 blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/5 dark:bg-emerald-900/10 blur-[120px]" />
+      </div>
 
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 py-8 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 z-10 transition-colors duration-300">
