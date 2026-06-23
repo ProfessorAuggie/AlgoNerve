@@ -39,6 +39,7 @@ export const VisualizerPage: React.FC = () => {
     nextStep,
     prevStep,
     resetPlayback,
+    setConsoleOpen,
   } = useAlgorithmStore();
 
   // Route fallback or algorithm loading
@@ -237,6 +238,12 @@ export const VisualizerPage: React.FC = () => {
           >
             Documentation
           </Link>
+          <button
+            onClick={() => setConsoleOpen(true)}
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-1.5 px-3 rounded-lg transition-all duration-300"
+          >
+            Interactive Console
+          </button>
           <HelpCircle size={15} className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors" />
           <ThemeToggle />
         </div>

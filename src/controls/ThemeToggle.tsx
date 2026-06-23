@@ -32,6 +32,16 @@ export const ThemeToggle: React.FC = () => {
   // On mount, ensure DOM matches resolved theme
   useEffect(() => {
     applyTheme(theme);
+
+    const handleThemeChanged = () => {
+      const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      setTheme(current);
+    };
+
+    window.addEventListener('theme-changed', handleThemeChanged);
+    return () => {
+      window.removeEventListener('theme-changed', handleThemeChanged);
+    };
   }, []);
 
   const toggleTheme = () => {

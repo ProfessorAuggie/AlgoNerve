@@ -118,6 +118,13 @@ interface AlgorithmState {
   
   // Re-generate steps based on selected algorithm and current input configuration
   generateSteps: () => void;
+
+  // Console state
+  isConsoleOpen: boolean;
+  consoleLogs: Array<{ type: 'input' | 'output' | 'error' | 'system'; text: string }>;
+  setConsoleOpen: (open: boolean) => void;
+  addConsoleLog: (type: 'input' | 'output' | 'error' | 'system', text: string) => void;
+  clearConsoleLogs: () => void;
 }
 
 let timer: any = null;
@@ -138,6 +145,16 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
   dpString1: 'AABCDE',
   dpString2: 'ABACDE',
   recursionN: 4,
+
+  // Console state defaults
+  isConsoleOpen: false,
+  consoleLogs: [
+    { type: 'system', text: 'Welcome to AlgoNerve Interactive Command Console.' },
+    { type: 'system', text: 'Type "help" to display the list of available commands.' }
+  ],
+  setConsoleOpen: (open) => set({ isConsoleOpen: open }),
+  addConsoleLog: (type, text) => set((state) => ({ consoleLogs: [...state.consoleLogs, { type, text }] })),
+  clearConsoleLogs: () => set({ consoleLogs: [] }),
 
   selectAlgorithm: (id: string) => {
     const algo = ALGORITHM_REGISTRY.find(a => a.id === id) || ALGORITHM_REGISTRY[0];

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, BookOpen, Cpu, Settings, Keyboard, Accessibility, User, HelpCircle } from 'lucide-react';
+import { ChevronLeft, BookOpen, Cpu, Settings, Keyboard, Accessibility, User, HelpCircle, Terminal } from 'lucide-react';
 import { ThemeToggle } from '../controls/ThemeToggle';
+import { useAlgorithmStore } from '../store/algorithmStore';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 import type { AlgorithmCategory } from '../algorithms/types';
 
 export const DocumentationPage: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'algorithms' | 'controls' | 'shortcuts' | 'accessibility' | 'setup' | 'creator'>('overview');
+  const { setConsoleOpen } = useAlgorithmStore();
+  const [activeTab, setActiveTab] = useState<'overview' | 'algorithms' | 'controls' | 'shortcuts' | 'accessibility' | 'setup' | 'creator' | 'console'>('overview');
 
   React.useEffect(() => {
     document.title = "AlgoNerve Documentation | Guides & Reference Manual";
@@ -22,6 +24,7 @@ export const DocumentationPage: React.FC = () => {
     { id: 'algorithms' as const, label: 'Supported Algorithms', icon: Cpu },
     { id: 'controls' as const, label: 'Playback & Controls', icon: Settings },
     { id: 'shortcuts' as const, label: 'Keyboard Shortcuts', icon: Keyboard },
+    { id: 'console' as const, label: 'Interactive Console', icon: Terminal },
     { id: 'accessibility' as const, label: 'Accessibility (A11y)', icon: Accessibility },
     { id: 'setup' as const, label: 'Local Configuration', icon: HelpCircle },
     { id: 'creator' as const, label: 'Developer Credits', icon: User },
@@ -57,7 +60,15 @@ export const DocumentationPage: React.FC = () => {
           </div>
         </div>
 
-        <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setConsoleOpen(true)}
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300"
+          >
+            Interactive Console
+          </button>
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* Main Split Content */}
@@ -395,6 +406,86 @@ export const DocumentationPage: React.FC = () => {
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* 8. INTERACTIVE CONSOLE */}
+          {activeTab === 'console' && (
+            <div className="flex flex-col gap-6">
+              <div>
+                <h1 className="text-2xl font-extrabold tracking-tight mb-2 text-zinc-900 dark:text-white">Interactive Console (CLI)</h1>
+                <p className="text-sm text-zinc-550 dark:text-zinc-400 font-mono">Terminal Command Line Interface</p>
+              </div>
+              <hr className="border-zinc-200 dark:border-zinc-800/60" />
+
+              <div className="space-y-4 text-sm text-zinc-650 dark:text-zinc-300 leading-relaxed">
+                <p>
+                  AlgoNerve includes a full-featured developer command line console. Toggle it globally by pressing the **Backtick key (`` ` ``)** or clicking the **Interactive Console** button in the header.
+                </p>
+
+                <h3 className="font-bold text-sm uppercase text-violet-600 dark:text-violet-400 font-mono mt-4">Supported CLI Commands</h3>
+                <div className="overflow-x-auto w-full">
+                  <table className="w-full text-left border-collapse text-xs md:text-sm mt-2">
+                    <thead>
+                      <tr className="border-b border-zinc-200 dark:border-zinc-800 font-mono text-zinc-550">
+                        <th className="py-2.5 pr-4">Command</th>
+                        <th className="py-2.5">Description / Usage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">help</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Displays the command reference list.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">list [category]</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Lists all available algorithm IDs (e.g. <code className="bg-zinc-200/50 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-800 dark:text-zinc-300">list searching</code>).</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">search &lt;query&gt;</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Searches algorithms by name, description, or tags.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">visualize &lt;algo-id&gt;</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Redirects to the visualizer page for the given ID (e.g. <code className="bg-zinc-200/50 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-800 dark:text-zinc-300">visualize quick-sort</code>).</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">play / pause</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Controls the current simulation auto-playback state.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">next / prev</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Steps forward or backward exactly 1 step in the simulation.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">reset</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Resets the visualization step timeline back to step 0.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">speed &lt;ms&gt;</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Sets playback delay speed in milliseconds (e.g. <code className="bg-zinc-200/50 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-800 dark:text-zinc-300">speed 400</code>).</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">input &lt;nums&gt;</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Sets a new custom array input (e.g. <code className="bg-zinc-200/50 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-800 dark:text-zinc-300">input 10,25,40,5</code>).</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">theme &lt;light|dark|toggle&gt;</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Queries or sets the application styling theme.</td>
+                      </tr>
+                      <tr className="border-b border-zinc-100 dark:border-zinc-800/60">
+                        <td className="py-3 pr-4 font-mono font-bold text-violet-600 dark:text-violet-400">clear / exit</td>
+                        <td className="py-3 text-zinc-600 dark:text-zinc-400">Clears command line outputs or exits the console overlay.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h3 className="font-bold text-sm uppercase text-violet-600 dark:text-violet-400 font-mono mt-4">Command History & Shortcuts</h3>
+                <p>
+                  Inside the terminal prompt, use the **Up Arrow** and **Down Arrow** keys to recall previous commands you have executed in the session. Press the **Escape** key to instantly hide the drawer.
+                </p>
               </div>
             </div>
           )}

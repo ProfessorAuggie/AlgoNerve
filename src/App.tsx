@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { HomePage } from './pages/HomePage';
 import { VisualizerPage } from './pages/VisualizerPage';
 import { DocumentationPage } from './pages/DocumentationPage';
+import { InteractiveConsole } from './controls/InteractiveConsole';
 
 const App: React.FC = () => {
   return (
     <Router>
+      <InteractiveConsole />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/visualize/:id" element={<VisualizerPage />} />

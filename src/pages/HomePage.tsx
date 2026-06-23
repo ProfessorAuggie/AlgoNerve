@@ -38,7 +38,7 @@ import { ThemeToggle } from '../controls/ThemeToggle';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const { selectAlgorithm } = useAlgorithmStore();
+  const { selectAlgorithm, setConsoleOpen } = useAlgorithmStore();
   const [activeCategory, setActiveCategory] = useState<AlgorithmCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -124,7 +124,10 @@ export const HomePage: React.FC = () => {
           >
             Documentation
           </Link>
-          <button className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300">
+          <button
+            onClick={() => setConsoleOpen(true)}
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300"
+          >
             Interactive Console
           </button>
           <ThemeToggle />
