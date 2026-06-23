@@ -94,7 +94,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
         {nodesList.length === 0 ? (
           <div className="text-zinc-500 font-medium text-sm">Tree is empty. Add values to build a BST.</div>
         ) : (
-          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full min-w-[550px] max-w-[650px] overflow-visible">
+          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full max-w-[650px] overflow-visible">
             {/* Draw connections */}
             {edgesList.map((edge, idx) => {
               const isSourceCurrent = current === edge.source.id;

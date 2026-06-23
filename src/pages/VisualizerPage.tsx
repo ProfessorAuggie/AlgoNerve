@@ -23,7 +23,7 @@ import { ArrayInput } from '../inputs/ArrayInput';
 import { GraphInput } from '../inputs/GraphInput';
 import { DPInput } from '../inputs/DPInput';
 
-import { ChevronLeft, HelpCircle } from 'lucide-react';
+import { ChevronLeft, HelpCircle, BookOpen, Terminal } from 'lucide-react';
 
 
 export const VisualizerPage: React.FC = () => {
@@ -233,16 +233,18 @@ export const VisualizerPage: React.FC = () => {
           </div>
           <Link
             to="/documentation"
-            className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors"
+            className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors flex items-center"
             title="Open Documentation"
           >
-            Documentation
+            <span className="hidden sm:inline">Documentation</span>
+            <BookOpen size={15} className="sm:hidden" />
           </Link>
           <button
             onClick={() => setConsoleOpen(true)}
-            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-1.5 px-3 rounded-lg transition-all duration-300"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-1.5 px-3 rounded-lg transition-all duration-300 flex items-center"
           >
-            Interactive Console
+            <span className="hidden sm:inline">Interactive Console</span>
+            <Terminal size={14} className="sm:hidden" />
           </button>
           <HelpCircle size={15} className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors" />
           <ThemeToggle />

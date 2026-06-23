@@ -63,9 +63,10 @@ export const DocumentationPage: React.FC = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setConsoleOpen(true)}
-            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 flex items-center"
           >
-            Interactive Console
+            <span className="hidden sm:inline">Interactive Console</span>
+            <Terminal size={14} className="sm:hidden" />
           </button>
           <ThemeToggle />
         </div>

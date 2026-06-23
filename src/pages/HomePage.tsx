@@ -32,7 +32,9 @@ import {
   Activity,
   Shuffle,
   Brain,
-  Workflow
+  Workflow,
+  Terminal,
+  BookOpen
 } from 'lucide-react';
 import { ThemeToggle } from '../controls/ThemeToggle';
 
@@ -120,15 +122,17 @@ export const HomePage: React.FC = () => {
         <div className="flex items-center gap-4">
           <Link
             to="/documentation"
-            className="text-xs text-zinc-555 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
+            className="text-xs text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center"
           >
-            Documentation
+            <span className="hidden sm:inline">Documentation</span>
+            <BookOpen size={15} className="sm:hidden" />
           </Link>
           <button
             onClick={() => setConsoleOpen(true)}
-            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-2 px-4 rounded-xl transition-all duration-300 flex items-center"
           >
-            Interactive Console
+            <span className="hidden sm:inline">Interactive Console</span>
+            <Terminal size={14} className="sm:hidden" />
           </button>
           <ThemeToggle />
         </div>
@@ -155,7 +159,7 @@ export const HomePage: React.FC = () => {
         </p>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 max-w-5xl">
+        <div className="w-full flex md:flex-wrap items-center justify-start md:justify-center gap-2 mb-8 overflow-x-auto md:overflow-visible pb-3 md:pb-0 scrollbar-none px-4 md:px-0 max-w-5xl">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = activeCategory === cat.key;
