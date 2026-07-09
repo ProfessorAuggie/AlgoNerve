@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAlgorithmStore } from '../store/algorithmStore';
+import { ArrowUpNarrowWide, ArrowDownWideNarrow } from 'lucide-react';
 
 export const ArrayInput: React.FC = () => {
-  const { inputArray, setInputArray, selectedAlgo, recursionN, setRecursionN } = useAlgorithmStore();
+  const { inputArray, setInputArray, selectedAlgo, recursionN, setRecursionN, sortOrder, setSortOrder } = useAlgorithmStore();
   const [inputValue, setInputValue] = useState(inputArray.join(', '));
   const [targetInput, setTargetInput] = useState(recursionN.toString());
 
@@ -85,6 +86,36 @@ export const ArrayInput: React.FC = () => {
           Randomize
         </button>
       </div>
+
+      {selectedAlgo?.category === 'sorting' && (
+        <div className="flex flex-col gap-1.5 border-t border-zinc-200 dark:border-zinc-800/60 pt-3">
+          <label className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">Sort Order</label>
+          <div className="flex rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-800 w-fit">
+            <button
+              onClick={() => setSortOrder('asc')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                sortOrder === 'asc'
+                  ? 'bg-violet-600 text-white shadow-inner'
+                  : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200'
+              }`}
+            >
+              <ArrowUpNarrowWide size={13} />
+              Ascending
+            </button>
+            <button
+              onClick={() => setSortOrder('desc')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold transition-all duration-200 border-l border-zinc-200 dark:border-zinc-800 ${
+                sortOrder === 'desc'
+                  ? 'bg-violet-600 text-white shadow-inner'
+                  : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200'
+              }`}
+            >
+              <ArrowDownWideNarrow size={13} />
+              Descending
+            </button>
+          </div>
+        </div>
+      )}
 
       {selectedAlgo?.category === 'searching' && (
         <div className="flex flex-col gap-1.5 border-t border-zinc-200 dark:border-zinc-800/60 pt-3">

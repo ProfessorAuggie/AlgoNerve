@@ -13,7 +13,8 @@ import type {
 } from '../algorithms/types';
 import { ALGORITHM_REGISTRY } from '../algorithms/types';
 
-import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps, generatePigeonholeSortSteps } from '../algorithms/sorting';
+import { generateBubbleSortSteps, generateInsertionSortSteps, generateMergeSortSteps, generateQuickSortSteps, generateHeapSortSteps, generateSelectionSortSteps, generatePigeonholeSortSteps, generateShellSortSteps, generateCountingSortSteps, generateRadixSortSteps, generateBucketSortSteps } from '../algorithms/sorting';
+import type { SortOrder } from '../algorithms/sorting';
 import {
   generateLinearSearchSteps,
   generateBinarySearchSteps,
@@ -97,6 +98,7 @@ interface AlgorithmState {
   dpString1: string;
   dpString2: string;
   recursionN: number;
+  sortOrder: SortOrder;
   
   // Controls
   selectAlgorithm: (id: string) => void;
@@ -115,6 +117,7 @@ interface AlgorithmState {
   setTreeValues: (vals: number[]) => void;
   setDpStrings: (s1: string, s2: string) => void;
   setRecursionN: (n: number) => void;
+  setSortOrder: (order: SortOrder) => void;
   
   // Re-generate steps based on selected algorithm and current input configuration
   generateSteps: () => void;
@@ -145,6 +148,7 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
   dpString1: 'AABCDE',
   dpString2: 'ABACDE',
   recursionN: 4,
+  sortOrder: 'asc' as SortOrder,
 
   // Console state defaults
   isConsoleOpen: false,
@@ -273,6 +277,11 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
     get().generateSteps();
   },
 
+  setSortOrder: (order: SortOrder) => {
+    set({ sortOrder: order, currentStepIndex: 0, isPlaying: false });
+    get().generateSteps();
+  },
+
   generateSteps: () => {
     const state = get();
     const algo = state.selectedAlgo;
@@ -306,25 +315,37 @@ export const useAlgorithmStore = create<AlgorithmState>((set, get) => ({
 
       // Sorting
       case 'bubble-sort':
-        generated = generateBubbleSortSteps(state.inputArray);
+        generated = generateBubbleSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'selection-sort':
-        generated = generateSelectionSortSteps(state.inputArray);
+        generated = generateSelectionSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'insertion-sort':
-        generated = generateInsertionSortSteps(state.inputArray);
+        generated = generateInsertionSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'merge-sort':
-        generated = generateMergeSortSteps(state.inputArray);
+        generated = generateMergeSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'quick-sort':
-        generated = generateQuickSortSteps(state.inputArray);
+        generated = generateQuickSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'heap-sort':
-        generated = generateHeapSortSteps(state.inputArray);
+        generated = generateHeapSortSteps(state.inputArray, state.sortOrder);
         break;
       case 'pigeonhole-sort':
-        generated = generatePigeonholeSortSteps(state.inputArray);
+        generated = generatePigeonholeSortSteps(state.inputArray, state.sortOrder);
+        break;
+      case 'shell-sort':
+        generated = generateShellSortSteps(state.inputArray, state.sortOrder);
+        break;
+      case 'counting-sort':
+        generated = generateCountingSortSteps(state.inputArray, state.sortOrder);
+        break;
+      case 'radix-sort':
+        generated = generateRadixSortSteps(state.inputArray, state.sortOrder);
+        break;
+      case 'bucket-sort':
+        generated = generateBucketSortSteps(state.inputArray, state.sortOrder);
         break;
 
       // Data Structures

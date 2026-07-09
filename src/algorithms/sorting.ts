@@ -1,5 +1,7 @@
 import type { Step, SortingPayload } from './types';
 
+export type SortOrder = 'asc' | 'desc';
+
 
 // Helper to create a sorting step
 function createSortingStep(
@@ -35,26 +37,29 @@ function createSortingStep(
 }
 
 // ─── Bubble Sort ─────────────────────────────────────────────────────────────
-export function generateBubbleSortSteps(arr: number[]): Step[] {
+export function generateBubbleSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   for (let i = 0; i < n - 1; i++) {
     steps.push(createSortingStep(stepId++, 'outer-loop', `Outer loop iteration ${i + 1}: pass through elements up to index ${n - 1 - i}.`, 2, array, [], [], []));
     for (let j = 0; j < n - i - 1; j++) {
       steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j}] (${array[j]}) and array[${j + 1}] (${array[j + 1]}).`, 4, array, [j, j + 1], [], []));
       
-      if (array[j] > array[j + 1]) {
+      const shouldSwap = order === 'asc' ? array[j] > array[j + 1] : array[j] < array[j + 1];
+      if (shouldSwap) {
         // Swap
         const temp = array[j];
         array[j] = array[j + 1];
         array[j + 1] = temp;
         
-        steps.push(createSortingStep(stepId++, 'swap', `Since ${temp} > ${array[j]}, swap them.`, 5, array, [], [j, j + 1], []));
+        const cmp = order === 'asc' ? '>' : '<';
+        steps.push(createSortingStep(stepId++, 'swap', `Since ${temp} ${cmp} ${array[j]}, swap them.`, 5, array, [], [j, j + 1], []));
       }
     }
     // Element at index n - 1 - i is sorted
@@ -63,18 +68,19 @@ export function generateBubbleSortSteps(arr: number[]): Step[] {
   }
 
   // Final sorted step
-  steps.push(createSortingStep(stepId++, 'done', 'Bubble Sort complete! The array is fully sorted.', 8, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Bubble Sort complete! The array is fully sorted in ${orderLabel} order.`, 8, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Insertion Sort ──────────────────────────────────────────────────────────
-export function generateInsertionSortSteps(arr: number[]): Step[] {
+export function generateInsertionSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   for (let i = 1; i < n; i++) {
     const key = array[i];
@@ -82,8 +88,10 @@ export function generateInsertionSortSteps(arr: number[]): Step[] {
     
     steps.push(createSortingStep(stepId++, 'outer-loop', `Pick element array[${i}] (${key}) as the key to insert.`, 2, array, [i], [], []));
 
-    while (j >= 0 && array[j] > key) {
-      steps.push(createSortingStep(stepId++, 'compare', `Compare key (${key}) with array[${j}] (${array[j]}). Since ${array[j]} > ${key}, shift array[${j}] to the right.`, 4, array, [j, j + 1], [], []));
+    const cmpFn = order === 'asc' ? () => array[j] > key : () => array[j] < key;
+    const cmpOp = order === 'asc' ? '>' : '<';
+    while (j >= 0 && cmpFn()) {
+      steps.push(createSortingStep(stepId++, 'compare', `Compare key (${key}) with array[${j}] (${array[j]}). Since ${array[j]} ${cmpOp} ${key}, shift array[${j}] to the right.`, 4, array, [j, j + 1], [], []));
       
       array[j + 1] = array[j];
       j--;
@@ -95,17 +103,18 @@ export function generateInsertionSortSteps(arr: number[]): Step[] {
     steps.push(createSortingStep(stepId++, 'insert', `Insert key (${key}) at index ${j + 1}.`, 7, array, [], [j + 1], []));
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Insertion Sort complete! The array is fully sorted.', 9, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Insertion Sort complete! The array is fully sorted in ${orderLabel} order.`, 9, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Merge Sort ──────────────────────────────────────────────────────────────
-export function generateMergeSortSteps(arr: number[]): Step[] {
+export function generateMergeSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   function merge(left: number, mid: number, right: number) {
     const temp: number[] = [];
@@ -116,7 +125,7 @@ export function generateMergeSortSteps(arr: number[]): Step[] {
 
     while (i <= mid && j <= right) {
       steps.push(createSortingStep(stepId++, 'compare', `Compare element at index ${i} (${array[i]}) and index ${j} (${array[j]})`, 5, array, [i, j], [], [], undefined, left, right, mid));
-      if (array[i] <= array[j]) {
+      if (order === 'asc' ? array[i] <= array[j] : array[i] >= array[j]) {
         temp.push(array[i++]);
       } else {
         temp.push(array[j++]);
@@ -152,17 +161,18 @@ export function generateMergeSortSteps(arr: number[]): Step[] {
   }
 
   mergeSort(0, array.length - 1);
-  steps.push(createSortingStep(stepId++, 'done', 'Merge Sort complete!', 10, array, [], [], Array.from({ length: array.length }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Merge Sort complete! Sorted in ${orderLabel} order.`, 10, array, [], [], Array.from({ length: array.length }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Quick Sort ──────────────────────────────────────────────────────────────
-export function generateQuickSortSteps(arr: number[]): Step[] {
+export function generateQuickSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   function partition(low: number, high: number): number {
     const pivot = array[high];
@@ -171,12 +181,14 @@ export function generateQuickSortSteps(arr: number[]): Step[] {
     let i = low - 1;
     for (let j = low; j < high; j++) {
       steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j}] (${array[j]}) with pivot (${pivot}).`, 4, array, [j], [], [], pivot, low, high));
-      if (array[j] < pivot) {
+      const shouldSwap = order === 'asc' ? array[j] < pivot : array[j] > pivot;
+      if (shouldSwap) {
         i++;
         const temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-        steps.push(createSortingStep(stepId++, 'swap', `Swap array[${i}] (${array[i]}) and array[${j}] (${array[j]}) since ${array[i]} < pivot.`, 5, array, [], [i, j], [], pivot, low, high));
+        const cmp = order === 'asc' ? '<' : '>';
+        steps.push(createSortingStep(stepId++, 'swap', `Swap array[${i}] (${array[i]}) and array[${j}] (${array[j]}) since ${array[i]} ${cmp} pivot.`, 5, array, [], [i, j], [], pivot, low, high));
       }
     }
     const temp = array[i + 1];
@@ -197,18 +209,20 @@ export function generateQuickSortSteps(arr: number[]): Step[] {
   }
 
   quickSort(0, array.length - 1);
-  steps.push(createSortingStep(stepId++, 'done', 'Quick Sort complete!', 8, array, [], [], Array.from({ length: array.length }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Quick Sort complete! Sorted in ${orderLabel} order.`, 8, array, [], [], Array.from({ length: array.length }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Heap Sort ───────────────────────────────────────────────────────────────
-export function generateHeapSortSteps(arr: number[]): Step[] {
+export function generateHeapSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  const heapType = order === 'asc' ? 'max' : 'min';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   function heapify(size: number, i: number) {
     let largest = i;
@@ -217,11 +231,11 @@ export function generateHeapSortSteps(arr: number[]): Step[] {
 
     steps.push(createSortingStep(stepId++, 'heapify-compare', `Heapify sub-tree at index ${i}. Left child: ${left < size ? left : 'none'}, Right child: ${right < size ? right : 'none'}.`, 3, array, [i], [], []));
 
-    if (left < size && array[left] > array[largest]) {
+    if (left < size && (order === 'asc' ? array[left] > array[largest] : array[left] < array[largest])) {
       largest = left;
     }
 
-    if (right < size && array[right] > array[largest]) {
+    if (right < size && (order === 'asc' ? array[right] > array[largest] : array[right] < array[largest])) {
       largest = right;
     }
 
@@ -230,19 +244,21 @@ export function generateHeapSortSteps(arr: number[]): Step[] {
       array[i] = array[largest];
       array[largest] = swap;
 
-      steps.push(createSortingStep(stepId++, 'heapify-swap', `Swap parent index ${i} (${swap}) with larger child index ${largest} (${array[i]}).`, 4, array, [], [i, largest], []));
+      const childType = order === 'asc' ? 'larger' : 'smaller';
+      steps.push(createSortingStep(stepId++, 'heapify-swap', `Swap parent index ${i} (${swap}) with ${childType} child index ${largest} (${array[i]}).`, 4, array, [], [i, largest], []));
       heapify(size, largest);
     }
   }
 
   // Build heap
-  steps.push(createSortingStep(stepId++, 'build-heap', 'Phase 1: Build max-heap structure from the input array.', 2, array, [], [], []));
+  steps.push(createSortingStep(stepId++, 'build-heap', `Phase 1: Build ${heapType}-heap structure from the input array.`, 2, array, [], [], []));
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
     heapify(n, i);
   }
 
   // Extract from heap
-  steps.push(createSortingStep(stepId++, 'extract-start', 'Phase 2: Repeatedly extract the maximum element (root) and heapify.', 5, array, [], [], []));
+  const extremeLabel = order === 'asc' ? 'maximum' : 'minimum';
+  steps.push(createSortingStep(stepId++, 'extract-start', `Phase 2: Repeatedly extract the ${extremeLabel} element (root) and heapify.`, 5, array, [], [], []));
   const sorted: number[] = [];
   for (let i = n - 1; i > 0; i--) {
     const max = array[0];
@@ -256,29 +272,32 @@ export function generateHeapSortSteps(arr: number[]): Step[] {
   }
 
   sorted.push(0);
-  steps.push(createSortingStep(stepId++, 'done', 'Heap Sort complete!', 8, array, [], [], [...sorted]));
+  steps.push(createSortingStep(stepId++, 'done', `Heap Sort complete! Sorted in ${orderLabel} order.`, 8, array, [], [], [...sorted]));
   return steps;
 }
 
 // ─── Selection Sort ──────────────────────────────────────────────────────────
-export function generateSelectionSortSteps(arr: number[]): Step[] {
+export function generateSelectionSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  const extremeLabel = order === 'asc' ? 'minimum' : 'maximum';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   for (let i = 0; i < n - 1; i++) {
     let minIdx = i;
-    steps.push(createSortingStep(stepId++, 'outer-loop', `Outer loop iteration ${i + 1}: Find the minimum element in subarray from index ${i} to ${n - 1}. Set minimum index to ${i}.`, 2, array, [i], [], Array.from({ length: i }, (_, idx) => idx)));
+    steps.push(createSortingStep(stepId++, 'outer-loop', `Outer loop iteration ${i + 1}: Find the ${extremeLabel} element in subarray from index ${i} to ${n - 1}. Set ${extremeLabel} index to ${i}.`, 2, array, [i], [], Array.from({ length: i }, (_, idx) => idx)));
 
     for (let j = i + 1; j < n; j++) {
-      steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j}] (${array[j]}) with current minimum array[${minIdx}] (${array[minIdx]}).`, 4, array, [j, minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
+      steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j}] (${array[j]}) with current ${extremeLabel} array[${minIdx}] (${array[minIdx]}).`, 4, array, [j, minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
 
-      if (array[j] < array[minIdx]) {
+      const isBetter = order === 'asc' ? array[j] < array[minIdx] : array[j] > array[minIdx];
+      if (isBetter) {
         minIdx = j;
-        steps.push(createSortingStep(stepId++, 'new-min', `Found a new minimum element (${array[j]}) at index ${j}. Update minimum index.`, 5, array, [minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
+        steps.push(createSortingStep(stepId++, 'new-min', `Found a new ${extremeLabel} element (${array[j]}) at index ${j}. Update ${extremeLabel} index.`, 5, array, [minIdx], [], Array.from({ length: i }, (_, idx) => idx)));
       }
     }
 
@@ -286,9 +305,9 @@ export function generateSelectionSortSteps(arr: number[]): Step[] {
       const temp = array[i];
       array[i] = array[minIdx];
       array[minIdx] = temp;
-      steps.push(createSortingStep(stepId++, 'swap', `Swap array[${i}] (${temp}) with the minimum element array[${minIdx}] (${array[i]}).`, 7, array, [], [i, minIdx], Array.from({ length: i }, (_, idx) => idx)));
+      steps.push(createSortingStep(stepId++, 'swap', `Swap array[${i}] (${temp}) with the ${extremeLabel} element array[${minIdx}] (${array[i]}).`, 7, array, [], [i, minIdx], Array.from({ length: i }, (_, idx) => idx)));
     } else {
-      steps.push(createSortingStep(stepId++, 'no-swap', `The minimum element is already at index ${i}. No swap needed.`, 8, array, [], [], Array.from({ length: i }, (_, idx) => idx)));
+      steps.push(createSortingStep(stepId++, 'no-swap', `The ${extremeLabel} element is already at index ${i}. No swap needed.`, 8, array, [], [], Array.from({ length: i }, (_, idx) => idx)));
     }
 
     // Element at index i is sorted
@@ -296,12 +315,12 @@ export function generateSelectionSortSteps(arr: number[]): Step[] {
     steps.push(createSortingStep(stepId++, 'sorted', `Element at index ${i} (${array[i]}) is now in its final position.`, 9, array, [], [], sortedSoFar));
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Selection Sort complete! The array is fully sorted.', 11, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Selection Sort complete! The array is fully sorted in ${orderLabel} order.`, 11, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Pigeonhole Sort ─────────────────────────────────────────────────────────
-export function generatePigeonholeSortSteps(arr: number[]): Step[] {
+export function generatePigeonholeSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
@@ -310,7 +329,8 @@ export function generatePigeonholeSortSteps(arr: number[]): Step[] {
   if (n === 0) return [];
 
   // Step 1: Initial state
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   // Find min and max
   let min = array[0];
@@ -346,29 +366,41 @@ export function generatePigeonholeSortSteps(arr: number[]): Step[] {
   // Put elements back
   let index = 0;
   const sortedIndices: number[] = [];
-  for (let h = 0; h < range; h++) {
-    while (holes[h].length > 0) {
-      const val = holes[h].shift()!;
-      array[index] = val;
-      sortedIndices.push(index);
-      
-      steps.push(createSortingStep(stepId++, 'restore', `Pop ${val} from hole ${h} and write to array index ${index}.`, 10, array, [], [index], [...sortedIndices]));
-      index++;
+  if (order === 'asc') {
+    for (let h = 0; h < range; h++) {
+      while (holes[h].length > 0) {
+        const val = holes[h].shift()!;
+        array[index] = val;
+        sortedIndices.push(index);
+        steps.push(createSortingStep(stepId++, 'restore', `Pop ${val} from hole ${h} and write to array index ${index}.`, 10, array, [], [index], [...sortedIndices]));
+        index++;
+      }
+    }
+  } else {
+    for (let h = range - 1; h >= 0; h--) {
+      while (holes[h].length > 0) {
+        const val = holes[h].shift()!;
+        array[index] = val;
+        sortedIndices.push(index);
+        steps.push(createSortingStep(stepId++, 'restore', `Pop ${val} from hole ${h} and write to array index ${index}.`, 10, array, [], [index], [...sortedIndices]));
+        index++;
+      }
     }
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Pigeonhole Sort complete! The array is fully sorted.', 13, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Pigeonhole Sort complete! The array is fully sorted in ${orderLabel} order.`, 13, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Shell Sort ─────────────────────────────────────────────────────────────
-export function generateShellSortSteps(arr: number[]): Step[] {
+export function generateShellSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
   let stepId = 0;
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
     steps.push(createSortingStep(stepId++, 'gap-change', `Compare elements with gap distance of ${gap}.`, 2, array, [], [], []));
@@ -378,7 +410,7 @@ export function generateShellSortSteps(arr: number[]): Step[] {
       let j = i;
       steps.push(createSortingStep(stepId++, 'compare', `Pick array[${i}] (${temp}) as current key to insert.`, 3, array, [i], [], []));
 
-      while (j >= gap && array[j - gap] > temp) {
+      while (j >= gap && (order === 'asc' ? array[j - gap] > temp : array[j - gap] < temp)) {
         steps.push(createSortingStep(stepId++, 'compare', `Compare array[${j - gap}] (${array[j - gap]}) with key (${temp}). Since it's greater, shift array[${j - gap}] to index ${j}.`, 4, array, [j - gap, j], [], []));
         array[j] = array[j - gap];
         j -= gap;
@@ -389,12 +421,12 @@ export function generateShellSortSteps(arr: number[]): Step[] {
     }
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Shell Sort complete! The array is fully sorted.', 8, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Shell Sort complete! The array is fully sorted in ${orderLabel} order.`, 8, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Counting Sort ───────────────────────────────────────────────────────────
-export function generateCountingSortSteps(arr: number[]): Step[] {
+export function generateCountingSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
@@ -402,7 +434,8 @@ export function generateCountingSortSteps(arr: number[]): Step[] {
 
   if (n === 0) return [];
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   // Find max element
   let max = array[0];
@@ -430,23 +463,46 @@ export function generateCountingSortSteps(arr: number[]): Step[] {
 
   const output = Array(n).fill(0);
   const sortedIndices: number[] = [];
-  for (let i = n - 1; i >= 0; i--) {
-    const val = array[i];
-    if (val >= 0 && val <= max) {
-      const pos = count[val] - 1;
-      output[pos] = val;
-      count[val]--;
-      sortedIndices.push(pos);
-      steps.push(createSortingStep(stepId++, 'place', `Place value ${val} from index ${i} to sorted index ${pos} using count[${val}].`, 8, [...output], [i], [pos], [...sortedIndices]));
+  if (order === 'asc') {
+    for (let i = n - 1; i >= 0; i--) {
+      const val = array[i];
+      if (val >= 0 && val <= max) {
+        const pos = count[val] - 1;
+        output[pos] = val;
+        count[val]--;
+        sortedIndices.push(pos);
+        steps.push(createSortingStep(stepId++, 'place', `Place value ${val} from index ${i} to sorted index ${pos} using count[${val}].`, 8, [...output], [i], [pos], [...sortedIndices]));
+      }
     }
+  } else {
+    // For descending: reverse the output by mapping position
+    const descOutput = Array(n).fill(0);
+    const descCount = [...count];
+    // Rebuild prefix sums in reverse
+    const revCount = Array(max + 1).fill(0);
+    revCount[max] = descCount[max];
+    for (let i = max - 1; i >= 0; i--) {
+      revCount[i] = revCount[i + 1] + (descCount[i] - (i > 0 ? descCount[i - 1] : 0));
+    }
+    for (let i = n - 1; i >= 0; i--) {
+      const val = array[i];
+      if (val >= 0 && val <= max) {
+        const pos = revCount[val] - 1;
+        descOutput[pos] = val;
+        revCount[val]--;
+        sortedIndices.push(pos);
+        steps.push(createSortingStep(stepId++, 'place', `Place value ${val} from index ${i} to sorted index ${pos} (descending).`, 8, [...descOutput], [i], [pos], [...sortedIndices]));
+      }
+    }
+    for (let i = 0; i < n; i++) output[i] = descOutput[i];
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Counting Sort complete! Output array is fully sorted.', 10, output, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Counting Sort complete! Output array is fully sorted in ${orderLabel} order.`, 10, output, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Radix Sort ──────────────────────────────────────────────────────────────
-export function generateRadixSortSteps(arr: number[]): Step[] {
+export function generateRadixSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   let array = [...arr];
   const n = array.length;
@@ -454,7 +510,8 @@ export function generateRadixSortSteps(arr: number[]): Step[] {
 
   if (n === 0) return [];
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   let max = Math.max(...array);
   max = Math.max(max, 1);
@@ -489,12 +546,17 @@ export function generateRadixSortSteps(arr: number[]): Step[] {
     steps.push(createSortingStep(stepId++, 'digit-sorted', `Sorted pass complete for digit exponent ${exp}. Current array state updated.`, 8, array, [], [], []));
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Radix Sort complete! The array is fully sorted digit by digit.', 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  // If descending, reverse the final array
+  if (order === 'desc') {
+    array.reverse();
+    steps.push(createSortingStep(stepId++, 'reverse', 'Reversing the array for descending order.', 9, array, [], [], []));
+  }
+  steps.push(createSortingStep(stepId++, 'done', `Radix Sort complete! The array is fully sorted in ${orderLabel} order.`, 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
 
 // ─── Bucket Sort ─────────────────────────────────────────────────────────────
-export function generateBucketSortSteps(arr: number[]): Step[] {
+export function generateBucketSortSteps(arr: number[], order: SortOrder = 'asc'): Step[] {
   const steps: Step[] = [];
   const array = [...arr];
   const n = array.length;
@@ -502,7 +564,8 @@ export function generateBucketSortSteps(arr: number[]): Step[] {
 
   if (n === 0) return [];
 
-  steps.push(createSortingStep(stepId++, 'init', 'Initial state: array is unsorted.', 1, array, [], [], []));
+  const orderLabel = order === 'asc' ? 'ascending' : 'descending';
+  steps.push(createSortingStep(stepId++, 'init', `Initial state: array is unsorted. Sorting in ${orderLabel} order.`, 1, array, [], [], []));
 
   let min = array[0];
   let max = array[0];
@@ -527,10 +590,13 @@ export function generateBucketSortSteps(arr: number[]): Step[] {
 
   let index = 0;
   const sortedIndices: number[] = [];
-  for (let b = 0; b < bucketCount; b++) {
+  const bucketIter = order === 'asc'
+    ? Array.from({ length: bucketCount }, (_, i) => i)
+    : Array.from({ length: bucketCount }, (_, i) => bucketCount - 1 - i);
+  for (const b of bucketIter) {
     if (buckets[b].length > 0) {
       steps.push(createSortingStep(stepId++, 'sort-bucket', `Sorting bucket ${b} containing: [${buckets[b].join(', ')}].`, 6, array, [], [], []));
-      buckets[b].sort((x, y) => x - y);
+      buckets[b].sort((x, y) => order === 'asc' ? x - y : y - x);
 
       while (buckets[b].length > 0) {
         const val = buckets[b].shift()!;
@@ -542,6 +608,6 @@ export function generateBucketSortSteps(arr: number[]): Step[] {
     }
   }
 
-  steps.push(createSortingStep(stepId++, 'done', 'Bucket Sort complete! The array is fully sorted.', 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
+  steps.push(createSortingStep(stepId++, 'done', `Bucket Sort complete! The array is fully sorted in ${orderLabel} order.`, 10, array, [], [], Array.from({ length: n }, (_, idx) => idx)));
   return steps;
 }
