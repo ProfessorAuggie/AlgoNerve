@@ -100,7 +100,7 @@ export const SortingView: React.FC<SortingViewProps> = ({ step }) => {
       </div>
 
       {/* Main bar area */}
-      <div className="flex-1 w-full flex items-end justify-center gap-1.5 sm:gap-2 max-w-2xl min-h-[280px] px-2 py-4 relative">
+      <div className="flex-1 w-full flex items-end justify-center gap-1.5 sm:gap-2 max-w-2xl min-h-[200px] sm:min-h-[280px] px-2 py-4 relative">
         {/* Swap direction arrows between swapping bars */}
         {swapping.length === 2 && (
           <div className="absolute top-2 left-0 right-0 flex justify-center z-20 pointer-events-none">

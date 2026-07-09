@@ -21,7 +21,7 @@ export const DPView: React.FC<DPViewProps> = ({ step }) => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-      <div className="flex-1 w-full flex items-center justify-center overflow-auto p-4 min-h-[300px]">
+      <div className="flex-1 w-full flex items-center justify-center overflow-auto p-4 min-h-[220px] sm:min-h-[300px]">
         <table className="border-collapse font-mono text-sm max-w-full">
           <thead>
             <tr>

@@ -15,7 +15,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
     <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
       {/* Hanoi Visualization */}
       {pegs ? (
-        <div className="flex-1 w-full flex flex-col items-center justify-center min-h-[300px]">
+        <div className="flex-1 w-full flex flex-col items-center justify-center min-h-[220px] sm:min-h-[300px]">
           <div className="flex justify-around items-end w-full max-w-lg h-[200px] relative pb-6">
             {/* Render Pegs */}
             {(['A', 'B', 'C'] as const).map((pegKey) => {
@@ -66,7 +66,7 @@ export const RecursionView: React.FC<RecursionViewProps> = ({ step }) => {
         </div>
       ) : (
         /* Call Stack Frame Visualization */
-        <div className="flex-1 w-full flex items-center justify-center min-h-[300px] p-4">
+        <div className="flex-1 w-full flex items-center justify-center min-h-[220px] sm:min-h-[300px] p-4">
           {callStack.length === 0 ? (
             <div className="text-zinc-500 font-mono text-sm">Call stack empty.</div>
           ) : (

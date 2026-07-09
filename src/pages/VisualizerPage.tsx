@@ -202,29 +202,29 @@ export const VisualizerPage: React.FC = () => {
       <div className="absolute top-0 right-0 w-[40%] h-[40%] rounded-full bg-violet-900/5 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
 
       {/* Header bar */}
-      <header className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-900 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md sticky top-0 z-30 flex items-center justify-between transition-colors duration-300">
-        <div className="flex items-center gap-4">
+      <header className="px-4 py-3 sm:px-6 sm:py-4 border-b border-zinc-200 dark:border-zinc-900 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md sticky top-0 z-30 flex items-center justify-between transition-colors duration-300">
+        <div className="flex items-center gap-2 sm:gap-4">
           <button
             onClick={() => navigate('/')}
-            className="p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            className="p-1.5 sm:p-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
             aria-label="Back to dashboard"
           >
             <ChevronLeft size={16} />
           </button>
           
           <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <h2 className="font-bold text-base text-zinc-900 dark:text-white">{selectedAlgo.name}</h2>
-              <span className="text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <h2 className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">{selectedAlgo.name}</h2>
+              <span className="hidden sm:inline-flex text-[9px] font-mono font-bold bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-850 px-2 py-0.5 rounded-full uppercase tracking-wider">
                 {selectedAlgo.category}
               </span>
             </div>
-            <span className="text-[10px] text-zinc-500 dark:text-zinc-500 font-mono">Real-Time Traversal Visualizer</span>
+            <span className="hidden sm:block text-[10px] text-zinc-500 dark:text-zinc-500 font-mono">Real-Time Traversal Visualizer</span>
           </div>
         </div>
 
         {/* Short info/help guides */}
-        <div className="flex items-center gap-4 text-xs font-mono text-zinc-500">
+        <div className="flex items-center gap-2 sm:gap-4 text-xs font-mono text-zinc-500">
           <div className="hidden md:flex items-center gap-3 border-r border-zinc-200 dark:border-zinc-900 pr-4">
             <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">Space</kbd> Play/Pause</span>
             <span><kbd className="bg-zinc-200 dark:bg-zinc-900 px-1 rounded text-zinc-600 dark:text-zinc-400">←</kbd> Prev</span>
@@ -233,7 +233,7 @@ export const VisualizerPage: React.FC = () => {
           </div>
           <Link
             to="/documentation"
-            className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors flex items-center"
+            className="text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white transition-colors flex items-center p-1.5 rounded-lg border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800"
             title="Open Documentation"
           >
             <span className="hidden sm:inline">Documentation</span>
@@ -241,27 +241,27 @@ export const VisualizerPage: React.FC = () => {
           </Link>
           <button
             onClick={() => setConsoleOpen(true)}
-            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs py-1.5 px-3 rounded-lg transition-all duration-300 flex items-center"
+            className="bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 font-semibold text-xs p-1.5 sm:py-1.5 sm:px-3 rounded-lg transition-all duration-300 flex items-center"
           >
             <span className="hidden sm:inline">Interactive Console</span>
             <Terminal size={14} className="sm:hidden" />
           </button>
-          <HelpCircle size={15} className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors" />
+          <HelpCircle size={15} className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300 cursor-pointer transition-colors hidden xs:block" />
           <ThemeToggle />
         </div>
       </header>
 
       {/* Core split layout */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6 z-10 overflow-y-auto lg:overflow-visible">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-4 sm:px-6 sm:py-6 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 z-10">
         {/* Left Visualizer Dashboard Panel (2 cols) */}
-        <section className="lg:col-span-2 flex flex-col gap-6 h-full justify-between">
-          <div className="flex-1 min-h-[350px] relative">
+        <section className="lg:col-span-2 flex flex-col gap-4 sm:gap-6 h-full justify-between">
+          <div className="flex-1 min-h-[260px] sm:min-h-[350px] relative">
             {renderVisualizer()}
           </div>
 
           {/* Bottom control hub */}
-          <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-4 transition-colors duration-300">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="bg-white/80 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 p-3 sm:p-5 rounded-2xl backdrop-blur-sm shadow-md flex flex-col gap-3 sm:gap-4 transition-colors duration-300">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
               <Player />
               <SpeedControl />
             </div>
@@ -277,12 +277,13 @@ export const VisualizerPage: React.FC = () => {
         </section>
 
         {/* Right Details Config Panel (1 col) */}
-        <section className="flex flex-col gap-6 h-full justify-start">
+        <section className="flex flex-col gap-4 sm:gap-6 h-full justify-start">
           {renderInputs()}
           <CodePanel />
           <ComplexityBadge />
         </section>
       </main>
+
 
       <footer className="w-full border-t border-zinc-200 dark:border-zinc-900 py-4 text-center text-[10px] font-mono text-zinc-500 dark:text-zinc-700 bg-zinc-50 dark:bg-zinc-950/80 backdrop-blur-sm mt-auto z-10 transition-colors duration-300">
         © 2026 AlgoNerve. Created by <a href="https://www.linkedin.com/in/professorauggie/" target="_blank" rel="noopener noreferrer" className="text-violet-600 dark:text-violet-400 hover:text-violet-500 dark:hover:text-violet-300 hover:underline">Vaibhav Kushwaha</a>. All Rights Reserved.

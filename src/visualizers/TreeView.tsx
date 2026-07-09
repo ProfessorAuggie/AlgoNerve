@@ -90,7 +90,7 @@ export const TreeView: React.FC<TreeViewProps> = ({ step }) => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-      <div className="relative w-full flex-1 min-h-[350px] flex items-center justify-center overflow-x-auto overflow-y-hidden select-none scrollbar-none">
+      <div className="relative w-full flex-1 min-h-[250px] sm:min-h-[350px] flex items-center justify-center overflow-x-auto overflow-y-hidden select-none scrollbar-none">
         {nodesList.length === 0 ? (
           <div className="text-zinc-500 font-medium text-sm">Tree is empty. Add values to build a BST.</div>
         ) : (

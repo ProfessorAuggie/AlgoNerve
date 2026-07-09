@@ -27,7 +27,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     // Render stack vertically (bottom of stack is index 0, top of stack is elements.length - 1)
     const reversedElements = [...elements].reverse();
     return (
-      <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6">
+      <div className="flex flex-col items-center justify-center w-full min-h-[220px] sm:min-h-[300px] py-6">
         <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-4 uppercase tracking-wider">
           Stack (LIFO - Last In First Out)
         </div>
@@ -92,7 +92,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
   const renderQueue = () => {
     // Render queue horizontally
     return (
-      <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6 px-4">
+      <div className="flex flex-col items-center justify-center w-full min-h-[220px] sm:min-h-[300px] py-6 px-4">
         <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-6 uppercase tracking-wider">
           Queue (FIFO - First In First Out)
         </div>
@@ -163,7 +163,7 @@ export const ListStructureView: React.FC<ListStructureViewProps> = ({ step }) =>
     const listTitle = isDoubly ? 'Doubly Linked List' : isCircular ? 'Circular Linked List' : 'Singly Linked List';
 
     return (
-      <div className="flex flex-col items-center justify-center w-full min-h-[300px] py-6 px-4 overflow-x-auto">
+      <div className="flex flex-col items-center justify-center w-full min-h-[220px] sm:min-h-[300px] py-6 px-4 overflow-x-auto">
         <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-6 uppercase tracking-wider shrink-0">
           {listTitle}
         </div>

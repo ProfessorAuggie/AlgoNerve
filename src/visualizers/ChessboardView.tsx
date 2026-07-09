@@ -28,7 +28,7 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
   if (algoId === 'sudoku-solver') {
     return (
       <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-        <div className="flex-1 w-full flex items-center justify-center min-h-[300px] p-4">
+        <div className="flex-1 w-full flex items-center justify-center min-h-[200px] sm:min-h-[300px] p-4">
           <div
             style={{
               gridTemplateColumns: 'repeat(9, minmax(0, 1fr))',
@@ -118,7 +118,7 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
   if (algoId === 'rat-in-a-maze') {
     return (
       <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-        <div className="flex-1 w-full flex items-center justify-center min-h-[300px] p-4">
+        <div className="flex-1 w-full flex items-center justify-center min-h-[200px] sm:min-h-[300px] p-4">
           <div
             style={{
               gridTemplateColumns: `repeat(${n}, minmax(0, 1fr))`,
@@ -209,7 +209,7 @@ export const ChessboardView: React.FC<ChessboardViewProps> = ({ step }) => {
   // ─── 3. Chessboard / N-Queens View (Default) ──────────────────────────────
   return (
     <div className="w-full h-full flex flex-col items-center justify-between p-4 bg-white/80 dark:bg-zinc-900/40 rounded-xl border border-zinc-200 dark:border-zinc-800/80 backdrop-blur-sm transition-colors duration-300">
-      <div className="flex-1 w-full flex items-center justify-center min-h-[300px] p-4">
+      <div className="flex-1 w-full flex items-center justify-center min-h-[200px] sm:min-h-[300px] p-4">
         {/* Render Chessboard Grid */}
         <div
           style={{
