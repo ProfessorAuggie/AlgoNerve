@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAlgorithmStore } from '../store/algorithmStore';
+import type { SortOrder } from '../algorithms/sorting';
 
 // Pseudocode mapping for all supported algorithms
 const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
@@ -42,7 +43,7 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     'end procedure',
   ],
   // Sorting
-  'bubble-sort': [
+  'bubble-sort-asc': [
     'procedure bubbleSort(A : list of sortable items)',
     '  n := length(A)',
     '  for i := 0 to n-2 do',
@@ -54,7 +55,19 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end for',
     'end procedure',
   ],
-  'selection-sort': [
+  'bubble-sort-desc': [
+    'procedure bubbleSort(A : list of sortable items)',
+    '  n := length(A)',
+    '  for i := 0 to n-2 do',
+    '    for j := 0 to n-i-2 do',
+    '      if A[j] < A[j+1] then',
+    '        swap(A[j], A[j+1])',
+    '      end if',
+    '    end for',
+    '  end for',
+    'end procedure',
+  ],
+  'selection-sort-asc': [
     'procedure selectionSort(A : list of sortable items)',
     '  n := length(A)',
     '  for i := 0 to n-2 do',
@@ -66,7 +79,19 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end for',
     'end procedure',
   ],
-  'insertion-sort': [
+  'selection-sort-desc': [
+    'procedure selectionSort(A : list of sortable items)',
+    '  n := length(A)',
+    '  for i := 0 to n-2 do',
+    '    maxIdx := i',
+    '    for j := i+1 to n-1 do',
+    '      if A[j] > A[maxIdx] then maxIdx := j',
+    '    end for',
+    '    if maxIdx != i then swap(A[i], A[maxIdx])',
+    '  end for',
+    'end procedure',
+  ],
+  'insertion-sort-asc': [
     'procedure insertionSort(A : list of sortable items)',
     '  for i := 1 to length(A)-1 do',
     '    key := A[i]',
@@ -79,7 +104,20 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end for',
     'end procedure',
   ],
-  'merge-sort': [
+  'insertion-sort-desc': [
+    'procedure insertionSort(A : list of sortable items)',
+    '  for i := 1 to length(A)-1 do',
+    '    key := A[i]',
+    '    j := i - 1',
+    '    while j >= 0 and A[j] < key do',
+    '      A[j+1] := A[j]',
+    '      j := j - 1',
+    '    end while',
+    '    A[j+1] := key',
+    '  end for',
+    'end procedure',
+  ],
+  'merge-sort-asc': [
     'procedure mergeSort(A : list, left, right)',
     '  if left < right then',
     '    mid := floor((left + right) / 2)',
@@ -89,9 +127,21 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end if',
     'end procedure',
     'procedure merge(A, left, mid, right)',
-    '  // Copy and merge subarrays sequentially',
+    '  // Merge: pick smaller element first',
   ],
-  'quick-sort': [
+  'merge-sort-desc': [
+    'procedure mergeSort(A : list, left, right)',
+    '  if left < right then',
+    '    mid := floor((left + right) / 2)',
+    '    mergeSort(A, left, mid)',
+    '    mergeSort(A, mid + 1, right)',
+    '    merge(A, left, mid, right)',
+    '  end if',
+    'end procedure',
+    'procedure merge(A, left, mid, right)',
+    '  // Merge: pick larger element first',
+  ],
+  'quick-sort-asc': [
     'procedure quickSort(A : list, low, high)',
     '  if low < high then',
     '    pivotIndex := partition(A, low, high)',
@@ -100,18 +150,38 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end if',
     'end procedure',
     'procedure partition(A, low, high)',
-    '  // Place pivot element in sorted position',
+    '  // Elements < pivot go left, >= pivot go right',
   ],
-  'heap-sort': [
+  'quick-sort-desc': [
+    'procedure quickSort(A : list, low, high)',
+    '  if low < high then',
+    '    pivotIndex := partition(A, low, high)',
+    '    quickSort(A, low, pivotIndex - 1)',
+    '    quickSort(A, pivotIndex + 1, high)',
+    '  end if',
+    'end procedure',
+    'procedure partition(A, low, high)',
+    '  // Elements > pivot go left, <= pivot go right',
+  ],
+  'heap-sort-asc': [
     'procedure heapSort(A : list)',
     '  buildMaxHeap(A) // Rearrange array',
     '  for i := length(A)-1 down to 1 do',
     '    swap(A[0], A[i]) // Extract max root',
-    '    heapify(A, i, 0) // Restore heap property',
+    '    heapify(A, i, 0) // Restore max-heap property',
     '  end for',
     'end procedure',
   ],
-  'pigeonhole-sort': [
+  'heap-sort-desc': [
+    'procedure heapSort(A : list)',
+    '  buildMinHeap(A) // Rearrange array',
+    '  for i := length(A)-1 down to 1 do',
+    '    swap(A[0], A[i]) // Extract min root',
+    '    heapify(A, i, 0) // Restore min-heap property',
+    '  end for',
+    'end procedure',
+  ],
+  'pigeonhole-sort-asc': [
     'procedure pigeonholeSort(A : list of integers)',
     '  find min and max in A',
     '  range := max - min + 1',
@@ -120,7 +190,24 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '    holes[x - min].append(x) // Place in hole',
     '  end for',
     '  index := 0',
-    '  for each hole in holes do',
+    '  for each hole in holes (ascending) do',
+    '    while hole is not empty do',
+    '      A[index] := hole.pop_front()',
+    '      index := index + 1',
+    '    end while',
+    '  end for',
+    'end procedure',
+  ],
+  'pigeonhole-sort-desc': [
+    'procedure pigeonholeSort(A : list of integers)',
+    '  find min and max in A',
+    '  range := max - min + 1',
+    '  initialize holes array to empty lists',
+    '  for each x in A do',
+    '    holes[x - min].append(x) // Place in hole',
+    '  end for',
+    '  index := 0',
+    '  for each hole in holes (descending) do',
     '    while hole is not empty do',
     '      A[index] := hole.pop_front()',
     '      index := index + 1',
@@ -554,7 +641,7 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  rightVal := evaluateAST(node.right)',
     '  return applyOperator(node.operator, leftVal, rightVal)',
   ],
-  'shell-sort': [
+  'shell-sort-asc': [
     'procedure shellSort(A : list of sortable items)',
     '  for gap := floor(n/2) down to 1 do',
     '    for i := gap to n-1 do',
@@ -566,7 +653,19 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '  end for',
     'end procedure',
   ],
-  'counting-sort': [
+  'shell-sort-desc': [
+    'procedure shellSort(A : list of sortable items)',
+    '  for gap := floor(n/2) down to 1 do',
+    '    for i := gap to n-1 do',
+    '      while j >= gap and A[j-gap] < key do',
+    '        A[j] := A[j-gap]',
+    '        j := j - gap',
+    '      end while',
+    '    end for',
+    '  end for',
+    'end procedure',
+  ],
+  'counting-sort-asc': [
     'procedure countingSort(A : list of integers)',
     '  find max element in A to define range',
     '  initialize count array with 0s',
@@ -576,10 +675,23 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '    output[count[val] - 1] := val',
     '    count[val]--',
     '  end for',
-    '  copy output back to A',
+    '  copy output back to A // Ascending order',
     'end procedure',
   ],
-  'radix-sort': [
+  'counting-sort-desc': [
+    'procedure countingSort(A : list of integers)',
+    '  find max element in A to define range',
+    '  initialize count array with 0s',
+    '  for each val in A: count[val]++',
+    '  accumulate reverse prefix sums',
+    '  for each val in A in reverse order:',
+    '    output[revCount[val] - 1] := val',
+    '    revCount[val]--',
+    '  end for',
+    '  copy output back to A // Descending order',
+    'end procedure',
+  ],
+  'radix-sort-asc': [
     'procedure radixSort(A : list of integers)',
     '  find max element in A to count digits',
     '  for exponent exp := 1 to max by x10 do',
@@ -588,16 +700,41 @@ const PSEUDOCODE_REGISTRY: Record<string, string[]> = {
     '    place elements based on exp-th digit',
     '    copy output back to A',
     '  end for',
+    '  return A // Ascending order',
+    'end procedure',
+  ],
+  'radix-sort-desc': [
+    'procedure radixSort(A : list of integers)',
+    '  find max element in A to count digits',
+    '  for exponent exp := 1 to max by x10 do',
+    '    countingSortByDigit(A, exp)',
+    '    build count and output arrays',
+    '    place elements based on exp-th digit',
+    '    copy output back to A',
+    '  end for',
+    '  reverse(A) // Descending order',
     '  return A',
     'end procedure',
   ],
-  'bucket-sort': [
+  'bucket-sort-asc': [
     'procedure bucketSort(A : list)',
     '  find min and max values in A',
     '  create bucketCount empty buckets',
     '  for each val in A: place val in bucketIdx',
-    '  for each bucket do',
-    '    sort(bucket) using insertion sort',
+    '  for each bucket (ascending) do',
+    '    sort(bucket) ascending',
+    '    gather elements back to A',
+    '  end for',
+    '  return A',
+    'end procedure',
+  ],
+  'bucket-sort-desc': [
+    'procedure bucketSort(A : list)',
+    '  find min and max values in A',
+    '  create bucketCount empty buckets',
+    '  for each val in A: place val in bucketIdx',
+    '  for each bucket (descending) do',
+    '    sort(bucket) descending',
     '    gather elements back to A',
     '  end for',
     '  return A',
@@ -809,11 +946,15 @@ function getFallbackPseudocode(algoName: string, category: string): string[] {
 }
 
 export const CodePanel: React.FC = () => {
-  const { selectedAlgo, steps, currentStepIndex } = useAlgorithmStore();
+  const { selectedAlgo, steps, currentStepIndex, sortOrder } = useAlgorithmStore();
 
   if (!selectedAlgo) return null;
 
-  const lines = PSEUDOCODE_REGISTRY[selectedAlgo.id] || getFallbackPseudocode(selectedAlgo.name, selectedAlgo.category);
+  // For sorting algorithms, try order-specific pseudocode first
+  const getSortingKey = (id: string, order: SortOrder) => `${id}-${order}`;
+  const isSorting = selectedAlgo.category === 'sorting';
+  const lookupKey = isSorting ? getSortingKey(selectedAlgo.id, sortOrder) : selectedAlgo.id;
+  const lines = PSEUDOCODE_REGISTRY[lookupKey] || PSEUDOCODE_REGISTRY[selectedAlgo.id] || getFallbackPseudocode(selectedAlgo.name, selectedAlgo.category);
   const currentStep = steps[currentStepIndex];
   const highlightedLine = currentStep ? currentStep.codeLine : -1;
 
